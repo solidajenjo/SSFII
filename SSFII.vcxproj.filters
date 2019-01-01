@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\ExternalLibraries\imgui\imgui.cpp">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\imgui\imgui_demo.cpp">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\imgui\imgui_draw.cpp">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\imgui\imgui_widgets.cpp">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\imgui\examples\imgui_impl_sdl.cpp">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor.cpp" />
+    <ClCompile Include="Source\ExternalLibraries\imgui\examples\imgui_impl_opengl3.cpp">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\log.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Render.h" />
+    <ClInclude Include="Source\Globals.h" />
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\begin_code.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\close_code.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_assert.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_atomic.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_audio.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_bits.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_blendmode.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_clipboard.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_android.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_iphoneos.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_macosx.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_minimal.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_os2.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_pandora.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_psp.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_windows.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_winrt.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_config_wiz.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_copying.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_cpuinfo.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_egl.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_endian.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_error.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_events.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_filesystem.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_gamecontroller.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_gesture.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_haptic.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_hints.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_joystick.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_keyboard.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_keycode.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_loadso.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_log.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_main.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_messagebox.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_mouse.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_mutex.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_name.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengl.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengl_glext.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengles.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengles2.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengles2_gl2.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengles2_gl2ext.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengles2_gl2platform.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_opengles2_khrplatform.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_pixels.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_platform.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_power.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_quit.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_rect.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_render.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_revision.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_rwops.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_scancode.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_sensor.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_shape.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_stdinc.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_surface.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_system.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_syswm.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_assert.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_common.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_compare.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_crc32.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_font.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_fuzzer.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_harness.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_images.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_log.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_md5.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_memory.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_test_random.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_thread.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_timer.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_touch.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_types.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_version.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_video.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_vulkan.h">
+      <Filter>ExternalLibraries\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\imgui\imconfig.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\imgui\imgui.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\imgui\imgui_internal.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\imgui\imstb_rectpack.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\imgui\imstb_textedit.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\imgui\imstb_truetype.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\imgui\examples\imgui_impl_sdl.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor.h" />
+    <ClInclude Include="Source\ExternalLibraries\imgui\examples\imgui_impl_opengl3.h">
+      <Filter>ExternalLibraries\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game.h" />
+    <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\Point.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ExternalLibraries">
+      <UniqueIdentifier>{bc02559b-84c3-47ac-bfb5-e1f3b3ab8106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalLibraries\SDL">
+      <UniqueIdentifier>{c1217608-ed76-4620-98b5-c44517159150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalLibraries\ImGui">
+      <UniqueIdentifier>{01404aa8-9d25-4313-9d8c-30b20eb4b91f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
