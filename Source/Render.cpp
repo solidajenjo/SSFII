@@ -1,10 +1,12 @@
 #include "Game.h"
 #include "Globals.h"
 #include "Render.h"
+#include "Sprite.h"
 #include "ExternalLibraries/SDL/include/SDL.h"
 #include "ExternalLibraries/imgui/imgui.h"
 #include "ExternalLibraries/imgui/examples/imgui_impl_opengl3.h"
 #include "ExternalLibraries/glew-2.1.0/include/GL/glew.h"
+#include "ExternalLibraries/MathGeoLib/include/Math/float4x4.h"
 
 
 bool Render::Init()
@@ -42,14 +44,89 @@ bool Render::Init()
 	if (GLEW_OK != err)
 	{
 		LOG("Error Initializating GLEW");
+		return false;
 	}
+
+	program = glCreateProgram();
+
+	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
+	char* vsCode = readFile("default.vs");
+
+	glShaderSource(vs, 1, &vsCode , 0);
+	glCompileShader(vs);
+	GLint isCompiled;
+	glGetShaderiv(vs, GL_COMPILE_STATUS, &isCompiled);
+	if (isCompiled == GL_FALSE)
+	{
+		GLint maxLength = 0;
+		glGetShaderiv(vs, GL_INFO_LOG_LENGTH, &maxLength);
+		GLchar* infoLog = (GLchar*)malloc(sizeof(char) * (maxLength + 1));
+		glGetShaderInfoLog(vs, maxLength, &maxLength, &infoLog[0]);
+		glDeleteShader(vs);
+		LOG("Vertex shader compilation error: %s", infoLog);
+		free(infoLog);
+		return false;
+	}
+
+	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
+	const char* fsCode = readFile("default.fs");
+
+	glShaderSource(fs, 1, &fsCode, 0);
+	glCompileShader(fs);
+	
+	isCompiled = 0;
+	glGetShaderiv(fs, GL_COMPILE_STATUS, &isCompiled);
+	if (isCompiled == GL_FALSE)
+	{
+		GLint maxLength = 0;
+		glGetShaderiv(fs, GL_INFO_LOG_LENGTH, &maxLength);
+		GLchar* infoLog = (GLchar*)malloc(sizeof(char) * (maxLength + 1));
+		glGetShaderInfoLog(fs, maxLength, &maxLength, &infoLog[0]);
+		glDeleteShader(fs);
+		LOG("Fragment shader compilation error: %s", infoLog);
+		free(infoLog);
+		return false;
+	}
+
+	glAttachShader(program, vs);
+	glAttachShader(program, fs);
+
+	glLinkProgram(program);
+
+	GLint isLinked = 0;
+	glGetShaderiv(fs, GL_COMPILE_STATUS, &isLinked);
+	if (isLinked == GL_FALSE)
+	{
+		GLint maxLength = 0;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+		GLchar* infoLog = (GLchar*)malloc(sizeof(char) * (maxLength + 1));
+		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+		glDeleteProgram(program);
+		glDeleteShader(vs);
+		glDeleteShader(fs);
+		LOG("Program Linking error: %s", infoLog);
+		free(infoLog);
+		return false;
+	}
+	
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CCW);
+	glEnable(GL_TEXTURE_2D);
+
+	glClearDepth(1.0f);
+	glClearColor(.5f, 0.5f, .5f, 1.f);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	return true;
 }
 
 bool Render::PreUpdate()
-{
-	return false;
+{	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	return true;
 }
 
 bool Render::Update()
@@ -57,10 +134,33 @@ bool Render::Update()
 	return true;
 }
 
+void Render::RenderSprite(Sprite* sprite)
+{
+	GLenum err = glGetError();
+	glUseProgram(program);
+	float4x4 model;
+	model = model.FromTRS(float3(0, 0, 0), float4x4::identity, float3(sprite->width / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT , 1.f));
+	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, model.ptr());
+	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, float4x4::identity.ptr());
+	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, float4x4::identity.ptr());
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, sprite->texture);
+	GLint loc = glGetUniformLocation(program, "texture");
+	glUniform1i(loc, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, sprite->vbo);
+	glDrawArrays(GL_TRIANGLES, 0, 6); 
+	err = glGetError();
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUseProgram(0);
+}
+
 bool Render::PostUpdate()
 {
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	SDL_RenderPresent(renderer);
 	SDL_GL_SwapWindow(window);
 	return true;
 }
@@ -75,4 +175,22 @@ bool Render::Quit()
 	SDL_DestroyWindow(window);
 	LOG("Render quit");
 	return true;
+}
+
+char* Render::readFile(const char * name) const
+{
+	char* data = nullptr;
+	FILE* file = nullptr;
+	fopen_s(&file, name, "rb");
+	if (file)
+	{
+		fseek(file, 0, SEEK_END);
+		int size = ftell(file);
+		rewind(file);
+		data = (char*)malloc(size + 1);
+		fread(data, 1, size, file);
+		data[size] = 0;
+		fclose(file);
+	}
+	return data;
 }

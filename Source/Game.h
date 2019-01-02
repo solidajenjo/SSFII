@@ -4,6 +4,7 @@
 class Editor;
 class Render;
 class Input;
+class Textures;
 
 class Game
 {
@@ -19,6 +20,7 @@ public:
 	Render* render = nullptr;
 	Editor* editor = nullptr;
 	Input* input = nullptr;
+	Textures* textures = nullptr;
 };
 
 extern Game* game;

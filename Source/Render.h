@@ -5,6 +5,8 @@ struct SDL_Window;
 struct SDL_Surface;
 struct SDL_Renderer;
 
+class Sprite;
+
 class Render
 {
 public:
@@ -12,8 +14,11 @@ public:
 	bool Init();
 	bool PreUpdate();
 	bool Update();
+	void RenderSprite(Sprite* sprite);
 	bool PostUpdate();
 	bool Quit();
+
+	char* readFile(const char* name) const;
 
 	//members
 
@@ -22,6 +27,8 @@ public:
 	SDL_Renderer* renderer = nullptr;
 	
 	void* context;
+
+	unsigned program = 0;
 
 };
 
