@@ -1,6 +1,8 @@
 #ifndef __RENDER_H_
 #define __RENDER_H_
 
+#include "ExternalLibraries/MathGeoLib/include/Math/float3.h"
+
 struct SDL_Window;
 struct SDL_Surface;
 struct SDL_Renderer;
@@ -14,7 +16,7 @@ public:
 	bool Init();
 	bool PreUpdate();
 	bool Update();
-	void RenderSprite(Sprite* sprite);
+	void RenderSprite(const Sprite* sprite, const float3 &pos) const;
 	bool PostUpdate();
 	bool Quit();
 

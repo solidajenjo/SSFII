@@ -8,10 +8,8 @@
 
 //TODO: glDeleteBuffers(1, &vbo);
 
-Sprite::Sprite(const char* sheetPath, float x, float y, float w, float h)
+Sprite::Sprite(const char* sheetPath, float x, float y, float w, float h) : width(w), height(h)
 {
-	width = w;
-	height = h;
 	int texW, texH;
 	texture = game->textures->GetTexture(sheetPath, texW, texH);
 
@@ -24,13 +22,13 @@ Sprite::Sprite(const char* sheetPath, float x, float y, float w, float h)
 	float vertex_buffer_data[] =
 	{
 		// positions
-		-1, -1, 0.0f,
-		1, -1, 0.0f,
-		-1, 1, 0.0f,
+		-1.f, .0f, .0f,
+		1.f, .0f, .0f,
+		-1.f, 2.f, .0f,
 
-		-1, 1, 0.0f,
-		1, -1, 0.0f,
-		1,  1, 0.0f,
+		-1.f, 2.f, .0f,
+		1.f, .0f, .0f,
+		1.f,  2.f, .0f,
 
 		// uvs
 		s, t,
@@ -47,25 +45,6 @@ Sprite::Sprite(const char* sheetPath, float x, float y, float w, float h)
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(
-		0,                  // attribute 0
-		3,                  // number of componentes (3 floats)
-		GL_FLOAT,           // data type
-		GL_FALSE,           // should be normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
-	glVertexAttribPointer(
-		1,
-		2,
-		GL_FLOAT,
-		GL_FALSE,
-		0,
-		(void*)(sizeof(float) * 3 * 6)    // 3 float 6 vertices for jump positions
-	);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

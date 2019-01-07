@@ -123,6 +123,7 @@
     <ClCompile Include="Source\ExternalLibraries\MathGeoLib\include\Time\Clock.cpp">
       <Filter>ExternalLibraries\MathGeoLib</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Render.h" />
@@ -589,6 +590,7 @@
     <ClInclude Include="Source\ExternalLibraries\MathGeoLib\include\Time\Clock.h">
       <Filter>ExternalLibraries\MathGeoLib</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">

@@ -1,0 +1,39 @@
+#ifndef __ANIMATION_H_
+#define __ANIMATION_H_
+#include "ExternalLibraries/MathGeoLib/include/Math/float3.h"
+
+class Sprite;
+class AABB2D;
+
+class Animation
+{
+public:
+	struct HitBox
+	{
+		AABB2D* box;
+		bool doDamage = false;
+	};
+
+	struct Frame
+	{
+		Sprite* sprite;
+		HitBox hitBoxes[4];
+	};
+
+	Animation(unsigned nFrames);
+	~Animation();
+
+	bool SetFrame(unsigned frameNum, Sprite* sprite);
+	void Play(const float3 &pos, bool &loopEnded);
+
+	//members
+
+	Frame** frames = nullptr;
+	unsigned nFrames = 0u, currentFrame = 0u;
+	unsigned frameDuration = 400u;
+	unsigned lastTime = 0u;
+	unsigned nextFrameChange = frameDuration;
+};
+
+
+#endif

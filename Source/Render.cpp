@@ -134,24 +134,43 @@ bool Render::Update()
 	return true;
 }
 
-void Render::RenderSprite(Sprite* sprite)
+void Render::RenderSprite(const Sprite* sprite, const float3 &pos) const
 {
-	GLenum err = glGetError();
 	glUseProgram(program);
 	float4x4 model;
-	model = model.FromTRS(float3(0, 0, 0), float4x4::identity, float3(sprite->width / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT , 1.f));
+	model = model.FromTRS(float3(((pos.x / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, .0f),
+		float4x4::identity, float3(sprite->width / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT , 1.f) * 2.f);
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, model.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, float4x4::identity.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, float4x4::identity.ptr());
 
 	glActiveTexture(GL_TEXTURE0);
+	glBindBuffer(GL_ARRAY_BUFFER, sprite->vbo);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(
+		0,                  // attribute 0
+		3,                  // number of componentes (3 floats)
+		GL_FLOAT,           // data type
+		GL_FALSE,           // should be normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+	glVertexAttribPointer(
+		1,
+		2,
+		GL_FLOAT,
+		GL_FALSE,
+		0,
+		(void*)(sizeof(float) * 3 * 6)    // 3 float 6 vertices for jump positions
+	);
 	glBindTexture(GL_TEXTURE_2D, sprite->texture);
 	GLint loc = glGetUniformLocation(program, "texture");
 	glUniform1i(loc, 0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, sprite->vbo);
 	glDrawArrays(GL_TRIANGLES, 0, 6); 
-	err = glGetError();
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
