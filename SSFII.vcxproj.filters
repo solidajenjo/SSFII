@@ -124,6 +124,7 @@
       <Filter>ExternalLibraries\MathGeoLib</Filter>
     </ClCompile>
     <ClCompile Include="Source\Animation.cpp" />
+    <ClCompile Include="Source\AnimationSheet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Render.h" />
@@ -591,6 +592,7 @@
       <Filter>ExternalLibraries\MathGeoLib</Filter>
     </ClInclude>
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\AnimationSheet.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">

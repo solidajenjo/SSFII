@@ -33,7 +33,7 @@ void Animation::Play(const float3 &pos, bool &loopEnded)
 	lastTime = SDL_GetTicks();
 	if (lastTime >= nextFrameChange)
 	{
-		nextFrameChange += frameDuration;
+		nextFrameChange = lastTime + frameDuration;
 		++currentFrame;
 		if (currentFrame >= nFrames)
 		{
