@@ -3,7 +3,8 @@
 
 #include "Globals.h"
 #include <string>
-#include <vector>
+#include "ExternalLibraries/rapidjson-1.1.0/include/rapidjson/prettywriter.h"
+
 
 class Animation;
 
@@ -22,13 +23,16 @@ public:
 
 	AnimationSheet(std::string sheetName, std::string sheetPath, std::string sheetSource) : sheetName(sheetName), sheetPath(sheetPath), sheetSource(sheetSource) {};
 
+	void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const;
+
+
 	//members
 	
 	std::string sheetName = "";
 	std::string sheetPath = "";
 	std::string sheetSource = "";
 
-	std::vector<Animation*> animations = std::vector<Animation*>(ANIM_NUM);
+	Animation** animations = nullptr;
 
 	std::string ANIM_NAMES[ANIM_NUM] = { "IDLE","WALK","JUMP","FORWARD_JUMP","CROUCH","BLOCKING","BLOCKING_CROUCH",
 		"L_PUNCH","M_PUNCH","H_PUNCH","F_L_PUNCH","F_M_PUNCH","F_J_PUNCH","L_KICK","M_KICK","H_KICK",

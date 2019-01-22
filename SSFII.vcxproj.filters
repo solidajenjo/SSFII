@@ -125,6 +125,7 @@
     </ClCompile>
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\AnimationSheet.cpp" />
+    <ClCompile Include="Source\FileSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Render.h" />
@@ -593,6 +594,7 @@
     </ClInclude>
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimationSheet.h" />
+    <ClInclude Include="Source\FileSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">

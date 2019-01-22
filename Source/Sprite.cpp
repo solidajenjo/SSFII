@@ -8,10 +8,10 @@
 
 //TODO: glDeleteBuffers(1, &vbo);
 
-Sprite::Sprite(const char* sheetPath, float x, float y, float w, float h) : width(w), height(h)
+Sprite::Sprite(std::string sheetPath, unsigned x, unsigned y, unsigned w, unsigned h) : width(w), height(h), x(x), y(y), sheetPath(sheetPath)
 {
 	int texW, texH;
-	texture = game->textures->GetTexture(sheetPath, texW, texH);
+	texture = game->textures->GetTexture(sheetPath.c_str(), texW, texH);
 
 	float s = x / (float)texW;
 	float sW = w / (float)texW;
@@ -47,4 +47,15 @@ Sprite::Sprite(const char* sheetPath, float x, float y, float w, float h) : widt
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const
+{
+	writer.StartObject();
+	writer.String("sheetPath"); writer.String(sheetPath.c_str());
+	writer.String("width"); writer.Int(width);
+	writer.String("height"); writer.Int(height);
+	writer.String("x"); writer.Int(x);
+	writer.String("y"); writer.Int(y);
+	writer.EndObject();
 }

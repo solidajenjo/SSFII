@@ -6,6 +6,7 @@
 #include "Textures.h"
 #include "Sprite.h"
 #include "Animation.h"
+#include "FileSystem.h"
 
 bool Game::Init()
 {
@@ -13,10 +14,12 @@ bool Game::Init()
 	editor = new Editor();
 	input = new Input();
 	textures = new Textures();
+	fileSystem = new FileSystem();
 	render->Init();
 	editor->Init();
 	input->Init();
 	textures->Init();
+	fileSystem->Init();
 	animation = new Animation(2);
 	animation->SetFrame(0, new Sprite("SpriteSheets\\blanka.png", 516, 234, 123, 119));
 	animation->SetFrame(1, new Sprite("SpriteSheets\\blanka.png", 639, 234, 113, 119));
@@ -26,9 +29,7 @@ bool Game::Init()
 bool Game::PreUpdate()
 {
 	bool status = input->PreUpdate();
-	status = status && render->PreUpdate();
-	
-
+	status = status && render->PreUpdate();	
 	return status;
 }
 
@@ -52,6 +53,7 @@ bool Game::Quit()
 {
 	render->Quit();
 	input->Quit();
+	fileSystem->CleanUp();
 	RELEASE(animation);
 	return true;
 }

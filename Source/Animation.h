@@ -1,9 +1,10 @@
 #ifndef __ANIMATION_H_
 #define __ANIMATION_H_
 #include "ExternalLibraries/MathGeoLib/include/Math/float3.h"
+#include "ExternalLibraries/rapidjson-1.1.0/include/rapidjson/prettywriter.h"
+#include "ExternalLibraries/MathGeoLib/include/Geometry/AABB2D.h"
 
 class Sprite;
-class AABB2D;
 
 class Animation
 {
@@ -25,6 +26,8 @@ public:
 
 	bool SetFrame(unsigned frameNum, Sprite* sprite);
 	void Play(const float3 &pos, bool &loopEnded);
+
+	void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const;
 
 	//members
 

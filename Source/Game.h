@@ -6,6 +6,7 @@ class Render;
 class Input;
 class Textures;
 class Animation;
+class FileSystem;
 
 class Game
 {
@@ -23,6 +24,7 @@ public:
 	Input* input = nullptr;
 	Textures* textures = nullptr;
 	Animation* animation = nullptr;
+	FileSystem* fileSystem = nullptr;
 };
 
 extern Game* game;

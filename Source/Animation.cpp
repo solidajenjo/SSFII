@@ -2,7 +2,9 @@
 #include "Globals.h"
 #include "Render.h"
 #include "Animation.h"
+#include "Sprite.h"
 #include "ExternalLibraries/SDL/include/SDL_timer.h"
+
 
 Animation::Animation(unsigned nFrames) : nFrames(nFrames)
 {
@@ -43,3 +45,31 @@ void Animation::Play(const float3 &pos, bool &loopEnded)
 	}
 	game->render->RenderSprite(frames[currentFrame]->sprite, pos);
 }
+
+void Animation::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const
+{
+	writer.StartObject();
+	writer.String("nFrames"); writer.Int(nFrames);
+	writer.String("frameDuration"); writer.Double(frameDuration);
+	writer.StartArray();
+	for (unsigned i = 0u; i < nFrames; ++i)
+	{
+		writer.StartObject();
+		writer.String("sprite");
+		frames[i]->sprite->Serialize(writer);
+		for (unsigned j = 0u; j < 4; ++j)
+		{
+			writer.StartObject();
+			writer.String("doDamage"); writer.Bool(frames[i]->hitBoxes[j].doDamage);
+			writer.String("maxPoint X"); writer.Double(frames[i]->hitBoxes[j].box->maxPoint.x);
+			writer.String("minPoint X"); writer.Double(frames[i]->hitBoxes[j].box->minPoint.x);
+			writer.String("maxPoint Y"); writer.Double(frames[i]->hitBoxes[j].box->maxPoint.y);
+			writer.String("minPoint Y"); writer.Double(frames[i]->hitBoxes[j].box->minPoint.y);
+			writer.EndObject();
+		}
+		writer.EndObject();
+	}
+	writer.EndArray();
+	writer.EndObject();
+}
+
