@@ -1,18 +1,12 @@
 #include "FileSystem.h"
 #include "Globals.h"
-#include "ExternalLibraries/SDL/include/SDL_filesystem.h"
 #include "ExternalLibraries/physfs-3.0.1/src/physfs.h"
 
 bool FileSystem::Init()
 {
-	//TODO: Search for dirs if not exist create
-	char* p = SDL_GetPrefPath("DraconisEngine", "");
-	prefPath = std::string(p);
-	SDL_free(p);
-	PHYSFS_init(prefPath.c_str());
+	PHYSFS_init(".");
 	PHYSFS_setWriteDir(".");
 	PHYSFS_mount(".", "", 0);
-	PHYSFS_mount(prefPath.c_str(), userDataMountPoint, 0);
 	return true;
 }
 
@@ -22,38 +16,22 @@ bool FileSystem::CleanUp()
 	return true;
 }
 
-bool FileSystem::Write(const std::string & path, const void * data, unsigned size, bool userData) const
-{
-	if (userData)
-	{
-		PHYSFS_setWriteDir(prefPath.c_str());
-	}
+bool FileSystem::Write(const std::string & path, const void * data, unsigned size) const
+{	
 	PHYSFS_File* file = PHYSFS_openWrite(path.c_str());
 	if (file == nullptr)
 	{
 		LOG("Error writing in %s -> %s", path.c_str(), PHYSFS_getLastError());
-		if (userData)
-		{
-			PHYSFS_setWriteDir(".");
-		}
 		return false;
 	}
 	unsigned k = PHYSFS_writeBytes(file, data, size);
 	if (k == size)
 	{
 		PHYSFS_close(file);
-		if (userData)
-		{
-			PHYSFS_setWriteDir(".");
-		}
 		return true;
 	}
 	LOG("Error writing in %s -> %s", path.c_str(), PHYSFS_getLastError());
 	PHYSFS_close(file);
-	if (userData)
-	{
-		PHYSFS_setWriteDir(".");
-	}
 	return false;
 }
 

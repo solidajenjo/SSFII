@@ -951,6 +951,7 @@ public:
 
     // Checks whether a number can be losslessly converted to a double.
     bool IsLosslessDouble() const {
+		/*
         if (!IsNumber()) return false;
         if (IsUint64()) {
             uint64_t u = GetUint64();
@@ -965,7 +966,7 @@ public:
             return (d >= static_cast<double>(std::numeric_limits<int64_t>::min()))
                 && (d < static_cast<double>(std::numeric_limits<int64_t>::max()))
                 && (i == static_cast<int64_t>(d));
-        }
+        }*/
         return true; // double, int, uint are always lossless
     }
 
@@ -979,12 +980,14 @@ public:
     // Checks whether a number can be losslessly converted to a float.
     bool IsLosslessFloat() const {
         if (!IsNumber()) return false;
-        double a = GetDouble();
+       /* double a = GetDouble();
         if (a < static_cast<double>(-std::numeric_limits<float>::max())
                 || a > static_cast<double>(std::numeric_limits<float>::max()))
             return false;
         double b = static_cast<double>(static_cast<float>(a));
         return a >= b && a <= b;    // Prevent -Wfloat-equal
+		*/
+		return true;
     }
 
     //@}

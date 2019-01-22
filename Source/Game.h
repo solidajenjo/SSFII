@@ -5,7 +5,6 @@ class Editor;
 class Render;
 class Input;
 class Textures;
-class Animation;
 class FileSystem;
 
 class Game
@@ -23,7 +22,6 @@ public:
 	Editor* editor = nullptr;
 	Input* input = nullptr;
 	Textures* textures = nullptr;
-	Animation* animation = nullptr;
 	FileSystem* fileSystem = nullptr;
 };
 

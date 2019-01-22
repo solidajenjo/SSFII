@@ -21,17 +21,16 @@ public:
 		VICTORY
 	};
 
-	AnimationSheet(std::string sheetName, std::string sheetPath, std::string sheetSource) : sheetName(sheetName), sheetPath(sheetPath), sheetSource(sheetSource) {};
+	AnimationSheet(std::string sheetName);
+	~AnimationSheet();
 
-	void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const;
-
+	void Serialize() const;
+	bool LoadSheet();
 
 	//members
 	
 	std::string sheetName = "";
-	std::string sheetPath = "";
-	std::string sheetSource = "";
-
+	
 	Animation** animations = nullptr;
 
 	std::string ANIM_NAMES[ANIM_NUM] = { "IDLE","WALK","JUMP","FORWARD_JUMP","CROUCH","BLOCKING","BLOCKING_CROUCH",

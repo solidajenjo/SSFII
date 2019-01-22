@@ -10,15 +10,20 @@
 
 Sprite::Sprite(std::string sheetPath, unsigned x, unsigned y, unsigned w, unsigned h) : width(w), height(h), x(x), y(y), sheetPath(sheetPath)
 {
+	CreateSprite();
+}
+
+void Sprite::CreateSprite()
+{
 	int texW, texH;
 	texture = game->textures->GetTexture(sheetPath.c_str(), texW, texH);
 
 	float s = x / (float)texW;
-	float sW = w / (float)texW;
-	float tW = h / (float)texH;
+	float sW = width / (float)texW;
+	float tW = height / (float)texH;
 	float t = ((texH - y) / (float)texH) - tW;
-	
-	
+
+
 	float vertex_buffer_data[] =
 	{
 		// positions
@@ -38,7 +43,7 @@ Sprite::Sprite(std::string sheetPath, unsigned x, unsigned y, unsigned w, unsign
 		s, t + tW,
 		s + sW, t,
 		s + sW, t + tW
-		
+
 	};
 
 
@@ -58,4 +63,14 @@ void Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer)
 	writer.String("x"); writer.Int(x);
 	writer.String("y"); writer.Int(y);
 	writer.EndObject();
+}
+
+void Sprite::UnSerialize(rapidjson::Value &value)
+{
+	sheetPath = value["sheetPath"].GetString();
+	width = value["width"].GetInt();
+	height = value["height"].GetInt();
+	x = value["x"].GetInt();
+	y = value["y"].GetInt();
+	CreateSprite();
 }

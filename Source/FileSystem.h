@@ -11,7 +11,7 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	bool Write(const std::string &path, const void* data, unsigned size, bool userData = false) const; //writes data to path
+	bool Write(const std::string &path, const void* data, unsigned size) const; //writes data to path
 	bool Read(const std::string &path, void* data, unsigned size) const; //reads from path and allocates in data. NOTE: The caller should be responsible to clean it
 
 	bool Exists(const std::string &path) const;
@@ -26,11 +26,7 @@ public:
 
 	void GetContentList(const std::string & path, std::vector<std::string>& files, std::vector<std::string>& dirs) const;
 
-	//members 
 
-	std::string prefPath;
-
-	char userDataMountPoint[20] = "User Data";
 };
 
 

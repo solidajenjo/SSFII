@@ -6,6 +6,7 @@
 #include "Textures.h"
 #include "Sprite.h"
 #include "Animation.h"
+#include "AnimationSheet.h"
 #include "FileSystem.h"
 
 bool Game::Init()
@@ -20,9 +21,7 @@ bool Game::Init()
 	input->Init();
 	textures->Init();
 	fileSystem->Init();
-	animation = new Animation(2);
-	animation->SetFrame(0, new Sprite("SpriteSheets\\blanka.png", 516, 234, 123, 119));
-	animation->SetFrame(1, new Sprite("SpriteSheets\\blanka.png", 639, 234, 113, 119));
+
 	return true;
 }
 
@@ -37,8 +36,8 @@ bool Game::Update()
 {
 	bool status = render->Update();
 	status = status && editor->Update();
-	bool b;
-	animation->Play(float3(100,100,0), b);
+	AnimationSheet* as = new AnimationSheet("AnimSheets/test.sht");
+	as->Serialize();
 	return status;
 }
 
@@ -54,6 +53,5 @@ bool Game::Quit()
 	render->Quit();
 	input->Quit();
 	fileSystem->CleanUp();
-	RELEASE(animation);
 	return true;
 }
