@@ -4,6 +4,8 @@
 struct SDL_Window;
 struct ImGuiIO;
 
+class Sprite;
+
 class Editor
 {
 public:
@@ -14,6 +16,7 @@ public:
 	//members
 
 	ImGuiIO* io;
+	Sprite* spriteSheet = nullptr;
 };
 
 #endif

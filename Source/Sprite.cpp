@@ -6,7 +6,6 @@
 #include "Sprite.h"
 #include "Textures.h"
 
-//TODO: glDeleteBuffers(1, &vbo);
 
 Sprite::Sprite(std::string sheetPath, unsigned x, unsigned y, unsigned w, unsigned h) : width(w), height(h), x(x), y(y), sheetPath(sheetPath)
 {
@@ -17,6 +16,11 @@ void Sprite::CreateSprite()
 {
 	int texW, texH;
 	texture = game->textures->GetTexture(sheetPath.c_str(), texW, texH);
+	if (x == 0u && y == 0u && width == 0u && height == 0u)
+	{
+		width = texW;
+		height = texH;
+	}
 
 	float s = x / (float)texW;
 	float sW = width / (float)texW;
@@ -52,6 +56,11 @@ void Sprite::CreateSprite()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Sprite::Flush()
+{
+	glDeleteBuffers(1, &vbo);
 }
 
 void Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const

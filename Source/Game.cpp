@@ -35,9 +35,7 @@ bool Game::PreUpdate()
 bool Game::Update()
 {
 	bool status = render->Update();
-	status = status && editor->Update();
-	AnimationSheet* as = new AnimationSheet("AnimSheets/test.sht");
-	as->Serialize();
+	status = status && editor->Update();	
 	return status;
 }
 

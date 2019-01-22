@@ -10,9 +10,10 @@ class Sprite
 public:
 	
 	Sprite() {};
-	Sprite(std::string sheetPath, unsigned x, unsigned y, unsigned w, unsigned h);
+	Sprite(std::string sheetPath, unsigned x = 0u, unsigned y = 0u, unsigned w = 0u, unsigned h = 0u); 
 
 	void CreateSprite();
+	void Flush();
 	void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer> &writer) const;
 	void UnSerialize(rapidjson::Value &value);
 	//members
