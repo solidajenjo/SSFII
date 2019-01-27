@@ -30,6 +30,7 @@ public:
 	//members
 	
 	std::string sheetName = "";
+	std::string sheetPath = "";
 	
 	Animation** animations = nullptr;
 

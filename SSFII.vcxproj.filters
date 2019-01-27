@@ -595,6 +595,9 @@
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimationSheet.h" />
     <ClInclude Include="Source\FileSystem.h" />
+    <ClInclude Include="Source\ExternalLibraries\rapidjson-1.1.0\include\rapidjson\document.h">
+      <Filter>ExternalLibraries\Rapidjson</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">
@@ -608,6 +611,9 @@
     </Filter>
     <Filter Include="ExternalLibraries\MathGeoLib">
       <UniqueIdentifier>{d3e4a53b-4c6d-4bc8-a349-f7a8aadc29bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalLibraries\Rapidjson">
+      <UniqueIdentifier>{0f2abd94-f762-47a5-9e58-53e5ac525a67}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

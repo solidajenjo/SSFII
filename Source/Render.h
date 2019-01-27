@@ -17,6 +17,7 @@ public:
 	bool PreUpdate();
 	bool Update();
 	void RenderSprite(const Sprite* sprite, const float3 &pos) const;
+	void DrawBox(const float2 &minPoint, const float2 &maxPoint, bool red = false);
 	bool PostUpdate();
 	bool Quit();
 

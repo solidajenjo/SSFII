@@ -10,6 +10,7 @@ AnimationSheet::AnimationSheet(std::string sheetName) : sheetName(sheetName)
 	for (unsigned i = 0u; i < ANIM_NUM; ++i)
 	{
 		animations[i] = new Animation(0);
+		animations[i]->name = ANIM_NAMES[i];
 	}
 }
 
@@ -25,12 +26,15 @@ void AnimationSheet::Serialize() const
 	rapidjson::StringBuffer sb;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(sb);
 	writer.StartArray();
+	writer.StartObject();
+	writer.String("spriteSheetPath"); writer.String(sheetPath.c_str());
+	writer.EndObject();
 	for (unsigned i = 0u; i < ANIM_NUM; ++i)
 	{
 		animations[i]->Serialize(writer);
 	}
 	writer.EndArray();
-	if (game->fileSystem->Write(sheetName, sb.GetString(), strlen(sb.GetString())))
+	if (game->fileSystem->Write("AnimSheets/" + sheetName, sb.GetString(), strlen(sb.GetString())))
 	{
 		LOG("AnimationSheet saved.");
 	}
@@ -38,22 +42,24 @@ void AnimationSheet::Serialize() const
 
 bool AnimationSheet::LoadSheet()
 {
-	unsigned fileSize = game->fileSystem->Size(sheetName);
+	unsigned fileSize = game->fileSystem->Size("AnimSheets/" + sheetName);
 	char* buffer = new char[fileSize];
-	if (game->fileSystem->Read(sheetName, buffer, fileSize))
+	if (game->fileSystem->Read("AnimSheets/" + sheetName, buffer, fileSize))
 	{
 		rapidjson::Document document;
 		if (document.Parse<rapidjson::kParseStopWhenDoneFlag>(buffer).HasParseError())
 		{
 			LOG("Error loading sheet %s. Sheet file corrupted.", sheetName.c_str());
+			auto error = rapidjson::GetParseErrorFunc(document.GetParseError());
 			return false;
 		}
 		else
 		{
-			rapidjson::Value sheetJSON = document.GetObject();
-			for (unsigned i = 0u; i < ANIM_NUM; ++i)
+			rapidjson::Value sheetJSON = document.GetArray();
+			sheetPath = sheetJSON[0]["spriteSheetPath"].GetString();
+			for (unsigned i = 1u; i <= ANIM_NUM; ++i)
 			{
-				animations[i]->UnSerialize(sheetJSON[i]);
+				animations[i - 1]->UnSerialize(sheetJSON[i]);
 			}
 		}
 	}

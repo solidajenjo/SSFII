@@ -12,14 +12,14 @@ class Animation
 public:
 	struct HitBox
 	{
-		AABB2D* box;
-		bool doDamage = false;
+		AABB2D box;		
+		int damageAmount = 0;
 	};
 
 	struct Frame
 	{
 		Sprite* sprite;
-		HitBox hitBoxes[4];
+		HitBox hitBoxes[4]; // 0 - Face / 1 - Body / 2 - Legs / 3 - Attack
 	};
 
 	Animation(unsigned nFrames);
@@ -28,7 +28,7 @@ public:
 	bool SetFrame(unsigned frameNum, Sprite* sprite);
 	void Play(const float3 &pos, bool &loopEnded);
 
-	void Reset();
+	void Reset(unsigned newNFrames, std::string sheetPath);
 	void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const;
 	void UnSerialize(rapidjson::Value &value);
 
@@ -40,6 +40,7 @@ public:
 	unsigned frameDuration = 400u;
 	unsigned lastTime = 0u;
 	unsigned nextFrameChange = frameDuration;
+	std::string name = "";
 };
 
 

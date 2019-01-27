@@ -7,6 +7,8 @@ bool FileSystem::Init()
 	PHYSFS_init(".");
 	PHYSFS_setWriteDir(".");
 	PHYSFS_mount(".", "", 0);
+	PHYSFS_mount("AnimSheets", "AnimSheets/.", 0);
+	PHYSFS_mount("SpriteSheets", "SpriteSheets/.", 0);
 	return true;
 }
 

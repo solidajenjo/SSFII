@@ -5,6 +5,7 @@
 #include "ExternalLibraries/DevIL/include/IL/ilu.h"
 #include "ExternalLibraries/DevIL/include/IL/ilut.h"
 #include "Textures.h"
+#include "FileSystem.h"
 
 void Textures::Init()
 {
@@ -20,42 +21,58 @@ unsigned Textures::GetTexture(const char* texturePath, int &w, int &h)
 		TextureData* newTData = new TextureData();
 		ILuint ImageName;
 		ilGenImages(1, &ImageName);
-
 		ilBindImage(ImageName);
-		ILboolean succes = ilLoadImage(texturePath);
-		if (succes)
+		unsigned fileSize = game->fileSystem->Size(texturePath);
+		if (fileSize > 0)
 		{
-			ILinfo ImageInfo;
-			iluGetImageInfo(&ImageInfo);
-			if (ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+			char* data = new char[fileSize];
+			if (game->fileSystem->Read(texturePath, data, fileSize))
 			{
-				iluFlipImage();
+				if (ilLoadL(IL_TYPE_UNKNOWN, data, fileSize))
+				{
+					ILinfo ImageInfo;
+					iluGetImageInfo(&ImageInfo);
+					if (ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+					{
+						iluFlipImage();
+					}
+					ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
+
+					glGenTextures(1, &newTData->texId);
+					glBindTexture(GL_TEXTURE_2D, newTData->texId);
+
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+					w = ilGetInteger(IL_IMAGE_WIDTH);
+					h = ilGetInteger(IL_IMAGE_HEIGHT);
+					glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_FORMAT), w, h, 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE, ilGetData());
+
+					newTData->w = w;
+					newTData->h = h;
+					++newTData->users;
+
+					texturesContainer[texturePath] = newTData;
+					return newTData->texId;
+				}
+				else
+				{
+					LOG("Failed loading texture %s -> %s", texturePath, iluErrorString(ilGetError()));
+					return 0;
+				}
 			}
-			ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
-
-			glGenTextures(1, &newTData->texId);
-			glBindTexture(GL_TEXTURE_2D, newTData->texId);
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-			w = ilGetInteger(IL_IMAGE_WIDTH);	
-			h = ilGetInteger(IL_IMAGE_HEIGHT);	
-			glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_FORMAT), w, h,	0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE, ilGetData());
-
-			newTData->w = w;
-			newTData->h = h;
-			++newTData->users;
-
-			texturesContainer[texturePath] = newTData;
-			return newTData->texId;
+			else
+			{
+				LOG("Failed loading texture %s -> not found", texturePath);
+				return 0;
+			}
 		}
-		else 
+		else
 		{
-			LOG("Failed loading texture %s -> %s", texturePath, iluErrorString(ilGetError()));
+			LOG("Failed loading texture %s -> not found", texturePath);
 			return 0;
 		}
 	}

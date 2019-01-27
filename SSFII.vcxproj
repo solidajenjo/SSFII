@@ -254,6 +254,7 @@
     <ClInclude Include="Source\ExternalLibraries\MathGeoLib\include\Math\sse_mathfun.h" />
     <ClInclude Include="Source\ExternalLibraries\MathGeoLib\include\Math\TransformOps.h" />
     <ClInclude Include="Source\ExternalLibraries\MathGeoLib\include\Time\Clock.h" />
+    <ClInclude Include="Source\ExternalLibraries\rapidjson-1.1.0\include\rapidjson\document.h" />
     <ClInclude Include="Source\ExternalLibraries\SDL\include\begin_code.h" />
     <ClInclude Include="Source\ExternalLibraries\SDL\include\close_code.h" />
     <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL.h" />

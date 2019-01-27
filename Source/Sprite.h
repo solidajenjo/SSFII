@@ -21,8 +21,9 @@ public:
 	std::string sheetPath;
 
 	unsigned vbo = 0u, texture = 0u;
-	unsigned width = 0u, height = 0u;
-	unsigned x = 0u, y = 0u;
+	int width = 0, height = 0;
+	int x = 0, y = 0;
+	float sW = 0.f, tW = 0.f;
 };
 
 

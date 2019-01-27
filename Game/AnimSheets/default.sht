@@ -1,0 +1,299 @@
+[
+    {
+        "spriteSheetPath": "SpriteSheets/ZangiefSS.gif"
+    },
+    {
+        "nFrames": 4,
+        "frameDuration": 250.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/ZangiefSS.gif",
+                    "width": 61,
+                    "height": 100,
+                    "x": 3,
+                    "y": 118
+                },
+                "hitboxes": [
+                    {
+                        "x": 55.0,
+                        "y": 150.0,
+                        "X": 85.0,
+                        "Y": 195.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 90.0,
+                        "X": 90.0,
+                        "Y": 150.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 100.0,
+                        "Y": 90.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ]
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/ZangiefSS.gif",
+                    "width": 61,
+                    "height": 99,
+                    "x": 70,
+                    "y": 118
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ]
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/ZangiefSS.gif",
+                    "width": 68,
+                    "height": 99,
+                    "x": 145,
+                    "y": 118
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ]
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/ZangiefSS.gif",
+                    "width": 61,
+                    "height": 99,
+                    "x": 70,
+                    "y": 118
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    },
+    {
+        "nFrames": 0,
+        "frameDuration": 400.0
+    }
+]

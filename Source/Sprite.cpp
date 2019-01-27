@@ -23,9 +23,9 @@ void Sprite::CreateSprite()
 	}
 
 	float s = x / (float)texW;
-	float sW = width / (float)texW;
-	float tW = height / (float)texH;
-	float t = ((texH - y) / (float)texH) - tW;
+	sW = width / (float)texW;
+	tW = height / (float)texH;
+	float t = ((texH - y + height) / (float)texH) - tW;
 
 
 	float vertex_buffer_data[] =

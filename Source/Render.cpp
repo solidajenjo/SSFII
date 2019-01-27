@@ -7,6 +7,7 @@
 #include "ExternalLibraries/imgui/examples/imgui_impl_opengl3.h"
 #include "ExternalLibraries/glew-2.1.0/include/GL/glew.h"
 #include "ExternalLibraries/MathGeoLib/include/Math/float4x4.h"
+#include "ExternalLibraries/MathGeoLib/include/Math/float2.h"
 
 
 bool Render::Init()
@@ -138,7 +139,7 @@ void Render::RenderSprite(const Sprite* sprite, const float3 &pos) const
 {
 	glUseProgram(program);
 	float4x4 model;
-	model = model.FromTRS(float3(((pos.x / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, .0f),
+	model = model.FromTRS(float3((((pos.x + sprite->width) / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, .0f),
 		float4x4::identity, float3(sprite->width / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT , 1.f) * 2.f);
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, model.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, float4x4::identity.ptr());
@@ -175,6 +176,47 @@ void Render::RenderSprite(const Sprite* sprite, const float3 &pos) const
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUseProgram(0);
+}
+
+void Render::DrawBox(const float2 &minPoint, const float2 &maxPoint, bool red)
+{
+	float2 mPoint, MPoint;
+	mPoint.x = ((minPoint.x / SCREEN_WIDTH) * 2.f) - 1.f;
+	mPoint.y = ((minPoint.y / SCREEN_HEIGHT) * 2.f) - 1.f;
+
+	MPoint.x = ((maxPoint.x / SCREEN_WIDTH) * 2.f) - 1.f;
+	MPoint.y = ((maxPoint.y / SCREEN_HEIGHT) * 2.f - 1.f);
+
+	if (red)
+	{
+		glBegin(GL_LINE_STRIP);
+		glColor3f(1.f, .0f, .0f);
+		glVertex3f(mPoint.x, mPoint.y, -1.f);
+		glColor3f(1.f, .0f, .0f);
+		glVertex3f(mPoint.x, MPoint.y, -1.f);
+		glColor3f(1.f, .0f, .0f);
+		glVertex3f(MPoint.x, MPoint.y, -1.f);
+		glColor3f(1.f, .0f, .0f);
+		glVertex3f(MPoint.x, mPoint.y, -1.f);
+		glColor3f(1.f, .0f, .0f);
+		glVertex3f(mPoint.x, mPoint.y, -1.f);
+		glEnd();
+	}
+	else
+	{
+		glBegin(GL_LINE_STRIP);
+		glColor3f(.0f, 1.f, .0f);
+		glVertex3f(mPoint.x, mPoint.y, -1.f);
+		glColor3f(.0f, 1.f, .0f);
+		glVertex3f(mPoint.x, MPoint.y, -1.f);
+		glColor3f(.0f, 1.f, .0f);
+		glVertex3f(MPoint.x, MPoint.y, -1.f);
+		glColor3f(.0f, 1.f, .0f);
+		glVertex3f(MPoint.x, mPoint.y, -1.f);
+		glColor3f(.0f, 1.f, .0f);
+		glVertex3f(mPoint.x, mPoint.y, -1.f);
+		glEnd();
+	}
 }
 
 bool Render::PostUpdate()
