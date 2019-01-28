@@ -104,7 +104,6 @@ bool Editor::Update()
 			ImGui::Image((void*)(intptr_t)spriteSheet->texture, ImVec2(spriteSheet->width, spriteSheet->height), ImVec2(0, 1), ImVec2(1, 0));
 			if (ImGui::IsItemHovered())
 			{
-				//MousePos.x - GetCursorScreenPos().x - GetScrollX()
 				int x = ImGui::GetMousePos().x - imagePos.x;
 				int y = ImGui::GetMousePos().y - imagePos.y + ImGui::GetScrollY();
 				ImGui::BeginTooltip();
@@ -128,9 +127,11 @@ bool Editor::Update()
 		{
 			for (unsigned i = 0u; i < ANIM_NUM; ++i)
 			{
-				if (ImGui::TreeNodeEx(as->ANIM_NAMES[i].c_str()))
+				if (ImGui::TreeNodeEx(as->ANIM_NAMES[i]))
 				{
+					ImGui::PushItemWidth(100.f);
 					ImGui::PushID(i);
+					
 					int nFrames = as->animations[i]->nFrames;
 					if (ImGui::Button("Preview"))
 					{
@@ -150,7 +151,7 @@ bool Editor::Update()
 					{
 						if (nFrames > 0)
 						{
-							as->animations[i]->Reset(nFrames, "SpriteSheets/ZangiefSS.gif"); //TODO:Hardcoded -> use text input above
+							as->animations[i]->Reset(nFrames, as->sheetPath); 
 						}
 					}
 					int frameDuration = as->animations[i]->frameDuration;
@@ -167,6 +168,18 @@ bool Editor::Update()
 					ImGui::Separator();
 					if (as->animations[i]->nFrames > 0)
 					{
+						if (ImGui::Button("Propagate frame 0 coordinates"))
+						{
+							for (unsigned j = 1u; j < nFrames; ++j)
+							{
+								as->animations[i]->frames[j]->sprite->x = as->animations[i]->frames[0]->sprite->x;
+								as->animations[i]->frames[j]->sprite->y = as->animations[i]->frames[0]->sprite->y;
+								as->animations[i]->frames[j]->sprite->width = as->animations[i]->frames[0]->sprite->width;
+								as->animations[i]->frames[j]->sprite->height = as->animations[i]->frames[0]->sprite->height;
+								as->animations[i]->frames[j]->sprite->Flush();
+								as->animations[i]->frames[j]->sprite->CreateSprite();
+							}
+						}
 						if (ImGui::InputInt("X", &as->animations[i]->frames[as->animations[i]->currentFrame]->sprite->x) ||
 							ImGui::InputInt("Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->sprite->y) ||
 							ImGui::InputInt("W", &as->animations[i]->frames[as->animations[i]->currentFrame]->sprite->width) ||
@@ -177,7 +190,12 @@ bool Editor::Update()
 						}
 						ImGui::Separator();
 						ImGui::Text("Hit boxes");
-
+						if (ImGui::Button("Propagate frame 0 hit boxes"))
+						{
+							for (unsigned j = 1u; j < nFrames; ++j)
+								for (unsigned jj = 0u; jj < 4u; ++jj)
+									as->animations[i]->frames[j]->hitBoxes[jj] = as->animations[i]->frames[0]->hitBoxes[jj];
+						}
 						ImGui::Text("Face");
 						ImGui::PushID("Face");
 						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.minPoint[0]);
@@ -185,9 +203,7 @@ bool Editor::Update()
 
 						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.maxPoint[0]);
 						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.maxPoint[1]);
-
-						game->render->DrawBox(previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.minPoint,
-							previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.maxPoint);
+						
 						ImGui::PopID();
 						
 						ImGui::Text("Body");
@@ -199,8 +215,6 @@ bool Editor::Update()
 						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.maxPoint[0]);
 						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.maxPoint[1]);
 
-						game->render->DrawBox(previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.minPoint,
-							previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.maxPoint);
 						ImGui::PopID();
 
 						ImGui::Text("Legs");
@@ -225,11 +239,31 @@ bool Editor::Update()
 
 						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.maxPoint[0]);
 						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.maxPoint[1]);
-
-						game->render->DrawBox(previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.minPoint,
-							previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.maxPoint, true);
+						
 						ImGui::PopID();
 
+					}
+					if (animPreview != nullptr)
+					{
+						ImGui::Text(animPreview->name.c_str());
+						if (animPreview->nFrames > 0 && animPreview->frames[animPreview->currentFrame]->sprite != nullptr)
+						{
+							if (!play)
+								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite, float3(previewPos, 0.f));
+							else
+							{
+								bool loopEnded;
+								animPreview->Play(float3(previewPos, 0.f), loopEnded);
+							}
+							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.minPoint,
+								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.maxPoint);
+							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.minPoint,
+								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.maxPoint);
+							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.minPoint,
+								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.maxPoint);
+							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[3].box.minPoint,
+								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[3].box.maxPoint, true);
+						}
 					}
 					ImGui::PopID();
 					ImGui::TreePop();
@@ -238,20 +272,7 @@ bool Editor::Update()
 		}
 		ImGui::EndChildFrame();
 		ImGui::SameLine();
-		if (animPreview != nullptr)
-		{
-			ImGui::Text(animPreview->name.c_str());
-			if (animPreview->nFrames > 0 && animPreview->frames[animPreview->currentFrame]->sprite != nullptr)
-			{	
-				if (!play)
-					game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite, float3(previewPos, 0.f));
-				else
-				{
-					bool loopEnded;
-					animPreview->Play(float3(previewPos, 0.f), loopEnded);
-				}
-			}
-		}
+		
 	}
 	
 

@@ -9,5 +9,6 @@ uniform sampler2D texture;
 void main()
 {
     color = texture2D(texture, uv0);
-    //color = vec4(1,0,0,1);
+	if (color.a < 0.9)
+		discard;
 }

@@ -36,7 +36,7 @@ unsigned Textures::GetTexture(const char* texturePath, int &w, int &h)
 					{
 						iluFlipImage();
 					}
-					ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
+					ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
 					glGenTextures(1, &newTData->texId);
 					glBindTexture(GL_TEXTURE_2D, newTData->texId);
@@ -49,7 +49,7 @@ unsigned Textures::GetTexture(const char* texturePath, int &w, int &h)
 
 					w = ilGetInteger(IL_IMAGE_WIDTH);
 					h = ilGetInteger(IL_IMAGE_HEIGHT);
-					glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_FORMAT), w, h, 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE, ilGetData());
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, ilGetData());
 
 					newTData->w = w;
 					newTData->h = h;
