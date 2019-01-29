@@ -44,7 +44,7 @@ void Animation::Play(const float3 &pos, bool &loopEnded)
 			loopEnded = true;
 		}
 	}
-	game->render->RenderSprite(frames[currentFrame]->sprite, pos);
+	game->render->RenderSprite(frames[currentFrame]->sprite, pos + float3(frames[currentFrame]->offsetH, frames[currentFrame]->offsetV, .0f));
 
 }
 
@@ -68,7 +68,6 @@ void Animation::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writ
 	writer.StartObject();
 	writer.String("nFrames"); writer.Int(nFrames);
 	writer.String("frameDuration"); writer.Double(frameDuration); 
-
 	if (nFrames > 0)
 	{
 		writer.String("frames");
@@ -91,6 +90,8 @@ void Animation::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writ
 				writer.EndObject();
 			}
 			writer.EndArray();
+			writer.String("offsetH"); writer.Int(frames[i]->offsetH);
+			writer.String("offsetV"); writer.Int(frames[i]->offsetV);
 			writer.EndObject();
 		}
 		writer.EndArray();
@@ -115,6 +116,8 @@ void Animation::UnSerialize(rapidjson::Value & value)
 			frames[i]->hitBoxes[j].box.maxPoint.y = value["frames"][i]["hitboxes"][j]["Y"].GetDouble();
 			frames[i]->hitBoxes[j].damageAmount = value["frames"][i]["hitboxes"][j]["damage"].GetInt();
 		}
+		frames[i]->offsetH = value["frames"][i]["offsetH"].GetInt();
+		frames[i]->offsetV = value["frames"][i]["offsetV"].GetInt();
 	}
 }
 

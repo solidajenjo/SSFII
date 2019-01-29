@@ -20,6 +20,8 @@ public:
 	{
 		Sprite* sprite;
 		HitBox hitBoxes[4]; // 0 - Face / 1 - Body / 2 - Legs / 3 - Attack
+		int offsetH = 0;
+		int offsetV = 0;
 	};
 
 	Animation(unsigned nFrames);

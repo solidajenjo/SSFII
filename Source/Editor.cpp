@@ -188,6 +188,8 @@ bool Editor::Update()
 							as->animations[i]->frames[as->animations[i]->currentFrame]->sprite->Flush();
 							as->animations[i]->frames[as->animations[i]->currentFrame]->sprite->CreateSprite();
 						}
+						ImGui::InputInt("Offset H", &as->animations[i]->frames[as->animations[i]->currentFrame]->offsetH);
+						ImGui::InputInt("Offset V", &as->animations[i]->frames[as->animations[i]->currentFrame]->offsetV);
 						ImGui::Separator();
 						ImGui::Text("Hit boxes");
 						if (ImGui::Button("Propagate frame 0 hit boxes"))
@@ -249,7 +251,9 @@ bool Editor::Update()
 						if (animPreview->nFrames > 0 && animPreview->frames[animPreview->currentFrame]->sprite != nullptr)
 						{
 							if (!play)
-								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite, float3(previewPos, 0.f));
+								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite, 
+									float3(previewPos, 0.f) + float3(as->animations[i]->frames[as->animations[i]->currentFrame]->offsetH, 
+										as->animations[i]->frames[as->animations[i]->currentFrame]->offsetV, .0f));
 							else
 							{
 								bool loopEnded;
