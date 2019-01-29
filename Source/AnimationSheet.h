@@ -12,7 +12,7 @@ class AnimationSheet
 {
 public:
 	
-	enum class Animations //TDODO: Add grab possibility?
+	enum Anims //TDODO: Add grab possibility?
 	{
 		IDLE, WALK, JUMP, FORWARD_JUMP, CROUCH, BLOCKING, BLOCKING_CROUCH,
 		L_PUNCH, M_PUNCH, H_PUNCH, F_L_PUNCH, F_M_PUNCH, F_J_PUNCH, L_KICK, M_KICK, H_KICK,

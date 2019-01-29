@@ -37,15 +37,34 @@ void Animation::Play(const float3 &pos, bool &loopEnded)
 	if (lastTime >= nextFrameChange)
 	{
 		nextFrameChange = lastTime + frameDuration;
-		++currentFrame;
-		if (currentFrame >= nFrames)
+		if (!reverse)
 		{
-			currentFrame = 0u;
-			loopEnded = true;
+			++currentFrame;
+			if (currentFrame >= nFrames)
+			{
+				currentFrame = 0u;
+				loopEnded = true;
+			}
+		}
+		else
+		{			
+			if (currentFrame == 0)
+			{
+				currentFrame = nFrames - 1;
+				loopEnded = true;
+			}
+			else
+				--currentFrame;
 		}
 	}
 	game->render->RenderSprite(frames[currentFrame]->sprite, pos + float3(frames[currentFrame]->offsetH, frames[currentFrame]->offsetV, .0f));
 
+}
+
+void Animation::Rewind()
+{
+	currentFrame = 0u;
+	nextFrameChange = lastTime + frameDuration;
 }
 
 void Animation::Reset(unsigned newNFrames, std::string sheetPath)

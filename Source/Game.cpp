@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "Animation.h"
 #include "AnimationSheet.h"
+#include "CharacterController.h"
 #include "FileSystem.h"
 
 bool Game::Init()
@@ -35,7 +36,11 @@ bool Game::PreUpdate()
 bool Game::Update()
 {
 	bool status = render->Update();
-	status = status && editor->Update();	
+	status = status && editor->Update();
+	if (characterController != nullptr && editor->testing)
+	{
+		characterController->Update();
+	}
 	return status;
 }
 

@@ -29,6 +29,7 @@ public:
 
 	bool SetFrame(unsigned frameNum, Sprite* sprite);
 	void Play(const float3 &pos, bool &loopEnded);
+	void Rewind();
 
 	void Reset(unsigned newNFrames, std::string sheetPath);
 	void Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writer) const;
@@ -42,6 +43,7 @@ public:
 	unsigned frameDuration = 400u;
 	unsigned lastTime = 0u;
 	unsigned nextFrameChange = frameDuration;
+	bool reverse = false;
 	std::string name = "";
 };
 

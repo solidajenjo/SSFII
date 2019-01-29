@@ -9,6 +9,7 @@
 #include "AnimationSheet.h"
 #include "Animation.h"
 #include "FileSystem.h"
+#include "CharacterController.h"
 
 bool Editor::Init()
 {
@@ -30,7 +31,12 @@ bool Editor::Update()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(game->render->window);
 	ImGui::NewFrame();
-
+	float2 previewPos = float2(100.f, 300.f);
+	if (ImGui::Button("Test") && game->characterController != nullptr)
+	{
+		testing = true;
+		animPreview = nullptr;
+	}
 	if (ImGui::CollapsingHeader("Animation Editor"))
 	{
 		ImGui::Text("Animation sheet name: ");
@@ -63,7 +69,7 @@ bool Editor::Update()
 			files.resize(0);
 			dirs.resize(0);
 			game->fileSystem->GetContentList("AnimSheets", files, dirs);
-			ImGui::OpenPopup("LoadPopup");			
+			ImGui::OpenPopup("LoadPopup");				
 		}
 		if (ImGui::BeginPopup("LoadPopup", ImGuiWindowFlags_Modal))
 		{
@@ -78,6 +84,8 @@ bool Editor::Update()
 					as->LoadSheet();
 					spriteSheet = new Sprite(as->sheetPath);
 					ImGui::CloseCurrentPopup();
+					//TODO:Release old character controller
+					game->characterController = new CharacterController(as, float3(previewPos, 0.f));
 				}
 			}
 			ImGui::EndPopup();
@@ -116,13 +124,11 @@ bool Editor::Update()
 		ImGui::BeginChildFrame(2, ImVec2(regAvail.x, regAvail.y));	
 		if (animPreview != nullptr)
 		{
-
 			ImGui::Text("Previewing - ");
 			ImGui::SameLine();
 			ImGui::Text(animPreview->name.c_str());
 		}
 		static bool play = false;
-		float2 previewPos = float2(100.f, 300.f);
 		if (as != nullptr)
 		{
 			for (unsigned i = 0u; i < ANIM_NUM; ++i)
@@ -136,6 +142,7 @@ bool Editor::Update()
 					if (ImGui::Button("Preview"))
 					{
 						animPreview = as->animations[i];
+						testing = false;
 					}
 					ImGui::SameLine();
 					if (ImGui::Button("Play"))

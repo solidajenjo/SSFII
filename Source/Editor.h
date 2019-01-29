@@ -27,6 +27,8 @@ public:
 
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
+
+	bool testing = false;
 };
 
 #endif

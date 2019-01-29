@@ -2,9 +2,8 @@
 #define __CHARACTERCONTROLLER_H_
 
 #include "Globals.h"
+#include "ExternalLibraries/MathGeoLib/include/Math/float3.h"
 
-
-class Animation;
 class AnimationSheet;
 
 class CharacterController
@@ -31,6 +30,23 @@ public:
 		KO		
 	};
 
+	CharacterController(AnimationSheet *animationSheet, float3 pos) : animationSheet(animationSheet), pos(pos), idleY(pos.y) {};
+
+	void Update();
+
+	//members
+
+	CharacterStates state = CharacterStates::IDLE;
+	AnimationSheet* animationSheet = nullptr; //TODO:Clean
+	bool loopEnded = false;
+
+	float3 pos = float3::zero;
+	int direction = 1;
+	float speed = 2.5f; //TODO:Add deltatime
+	float verticalSpeed = 0.f;
+	float jumpSpeed = 10.f;
+	float gravity = .3f;
+	float idleY = 0.f;
 	
 };
 
