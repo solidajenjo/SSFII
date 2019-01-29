@@ -252,8 +252,8 @@ bool Editor::Update()
 						{
 							if (!play)
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite, 
-									float3(previewPos, 0.f) + float3(as->animations[i]->frames[as->animations[i]->currentFrame]->offsetH, 
-										as->animations[i]->frames[as->animations[i]->currentFrame]->offsetV, .0f));
+									float3(previewPos, 0.f) + float3(animPreview->frames[animPreview->currentFrame]->offsetH,
+										animPreview->frames[animPreview->currentFrame]->offsetV, .0f));
 							else
 							{
 								bool loopEnded;
