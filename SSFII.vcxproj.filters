@@ -126,6 +126,7 @@
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\AnimationSheet.cpp" />
     <ClCompile Include="Source\FileSystem.cpp" />
+    <ClCompile Include="Source\CharacterController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Render.h" />
@@ -598,6 +599,7 @@
     <ClInclude Include="Source\ExternalLibraries\rapidjson-1.1.0\include\rapidjson\document.h">
       <Filter>ExternalLibraries\Rapidjson</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CharacterController.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">

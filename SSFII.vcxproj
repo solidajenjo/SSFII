@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\AnimationSheet.cpp" />
+    <ClCompile Include="Source\CharacterController.cpp" />
     <ClCompile Include="Source\Editor.cpp" />
     <ClCompile Include="Source\ExternalLibraries\imgui\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Source\ExternalLibraries\imgui\examples\imgui_impl_sdl.cpp" />
@@ -185,6 +186,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimationSheet.h" />
+    <ClInclude Include="Source\CharacterController.h" />
     <ClInclude Include="Source\Editor.h" />
     <ClInclude Include="Source\ExternalLibraries\imgui\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="Source\ExternalLibraries\imgui\examples\imgui_impl_sdl.h" />
