@@ -19,7 +19,7 @@ public:
 	struct Frame
 	{
 		Sprite* sprite;
-		HitBox hitBoxes[4]; // 0 - Face / 1 - Body / 2 - Legs / 3 - Attack
+		HitBox hitBoxes[3]; // 0 - Face / 1 - Body / 3 - Attack
 		int offsetH = 0;
 		int offsetV = 0;
 	};

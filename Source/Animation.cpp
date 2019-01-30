@@ -125,7 +125,7 @@ void Animation::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>& writ
 			frames[i]->sprite->Serialize(writer);
 			writer.String("hitboxes");
 			writer.StartArray();
-			for (unsigned j = 0u; j < 4u; ++j)
+			for (unsigned j = 0u; j < 3u; ++j)
 			{
 				writer.StartObject();				
 				writer.String("x"); writer.Double(frames[i]->hitBoxes[j].box.minPoint.x);
@@ -154,7 +154,7 @@ void Animation::UnSerialize(rapidjson::Value & value)
 	{
 		frames[i]->sprite = new Sprite();
 		frames[i]->sprite->UnSerialize(value["frames"][i]["sprite"]);	
-		for (unsigned j = 0u; j < 4u; ++j)
+		for (unsigned j = 0u; j < 3u; ++j)
 		{
 			frames[i]->hitBoxes[j].box.minPoint.x = value["frames"][i]["hitboxes"][j]["x"].GetDouble();
 			frames[i]->hitBoxes[j].box.minPoint.y = value["frames"][i]["hitboxes"][j]["y"].GetDouble();

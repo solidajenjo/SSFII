@@ -207,47 +207,34 @@ bool Editor::Update()
 						}
 						ImGui::Text("Face");
 						ImGui::PushID("Face");
-						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.minPoint[0]);
-						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.minPoint[1]);
+						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.minPoint[0], 2.f);
+						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.minPoint[1], 2.f);
 
-						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.maxPoint[0]);
-						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.maxPoint[1]);
+						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.maxPoint[0], 2.f);
+						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[0].box.maxPoint[1], 2.f);
 						
 						ImGui::PopID();
 						
 						ImGui::Text("Body");
 						ImGui::PushID("Body");
 						
-						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.minPoint[0]);
-						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.minPoint[1]);
+						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.minPoint[0], 2.f);
+						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.minPoint[1], 2.f);
 
-						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.maxPoint[0]);
-						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.maxPoint[1]);
+						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.maxPoint[0], 2.f);
+						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[1].box.maxPoint[1], 2.f);
 
-						ImGui::PopID();
-
-						ImGui::Text("Legs");
-						ImGui::PushID("Legs");
-						
-						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.minPoint[0]);
-						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.minPoint[1]);
-
-						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.maxPoint[0]);
-						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.maxPoint[1]);
-
-						game->render->DrawBox(previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.minPoint,
-							previewPos + as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.maxPoint);
 						ImGui::PopID();
 
 						ImGui::Text("Attack");
 						ImGui::PushID("Attack");
 
-						ImGui::InputInt("Damage amount", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].damageAmount);
-						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.minPoint[0]);
-						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.minPoint[1]);
-
-						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.maxPoint[0]);
-						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[3].box.maxPoint[1]);
+						ImGui::InputInt("Damage amount", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].damageAmount);
+						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.minPoint[0], 2.f);
+						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.minPoint[1], 2.f);
+																															  
+						ImGui::InputFloat("MaxPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.maxPoint[0], 2.f);
+						ImGui::InputFloat("MaxPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.maxPoint[1], 2.f);
 						
 						ImGui::PopID();
 
@@ -266,14 +253,15 @@ bool Editor::Update()
 								bool loopEnded;
 								animPreview->Play(float3(previewPos, 0.f), loopEnded);
 							}
-							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.minPoint,
-								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.maxPoint);
-							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.minPoint,
-								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.maxPoint);
-							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.minPoint,
-								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.maxPoint);
-							game->render->DrawBox(previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[3].box.minPoint,
-								previewPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[3].box.maxPoint, true);
+							float2 offsettedPos = float2(previewPos) + float2(animPreview->frames[animPreview->currentFrame]->offsetH,
+								animPreview->frames[animPreview->currentFrame]->offsetV);
+							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.minPoint,
+								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.maxPoint);
+							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.minPoint,
+								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.maxPoint);
+							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.minPoint,
+								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.maxPoint, true);
+							
 						}
 					}
 					ImGui::PopID();
