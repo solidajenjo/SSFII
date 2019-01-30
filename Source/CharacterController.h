@@ -5,6 +5,7 @@
 #include "ExternalLibraries/MathGeoLib/include/Math/float3.h"
 
 class AnimationSheet;
+class Animation;
 
 class CharacterController
 {
@@ -30,7 +31,7 @@ public:
 		KO		
 	};
 
-	CharacterController(AnimationSheet *animationSheet, float3 pos) : animationSheet(animationSheet), pos(pos), idleY(pos.y) {};
+	CharacterController(AnimationSheet *animationSheet, float3 pos) : animationSheet(animationSheet), pos(pos), idleY(pos.y), landingY(pos.y + 80.f) {};
 
 	void Update();
 
@@ -38,16 +39,24 @@ public:
 
 	CharacterStates state = CharacterStates::IDLE;
 	AnimationSheet* animationSheet = nullptr; //TODO:Clean
+	Animation* attackAnimation = nullptr;
 	bool loopEnded = false;
 
 	float3 pos = float3::zero;
 	int direction = 1;
 	float speed = 2.5f; //TODO:Add deltatime
 	float verticalSpeed = 0.f;
-	float jumpSpeed = 10.f;
-	float gravity = .3f;
+	float jumpSpeed = 12.f;
+	float gravity = .4f;
 	float idleY = 0.f;
+	float landingY = 0.f;
 	
+private:
+
+	void CheckWalk();
+	void CheckJump();
+	void CheckGroundAttack();
+	void CheckAirAttack();
 };
 
 

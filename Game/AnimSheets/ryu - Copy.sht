@@ -43,7 +43,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -82,7 +84,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -121,7 +125,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -160,7 +166,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -205,7 +213,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -244,7 +254,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -283,7 +295,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -322,7 +336,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -361,7 +377,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -372,46 +390,7 @@
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 43,
-                    "height": 75,
-                    "x": 452,
-                    "y": 99
-                },
-                "hitboxes": [
-                    {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "X": 0.0,
-                        "Y": 0.0,
-                        "damage": 0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "X": 0.0,
-                        "Y": 0.0,
-                        "damage": 0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "X": 0.0,
-                        "Y": 0.0,
-                        "damage": 0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "X": 0.0,
-                        "Y": 0.0,
-                        "damage": 0
-                    }
-                ]
-            },
-            {
-                "sprite": {
-                    "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 43,
+                    "width": 45,
                     "height": 91,
                     "x": 499,
                     "y": 99
@@ -445,12 +424,55 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 43,
+                    "width": 45,
+                    "height": 91,
+                    "x": 499,
+                    "y": 99
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 44,
                     "height": 82,
                     "x": 538,
                     "y": 99
@@ -484,12 +506,14 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 43,
+                    "width": 45,
                     "height": 80,
                     "x": 574,
                     "y": 99
@@ -523,7 +547,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -562,12 +588,14 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 43,
+                    "width": 44,
                     "height": 94,
                     "x": 652,
                     "y": 99
@@ -601,14 +629,16 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 43,
-                    "height": 75,
-                    "x": 452,
+                    "width": 44,
+                    "height": 96,
+                    "x": 652,
                     "y": 99
                 },
                 "hitboxes": [
@@ -640,20 +670,22 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
     {
         "nFrames": 7,
-        "frameDuration": 200.0,
+        "frameDuration": 150.0,
         "frames": [
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 43,
-                    "height": 81,
-                    "x": 747,
+                    "width": 39,
+                    "height": 91,
+                    "x": 795,
                     "y": 99
                 },
                 "hitboxes": [
@@ -685,7 +717,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -724,7 +758,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -763,7 +799,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -802,7 +840,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -841,7 +881,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -880,7 +922,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -919,7 +963,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -964,7 +1010,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -1009,7 +1057,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -1054,7 +1104,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -1099,7 +1151,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1138,7 +1192,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1177,7 +1233,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -1222,7 +1280,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1261,7 +1321,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1300,7 +1362,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1339,7 +1403,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1378,7 +1444,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -1423,7 +1491,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1462,7 +1532,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1501,7 +1573,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1540,7 +1614,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1579,7 +1655,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -1624,7 +1702,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1663,7 +1743,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1702,7 +1784,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -1747,7 +1831,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1786,7 +1872,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1825,7 +1913,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1864,7 +1954,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1903,7 +1995,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1942,7 +2036,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -1981,7 +2077,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -2026,7 +2124,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2065,7 +2165,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2104,7 +2206,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2143,7 +2247,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2182,7 +2288,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -2227,7 +2335,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2266,7 +2376,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2305,7 +2417,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -2350,7 +2464,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2389,7 +2505,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2428,7 +2546,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -2473,7 +2593,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2512,7 +2634,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2551,7 +2675,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2590,7 +2716,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2629,7 +2757,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -2674,7 +2804,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2713,7 +2845,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2752,7 +2886,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -2797,7 +2933,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2836,7 +2974,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2875,7 +3015,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2914,7 +3056,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -2953,7 +3097,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -2998,7 +3144,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3037,7 +3185,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3076,7 +3226,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3115,7 +3267,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3154,7 +3308,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -3199,7 +3355,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3238,7 +3396,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3277,7 +3437,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -3322,7 +3484,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3361,7 +3525,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3400,7 +3566,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3439,7 +3607,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -3484,7 +3654,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3523,7 +3695,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3562,7 +3736,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3601,7 +3777,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3640,7 +3818,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -3685,7 +3865,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3724,7 +3906,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3763,7 +3947,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -3808,7 +3994,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3847,7 +4035,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3886,7 +4076,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -3931,7 +4123,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -3970,7 +4164,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4009,7 +4205,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4048,7 +4246,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4087,13 +4287,15 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
     {
         "nFrames": 3,
-        "frameDuration": 100.0,
+        "frameDuration": 150.0,
         "frames": [
             {
                 "sprite": {
@@ -4132,7 +4334,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4171,7 +4375,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4210,7 +4416,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -4255,7 +4463,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4294,7 +4504,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4333,7 +4545,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -4378,7 +4592,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4417,7 +4633,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4456,7 +4674,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -4501,7 +4721,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4540,13 +4762,15 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
     {
         "nFrames": 2,
-        "frameDuration": 175.0,
+        "frameDuration": 200.0,
         "frames": [
             {
                 "sprite": {
@@ -4585,7 +4809,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4624,13 +4850,15 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
     {
         "nFrames": 3,
-        "frameDuration": 200.0,
+        "frameDuration": 250.0,
         "frames": [
             {
                 "sprite": {
@@ -4669,7 +4897,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4708,7 +4938,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4747,7 +4979,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -4792,7 +5026,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4831,7 +5067,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4870,7 +5108,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4909,7 +5149,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -4948,7 +5190,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -4993,7 +5237,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5032,7 +5278,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5071,7 +5319,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5110,7 +5360,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5149,7 +5401,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -5194,7 +5448,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5233,7 +5489,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5272,7 +5530,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5311,7 +5571,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5350,7 +5612,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
@@ -5395,7 +5659,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5434,7 +5700,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5473,7 +5741,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5512,7 +5782,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5551,7 +5823,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": -38,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5590,7 +5864,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5629,7 +5905,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5668,7 +5946,9 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             },
             {
                 "sprite": {
@@ -5707,36 +5987,2313 @@
                         "Y": 0.0,
                         "damage": 0
                     }
-                ]
+                ],
+                "offsetH": 0,
+                "offsetV": 0
             }
         ]
     },
     {
-        "nFrames": 0,
-        "frameDuration": 400.0
+        "nFrames": 13,
+        "frameDuration": 150.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 46,
+                    "height": 97,
+                    "x": 951,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 43,
+                    "height": 125,
+                    "x": 997,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 68,
+                    "height": 121,
+                    "x": 1044,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 46,
+                    "height": 124,
+                    "x": 1131,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 67,
+                    "height": 122,
+                    "x": 1178,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -38,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 41,
+                    "height": 121,
+                    "x": 1250,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 66,
+                    "height": 124,
+                    "x": 1044,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 46,
+                    "height": 120,
+                    "x": 1131,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 65,
+                    "height": 118,
+                    "x": 1180,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -38,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 121,
+                    "x": 1250,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 46,
+                    "height": 116,
+                    "x": 1299,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 36,
+                    "height": 97,
+                    "x": 1352,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 43,
+                    "height": 93,
+                    "x": 1388,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            }
+        ]
     },
     {
-        "nFrames": 0,
-        "frameDuration": 400.0
+        "nFrames": 17,
+        "frameDuration": 150.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 95,
+                    "x": 951,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 44,
+                    "height": 122,
+                    "x": 997,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 70,
+                    "height": 122,
+                    "x": 1044,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 120,
+                    "x": 1131,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 66,
+                    "height": 119,
+                    "x": 1179,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -38,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 43,
+                    "height": 121,
+                    "x": 1250,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 66,
+                    "height": 124,
+                    "x": 1044,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 124,
+                    "x": 1131,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 67,
+                    "height": 121,
+                    "x": 1178,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -38,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 121,
+                    "x": 1250,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 65,
+                    "height": 123,
+                    "x": 1044,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 120,
+                    "x": 1131,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 68,
+                    "height": 122,
+                    "x": 1178,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -38,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 121,
+                    "x": 1250,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 45,
+                    "height": 117,
+                    "x": 1299,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 36,
+                    "height": 95,
+                    "x": 1352,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 44,
+                    "height": 95,
+                    "x": 1388,
+                    "y": 614
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            }
+        ]
     },
     {
-        "nFrames": 0,
-        "frameDuration": 400.0
+        "nFrames": 4,
+        "frameDuration": 125.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 48,
+                    "height": 77,
+                    "x": 5,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 48,
+                    "height": 77,
+                    "x": 53,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -8,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 50,
+                    "height": 77,
+                    "x": 105,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -14,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 46,
+                    "height": 83,
+                    "x": 163,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            }
+        ]
     },
     {
-        "nFrames": 0,
-        "frameDuration": 400.0
+        "nFrames": 4,
+        "frameDuration": 150.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 49,
+                    "height": 88,
+                    "x": 217,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 54,
+                    "height": 88,
+                    "x": 271,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -8,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 59,
+                    "height": 88,
+                    "x": 328,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -20,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 47,
+                    "height": 88,
+                    "x": 391,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 10,
+                "offsetV": 0
+            }
+        ]
     },
     {
-        "nFrames": 0,
-        "frameDuration": 400.0
+        "nFrames": 1,
+        "frameDuration": 400.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 46,
+                    "height": 63,
+                    "x": 451,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            }
+        ]
     },
     {
-        "nFrames": 0,
-        "frameDuration": 400.0
+        "nFrames": 8,
+        "frameDuration": 200.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 50,
+                    "height": 66,
+                    "x": 511,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 50,
+                    "height": 77,
+                    "x": 568,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 74,
+                    "height": 75,
+                    "x": 618,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -26,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 78,
+                    "height": 66,
+                    "x": 696,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -28,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 52,
+                    "height": 66,
+                    "x": 774,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -16,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 52,
+                    "height": 106,
+                    "x": 831,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -16,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 55,
+                    "height": 106,
+                    "x": 894,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -12,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 50,
+                    "height": 102,
+                    "x": 944,
+                    "y": 836
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -3,
+                "offsetV": 0
+            }
+        ]
     },
     {
-        "nFrames": 0,
-        "frameDuration": 400.0
+        "nFrames": 5,
+        "frameDuration": 300.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 51,
+                    "height": 66,
+                    "x": 1165,
+                    "y": 840
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 71,
+                    "height": 66,
+                    "x": 1218,
+                    "y": 840
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -13,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 80,
+                    "height": 66,
+                    "x": 1293,
+                    "y": 840
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -16,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 76,
+                    "height": 66,
+                    "x": 1373,
+                    "y": 840
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -12,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 75,
+                    "height": 66,
+                    "x": 1295,
+                    "y": 840
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": -16,
+                "offsetV": 0
+            }
+        ]
+    },
+    {
+        "nFrames": 3,
+        "frameDuration": 200.0,
+        "frames": [
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 44,
+                    "height": 78,
+                    "x": 6,
+                    "y": 962
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 44,
+                    "height": 88,
+                    "x": 57,
+                    "y": 962
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            },
+            {
+                "sprite": {
+                    "sheetPath": "SpriteSheets/RyuSS.png",
+                    "width": 44,
+                    "height": 111,
+                    "x": 108,
+                    "y": 962
+                },
+                "hitboxes": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "damage": 0
+                    }
+                ],
+                "offsetH": 0,
+                "offsetV": 0
+            }
+        ]
     }
 ]

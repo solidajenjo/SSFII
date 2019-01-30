@@ -31,30 +31,56 @@ bool Animation::SetFrame(unsigned frameNum, Sprite* sprite)
 	return false;
 }
 
-void Animation::Play(const float3 &pos, bool &loopEnded)
+void Animation::Play(const float3 &pos, bool &loopEnded, bool loop)
 {
 	lastTime = SDL_GetTicks();
+	loopEnded = false;
 	if (lastTime >= nextFrameChange)
 	{
-		nextFrameChange = lastTime + frameDuration;
-		if (!reverse)
+		if (loop)
 		{
-			++currentFrame;
-			if (currentFrame >= nFrames)
+			nextFrameChange = lastTime + frameDuration;
+			if (!reverse)
 			{
-				currentFrame = 0u;
-				loopEnded = true;
+				++currentFrame;
+				if (currentFrame >= nFrames)
+				{
+					currentFrame = 0u;
+					loopEnded = true;
+				}
+			}
+			else
+			{
+				if (currentFrame == 0)
+				{
+					currentFrame = nFrames - 1;
+					loopEnded = true;
+				}
+				else
+					--currentFrame;
 			}
 		}
 		else
-		{			
-			if (currentFrame == 0)
+		{
+			nextFrameChange = lastTime + frameDuration;
+			if (!reverse)
 			{
-				currentFrame = nFrames - 1;
-				loopEnded = true;
+				++currentFrame;
+				if (currentFrame >= nFrames)
+				{
+					currentFrame = nFrames - 1;
+					loopEnded = true;
+				}
 			}
 			else
-				--currentFrame;
+			{
+				if (currentFrame == 0)
+				{
+					loopEnded = true;
+				}
+				else
+					--currentFrame;
+			}
 		}
 	}
 	game->render->RenderSprite(frames[currentFrame]->sprite, pos + float3(frames[currentFrame]->offsetH, frames[currentFrame]->offsetV, .0f));
@@ -64,8 +90,9 @@ void Animation::Play(const float3 &pos, bool &loopEnded)
 void Animation::Rewind()
 {
 	currentFrame = 0u;
-	nextFrameChange = lastTime + frameDuration;
+	nextFrameChange = SDL_GetTicks() + frameDuration;
 }
+
 
 void Animation::Reset(unsigned newNFrames, std::string sheetPath)
 {

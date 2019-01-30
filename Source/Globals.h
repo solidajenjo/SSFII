@@ -38,5 +38,5 @@ enum LoopStates
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
-#define ANIM_NUM 43
+#define ANIM_NUM 50
 #endif
