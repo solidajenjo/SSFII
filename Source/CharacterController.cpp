@@ -13,7 +13,19 @@ void CharacterController::Update()
 	{
 	case CharacterStates::IDLE:
 		animationSheet->animations[AnimationSheet::Anims::IDLE]->Play(pos, loopEnded);
+		CheckCrouch();
 		CheckWalk();
+		CheckJump();
+		CheckGroundAttack();
+		break;
+
+	case CharacterStates::CROUCH:
+		animationSheet->animations[AnimationSheet::Anims::CROUCH]->Play(pos, loopEnded);		
+		if (game->input->GetKey(SDL_SCANCODE_DOWN) != KEY_REPEAT)
+		{
+			state = CharacterStates::IDLE;
+			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+		}
 		CheckJump();
 		CheckGroundAttack();
 		break;
@@ -26,6 +38,7 @@ void CharacterController::Update()
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
 		}
+		CheckCrouch();
 		CheckJump();
 		CheckGroundAttack();
 		break;
@@ -38,6 +51,7 @@ void CharacterController::Update()
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
 		}
+		CheckCrouch();
 		CheckJump();
 		CheckGroundAttack();
 		break;
@@ -93,6 +107,14 @@ void CharacterController::Update()
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
+		}
+		break;
+
+	case CharacterStates::CROUCH_ATTACK:
+		attackAnimation->Play(pos, loopEnded);
+		if (loopEnded)
+		{
+			state = CharacterStates::CROUCH;
 		}
 		break;
 
@@ -152,6 +174,15 @@ void CharacterController::Update()
 	}
 
 
+}
+
+void CharacterController::CheckCrouch()
+{
+	if (game->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+		state = CharacterStates::CROUCH;		
+		animationSheet->animations[AnimationSheet::Anims::CROUCH]->Rewind();
+	}
 }
 
 void CharacterController::CheckWalk()
@@ -283,6 +314,45 @@ void CharacterController::CheckGroundAttack()
 			state = CharacterStates::FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_L_KICK];
 			animationSheet->animations[AnimationSheet::Anims::F_L_KICK]->Rewind();
+		}
+		break;
+
+	case CharacterStates::CROUCH:
+		if (game->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+			state = CharacterStates::CROUCH_ATTACK;
+			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_PUNCH];
+			animationSheet->animations[AnimationSheet::Anims::C_H_PUNCH]->Rewind();
+		}
+		if (game->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		{
+			state = CharacterStates::CROUCH_ATTACK;
+			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_PUNCH];
+			animationSheet->animations[AnimationSheet::Anims::C_M_PUNCH]->Rewind();
+		}
+		if (game->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		{
+			state = CharacterStates::CROUCH_ATTACK;
+			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_PUNCH];
+			animationSheet->animations[AnimationSheet::Anims::C_L_PUNCH]->Rewind();
+		}
+		if (game->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		{
+			state = CharacterStates::CROUCH_ATTACK;
+			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_KICK];
+			animationSheet->animations[AnimationSheet::Anims::C_H_KICK]->Rewind();
+		}
+		if (game->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+		{
+			state = CharacterStates::CROUCH_ATTACK;
+			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_KICK];
+			animationSheet->animations[AnimationSheet::Anims::C_M_KICK]->Rewind();
+		}
+		if (game->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		{
+			state = CharacterStates::CROUCH_ATTACK;
+			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_KICK];
+			animationSheet->animations[AnimationSheet::Anims::C_L_KICK]->Rewind();
 		}
 		break;
 	}

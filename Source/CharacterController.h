@@ -53,6 +53,7 @@ public:
 	
 private:
 
+	void CheckCrouch();
 	void CheckWalk();
 	void CheckJump();
 	void CheckGroundAttack();
