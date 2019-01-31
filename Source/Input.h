@@ -4,6 +4,7 @@
 #include "Point.h"
 
 #include "ExternalLibraries/SDL/include/SDL_scancode.h"
+#include "ExternalLibraries/SDL/include/SDL_joystick.h"
 
 #define NUM_MOUSE_BUTTONS 5
 
@@ -21,6 +22,22 @@ enum KeyState
 	KEY_DOWN,
 	KEY_REPEAT,
 	KEY_UP
+};
+
+enum Joystick
+{
+	JOY_BUTTON_A = 0,
+	JOY_BUTTON_B,
+	JOY_BUTTON_X,
+	JOY_BUTTON_Y,
+	JOY_BUTTON_LR,
+	JOY_BUTTON_LB,
+	JOY_BUTTON_SELECT,
+	JOY_BUTTON_START,
+	JOY_LEFT,
+	JOY_RIGHT,
+	JOY_UP,
+	JOY_DOWN,
 };
 
 class Input
@@ -64,9 +81,11 @@ public:
 private:
 	bool		windowEvents[WE_COUNT];
 	KeyState*	keyboard;
+	KeyState*	joystick;
 	KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
 	iPoint mouse_motion;
 	iPoint mouse;
+	SDL_Joystick* gGameController = nullptr;
 };
 
 #endif // __MODULEINPUT_H__

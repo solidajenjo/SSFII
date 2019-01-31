@@ -4,18 +4,23 @@
 #include "ExternalLibraries/imgui/examples/imgui_impl_sdl.h"
 
 #define MAX_KEYS 300
+#define JOYSTICK_ACTIONS 12
+#define JOYSTICK_DEAD_ZONE 8000
 
 Input::Input() : mouse({0, 0}), mouse_motion({0,0})
 {
 	keyboard = new KeyState[MAX_KEYS];
+	joystick = new KeyState[JOYSTICK_ACTIONS];
 	memset(keyboard, KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
 	memset(mouse_buttons, KEY_IDLE, sizeof(KeyState) * NUM_MOUSE_BUTTONS);
+	memset(joystick, KEY_IDLE, sizeof(KeyState) * JOYSTICK_ACTIONS);
 }
 
 // Destructor
 Input::~Input()
 {
 	RELEASE_ARRAY(keyboard);
+	RELEASE_ARRAY(joystick);
 }
 
 // Called before render is available
@@ -31,6 +36,19 @@ bool Input::Init()
 		ret = false;
 	}
 
+	if (SDL_NumJoysticks() < 1)
+	{
+		LOG("Warning: No joysticks connected!");
+	}
+	else
+	{
+		//Load joystick
+		gGameController = SDL_JoystickOpen(0);
+		if (gGameController == NULL)
+		{
+			LOG("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
+		}
+	}
 	return ret;
 }
 
@@ -43,8 +61,7 @@ bool Input::PreUpdate()
 	mouse_motion = {0, 0};
 	memset(windowEvents, false, WE_COUNT * sizeof(bool));
 	
-	const Uint8* keys = SDL_GetKeyboardState(NULL);
-
+	const Uint8* keys = SDL_GetKeyboardState(NULL);	
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
 		if(keys[i] == 1)
@@ -62,6 +79,7 @@ bool Input::PreUpdate()
 				keyboard[i] = KEY_IDLE;
 		}
 	}
+	
 
 	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i)
 	{
@@ -116,6 +134,58 @@ bool Input::PreUpdate()
 				mouse.x = event.motion.x;
 				mouse.y = event.motion.y;
 			break;
+
+			case SDL_JOYBUTTONDOWN:
+				LOG("%d", event.jbutton.button);
+				if (joystick[event.jbutton.button] == KEY_DOWN)
+					joystick[event.jbutton.button] = KEY_REPEAT;
+				break;
+
+			case SDL_JOYBUTTONUP:
+				joystick[event.jbutton.button] = KEY_IDLE;
+				break;
+
+			case SDL_JOYAXISMOTION:
+				if (event.jaxis.which == 0)
+				{					
+					if (event.jaxis.axis == 0)
+					{
+						//Left of dead zone
+						if (event.jaxis.value < -JOYSTICK_DEAD_ZONE)
+						{
+							joystick[JOY_LEFT] = KEY_REPEAT;
+						}
+						//Right of dead zone
+						else if (event.jaxis.value > JOYSTICK_DEAD_ZONE)
+						{
+							joystick[JOY_RIGHT] = KEY_REPEAT;
+						}
+						else
+						{
+							joystick[JOY_LEFT] = KEY_IDLE;
+							joystick[JOY_RIGHT] = KEY_IDLE;
+						}
+					}
+					if (event.jaxis.axis == 1)
+					{
+						//Left of dead zone
+						if (event.jaxis.value < -JOYSTICK_DEAD_ZONE)
+						{
+							joystick[JOY_UP] = KEY_REPEAT;
+						}
+						//Right of dead zone
+						else if (event.jaxis.value > JOYSTICK_DEAD_ZONE)
+						{
+							joystick[JOY_DOWN] = KEY_REPEAT;
+						}
+						else
+						{
+							joystick[JOY_UP] = KEY_IDLE;
+							joystick[JOY_DOWN] = KEY_IDLE;
+						}
+					}
+				}
+				break;
 		}
 	}
 
