@@ -179,6 +179,7 @@
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\log.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\PlayerController.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
@@ -345,6 +346,7 @@
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\PlayerController.h" />
     <ClInclude Include="Source\Point.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Sprite.h" />

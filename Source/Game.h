@@ -7,6 +7,7 @@ class Input;
 class Textures;
 class FileSystem;
 class CharacterController;
+class PlayerController;
 
 class Game
 {
@@ -25,6 +26,8 @@ public:
 	Textures* textures = nullptr;
 	FileSystem* fileSystem = nullptr;
 	CharacterController* characterController = nullptr;
+	PlayerController* joystickController = nullptr;
+	PlayerController* keyboardController = nullptr;
 };
 
 extern Game* game;

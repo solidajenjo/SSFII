@@ -86,6 +86,7 @@ bool Editor::Update()
 					ImGui::CloseCurrentPopup();
 					//TODO:Release old character controller
 					game->characterController = new CharacterController(as, float3(previewPos, 0.f));
+					game->characterController->controller = game->keyboardController;
 				}
 			}
 			ImGui::EndPopup();

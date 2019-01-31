@@ -30,8 +30,8 @@ enum Joystick
 	JOY_BUTTON_B,
 	JOY_BUTTON_X,
 	JOY_BUTTON_Y,
-	JOY_BUTTON_LR,
 	JOY_BUTTON_LB,
+	JOY_BUTTON_RB,
 	JOY_BUTTON_SELECT,
 	JOY_BUTTON_START,
 	JOY_LEFT,
@@ -64,6 +64,11 @@ public:
 	KeyState GetKey(int id) const
 	{
 		return keyboard[id];
+	}
+
+	KeyState GetJoy(int id) const
+	{
+		return joystick[id];
 	}
 
 	KeyState GetMouseButtonDown(int id) const

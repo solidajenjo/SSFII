@@ -90,6 +90,17 @@ bool Input::PreUpdate()
 			mouse_buttons[i] = KEY_IDLE;
 	}
 
+	unsigned button = JOY_BUTTON_A;
+	while (button < JOY_LEFT)
+	{
+		if (SDL_JoystickGetButton(gGameController, button) == 1 && joystick[button] == KEY_DOWN)
+		{
+			LOG("R");
+			joystick[button] = KEY_REPEAT;
+		}
+		button++;
+	}
+
 	while(SDL_PollEvent(&event) != 0)
 	{
 		
@@ -136,11 +147,15 @@ bool Input::PreUpdate()
 			break;
 
 			case SDL_JOYBUTTONDOWN:
-				LOG("%d", event.jbutton.button);
-				if (joystick[event.jbutton.button] == KEY_DOWN)
-					joystick[event.jbutton.button] = KEY_REPEAT;
-				break;
+				LOG("ff %d", event.jbutton.button);
 
+				if (joystick[event.jbutton.button] == KEY_IDLE)
+				{
+					LOG("D");
+					joystick[event.jbutton.button] = KEY_DOWN;
+				}
+				break;
+			
 			case SDL_JOYBUTTONUP:
 				joystick[event.jbutton.button] = KEY_IDLE;
 				break;

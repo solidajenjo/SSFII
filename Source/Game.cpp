@@ -8,6 +8,7 @@
 #include "Animation.h"
 #include "AnimationSheet.h"
 #include "CharacterController.h"
+#include "PlayerController.h"
 #include "FileSystem.h"
 
 bool Game::Init()
@@ -17,6 +18,8 @@ bool Game::Init()
 	input = new Input();
 	textures = new Textures();
 	fileSystem = new FileSystem();
+	joystickController = new PlayerController(PlayerControllerType::JOYSTICK);
+	keyboardController = new PlayerController(PlayerControllerType::KEYBOARD); //TODO: Clean
 	render->Init();
 	editor->Init();
 	input->Init();

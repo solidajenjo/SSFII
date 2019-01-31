@@ -6,6 +6,7 @@
 
 class AnimationSheet;
 class Animation;
+class PlayerController;
 
 class CharacterController
 {
@@ -40,6 +41,7 @@ public:
 	CharacterStates state = CharacterStates::IDLE;
 	AnimationSheet* animationSheet = nullptr; //TODO:Clean
 	Animation* attackAnimation = nullptr;
+	PlayerController* controller = nullptr;
 	bool loopEnded = false;
 
 	float3 pos = float3::zero;

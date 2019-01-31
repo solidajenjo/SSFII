@@ -2,6 +2,7 @@
 #include "Animation.h"
 #include "Game.h"
 #include "CharacterController.h"
+#include "PlayerController.h"
 #include "Animation.h"
 #include "AnimationSheet.h"
 #include "Input.h"
@@ -21,7 +22,7 @@ void CharacterController::Update()
 
 	case CharacterStates::CROUCH:
 		animationSheet->animations[AnimationSheet::Anims::CROUCH]->Play(pos, loopEnded);		
-		if (game->input->GetKey(SDL_SCANCODE_DOWN) != KEY_REPEAT)
+		if (!controller->Down())
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
@@ -33,7 +34,7 @@ void CharacterController::Update()
 	case CharacterStates::WALK_FORWARD:
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded);
 		pos.x += speed;
-		if (game->input->GetKey(SDL_SCANCODE_RIGHT) != KEY_REPEAT)
+		if (!controller->Right())
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
@@ -46,7 +47,7 @@ void CharacterController::Update()
 	case CharacterStates::WALK_BACKWARDS:
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded);
 		pos.x -= speed;
-		if (game->input->GetKey(SDL_SCANCODE_LEFT) != KEY_REPEAT)
+		if (!controller->Left())
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
@@ -178,7 +179,7 @@ void CharacterController::Update()
 
 void CharacterController::CheckCrouch()
 {
-	if (game->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if (controller->Down())
 	{
 		state = CharacterStates::CROUCH;		
 		animationSheet->animations[AnimationSheet::Anims::CROUCH]->Rewind();
@@ -187,13 +188,13 @@ void CharacterController::CheckCrouch()
 
 void CharacterController::CheckWalk()
 {
-	if (game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (controller->Left())
 	{
 		state = CharacterStates::WALK_BACKWARDS;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->reverse = true;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Rewind();
 	}
-	if (game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (controller->Right())
 	{
 		state = CharacterStates::WALK_FORWARD;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->reverse = false;
@@ -203,24 +204,21 @@ void CharacterController::CheckWalk()
 
 void CharacterController::CheckJump()
 {
-	if (game->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (controller->Up())
 	{
 		verticalSpeed = jumpSpeed;
 		switch (state)
 		{
 		case CharacterStates::IDLE:
-			if (game->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-				state = CharacterStates::JUMP;
+			state = CharacterStates::JUMP;
 			animationSheet->animations[AnimationSheet::Anims::JUMP]->Rewind();
 			break;
 		case CharacterStates::WALK_FORWARD:
-			if (game->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-				state = CharacterStates::JUMP_FORWARD;
+			state = CharacterStates::JUMP_FORWARD;
 			animationSheet->animations[AnimationSheet::Anims::FORWARD_JUMP]->Rewind();
 			break;
 		case CharacterStates::WALK_BACKWARDS:
-			if (game->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-				state = CharacterStates::JUMP_BACKWARDS;
+			state = CharacterStates::JUMP_BACKWARDS;
 			animationSheet->animations[AnimationSheet::Anims::JUMP]->Rewind();
 			break;
 		}
@@ -240,37 +238,37 @@ void CharacterController::CheckGroundAttack()
 	{
 	case(CharacterStates::WALK_BACKWARDS): //remove this when distance enabled
 	case (CharacterStates::IDLE):
-		if (game->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (controller->H_Punch())
 		{
 			state = CharacterStates::ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::H_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if (controller->M_Punch())
 		{
 			state = CharacterStates::ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::M_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if (controller->L_Punch())
 		{
 			state = CharacterStates::ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::L_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		if (controller->H_Kick())
 		{
 			state = CharacterStates::ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::H_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+		if (controller->M_Kick())
 		{
 			state = CharacterStates::ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::M_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		if (controller->L_Kick())
 		{
 			state = CharacterStates::ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::L_KICK];
@@ -279,37 +277,37 @@ void CharacterController::CheckGroundAttack()
 		break;
 
 	case CharacterStates::WALK_FORWARD:
-		if (game->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (controller->H_Punch())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::F_H_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if (controller->M_Punch())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::F_M_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if (controller->L_Punch())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::F_L_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		if (controller->H_Kick())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::F_H_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+		if (controller->M_Kick())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::F_M_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		if (controller->L_Kick())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_L_KICK];
@@ -318,37 +316,37 @@ void CharacterController::CheckGroundAttack()
 		break;
 
 	case CharacterStates::CROUCH:
-		if (game->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (controller->H_Punch())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::C_H_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if (controller->M_Punch())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::C_M_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if (controller->L_Punch())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::C_L_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		if (controller->H_Kick())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::C_H_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+		if (controller->M_Kick())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::C_M_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		if (controller->L_Kick())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_KICK];
@@ -363,37 +361,37 @@ void CharacterController::CheckAirAttack()
 	switch (state)
 	{
 	case CharacterStates::JUMP_FORWARD:
-		if (game->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (controller->H_Punch())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_F_H_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if (controller->M_Punch())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_F_M_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if (controller->L_Punch())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_F_L_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		if (controller->H_Kick())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_F_H_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+		if (controller->M_Kick())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_F_M_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		if (controller->L_Kick())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_L_KICK];
@@ -402,37 +400,37 @@ void CharacterController::CheckAirAttack()
 		break;
 
 	case CharacterStates::JUMP:
-		if (game->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (controller->H_Punch())
 		{
 			state = CharacterStates::JUMP_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if (controller->M_Punch())
 		{
 			state = CharacterStates::JUMP_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if (controller->L_Punch())
 		{
 			state = CharacterStates::JUMP_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		if (controller->H_Kick())
 		{
 			state = CharacterStates::JUMP_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_H_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+		if (controller->M_Kick())
 		{
 			state = CharacterStates::JUMP_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_M_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		if (controller->L_Kick())
 		{
 			state = CharacterStates::JUMP_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_KICK];
@@ -441,37 +439,37 @@ void CharacterController::CheckAirAttack()
 		break;
 
 	case CharacterStates::JUMP_BACKWARDS:
-		if (game->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if (controller->H_Punch())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if (controller->M_Punch())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if (controller->L_Punch())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		if (controller->H_Kick())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_H_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+		if (controller->M_Kick())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_M_KICK]->Rewind();
 		}
-		if (game->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		if (controller->L_Kick())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_KICK];
