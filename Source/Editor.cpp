@@ -32,7 +32,8 @@ bool Editor::Update()
 	ImGui_ImplSDL2_NewFrame(game->render->window);
 	ImGui::NewFrame();
 	float2 previewPos = float2(100.f, 300.f);
-	if (ImGui::Button("Test") && game->characterController != nullptr)
+	float2 previewPos2 = float2(200.f, 300.f);
+	if (ImGui::Button("Test") && game->characterController1 != nullptr)
 	{
 		testing = true;
 		animPreview = nullptr;
@@ -85,8 +86,12 @@ bool Editor::Update()
 					spriteSheet = new Sprite(as->sheetPath);
 					ImGui::CloseCurrentPopup();
 					//TODO:Release old character controller
-					game->characterController = new CharacterController(as, float3(previewPos, 0.f));
-					game->characterController->controller = game->keyboardController;
+					game->characterController1 = new CharacterController(as, float3(previewPos, 0.f));
+					game->characterController1->controller = game->keyboardController;
+					game->characterController2 = new CharacterController(as, float3(previewPos2, 0.f));
+					game->characterController2->controller = game->joystickController;
+					game->characterController2->other = game->characterController1;
+					game->characterController1->other = game->characterController2;
 				}
 			}
 			ImGui::EndPopup();
@@ -246,13 +251,19 @@ bool Editor::Update()
 						if (animPreview->nFrames > 0 && animPreview->frames[animPreview->currentFrame]->sprite != nullptr)
 						{
 							if (!play)
-								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite, 
-									float3(previewPos, 0.f) + float3(animPreview->frames[animPreview->currentFrame]->offsetH,
-										animPreview->frames[animPreview->currentFrame]->offsetV, .0f));
+							{
+								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
+									float3(previewPos, 0.f), animPreview->frames[animPreview->currentFrame]->offsetH,
+										animPreview->frames[animPreview->currentFrame]->offsetV, false);
+								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
+									float3(previewPos2, 0.f), animPreview->frames[animPreview->currentFrame]->offsetH,
+										animPreview->frames[animPreview->currentFrame]->offsetV, true);
+							}
 							else
 							{
 								bool loopEnded;
-								animPreview->Play(float3(previewPos, 0.f), loopEnded);
+								animPreview->Play(float3(previewPos, 0.f), loopEnded, false);
+								animPreview->Play(float3(previewPos2, 0.f), loopEnded, true);
 							}
 							float2 offsettedPos = float2(previewPos) + float2(animPreview->frames[animPreview->currentFrame]->offsetH,
 								animPreview->frames[animPreview->currentFrame]->offsetV);
@@ -261,7 +272,7 @@ bool Editor::Update()
 							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.minPoint,
 								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.maxPoint);
 							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.minPoint,
-								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.maxPoint, true);
+								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.maxPoint, false);
 							
 						}
 					}

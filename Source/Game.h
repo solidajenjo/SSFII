@@ -25,7 +25,8 @@ public:
 	Input* input = nullptr;
 	Textures* textures = nullptr;
 	FileSystem* fileSystem = nullptr;
-	CharacterController* characterController = nullptr;
+	CharacterController* characterController1 = nullptr;
+	CharacterController* characterController2 = nullptr;
 	PlayerController* joystickController = nullptr;
 	PlayerController* keyboardController = nullptr;
 };

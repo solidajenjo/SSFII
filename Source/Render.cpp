@@ -113,8 +113,6 @@ bool Render::Init()
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glFrontFace(GL_CCW);
 	glEnable(GL_TEXTURE_2D);
 
 	glClearDepth(1.0f);
@@ -135,16 +133,27 @@ bool Render::Update()
 	return true;
 }
 
-void Render::RenderSprite(const Sprite* sprite, const float3 &pos) const
+void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float offsetH, float offsetV, bool flip) const
 {
 	glUseProgram(program);
 	float4x4 model;
-	model = model.FromTRS(float3((((pos.x + sprite->width) / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, .0f),
-		float4x4::identity, float3(sprite->width / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT , 1.f) * 2.f);
+	float3 spritePos;
+	float dir = 1.f;
+	if (flip)
+	{
+		spritePos = float3((((pos.x - offsetH) / SCREEN_WIDTH) * 2.f) - 1.f, (((pos.y + offsetV) / SCREEN_HEIGHT) * 2.f) - 1.f, .0f);
+		dir = -1.f;
+	}
+	else
+	{
+		spritePos = float3((((pos.x + offsetH) / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, .0f);		
+	}
+	model = model.FromTRS(spritePos,
+		float4x4::identity, 
+		float3((dir * sprite->width) / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT , 1.f) * 2.f);
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, model.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, float4x4::identity.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, float4x4::identity.ptr());
-
 	glActiveTexture(GL_TEXTURE0);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->vbo);
 

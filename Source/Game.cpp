@@ -40,9 +40,10 @@ bool Game::Update()
 {
 	bool status = render->Update();
 	status = status && editor->Update();
-	if (characterController != nullptr && editor->testing)
+	if (characterController1 != nullptr && editor->testing)
 	{
-		characterController->Update();
+		characterController1->Update();
+		characterController2->Update();
 	}
 	return status;
 }

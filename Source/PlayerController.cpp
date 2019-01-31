@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Input.h"
 
-bool PlayerController::Left()
+bool PlayerController::Left() const
 {
 	switch (type)
 	{
@@ -16,7 +16,7 @@ bool PlayerController::Left()
 	return false;
 }
 
-bool PlayerController::Right()
+bool PlayerController::Right() const
 {
 	switch (type)
 	{
@@ -30,7 +30,7 @@ bool PlayerController::Right()
 	return false;
 }
 
-bool PlayerController::Down()
+bool PlayerController::Down() const
 {
 	switch (type)
 	{
@@ -44,7 +44,7 @@ bool PlayerController::Down()
 	return false;
 }
 
-bool PlayerController::Up()
+bool PlayerController::Up() const
 {
 	switch (type)
 	{
@@ -58,7 +58,7 @@ bool PlayerController::Up()
 	return false;
 }
 
-bool PlayerController::L_Punch()
+bool PlayerController::L_Punch() const
 {
 	switch (type)
 	{
@@ -72,7 +72,7 @@ bool PlayerController::L_Punch()
 	return false;
 }
 
-bool PlayerController::M_Punch()
+bool PlayerController::M_Punch() const
 {
 	switch (type)
 	{
@@ -86,7 +86,7 @@ bool PlayerController::M_Punch()
 	return false;
 }
 
-bool PlayerController::H_Punch()
+bool PlayerController::H_Punch() const
 {
 	switch (type)
 	{
@@ -100,7 +100,7 @@ bool PlayerController::H_Punch()
 	return false;
 }
 
-bool PlayerController::L_Kick()
+bool PlayerController::L_Kick() const
 {
 	switch (type)
 	{
@@ -114,7 +114,7 @@ bool PlayerController::L_Kick()
 	return false;
 }
 
-bool PlayerController::M_Kick()
+bool PlayerController::M_Kick() const
 {
 	switch (type)
 	{
@@ -128,7 +128,7 @@ bool PlayerController::M_Kick()
 	return false;
 }
 
-bool PlayerController::H_Kick()
+bool PlayerController::H_Kick() const
 {
 	switch (type)
 	{

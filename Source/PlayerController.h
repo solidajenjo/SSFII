@@ -15,16 +15,16 @@ public:
 
 	PlayerController(PlayerControllerType type) : type(type) {}
 
-	bool Left();
-	bool Right();
-	bool Down();
-	bool Up();
-	bool L_Punch();
-	bool M_Punch();
-	bool H_Punch();
-	bool L_Kick();
-	bool M_Kick();
-	bool H_Kick();
+	bool Left() const;
+	bool Right() const;
+	bool Down() const;
+	bool Up() const;
+	bool L_Punch() const;
+	bool M_Punch() const;
+	bool H_Punch() const;
+	bool L_Kick() const; 
+	bool M_Kick() const;
+	bool H_Kick() const;
 
 private:
 

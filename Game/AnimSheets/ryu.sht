@@ -105,7 +105,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": -6,
                 "offsetV": 0
             },
             {
@@ -139,7 +139,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": -5,
                 "offsetV": 0
             }
         ]
@@ -497,9 +497,9 @@
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 44,
-                    "height": 94,
-                    "x": 652,
+                    "width": 45,
+                    "height": 91,
+                    "x": 499,
                     "y": 99
                 },
                 "hitboxes": [
@@ -531,9 +531,9 @@
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
-                    "width": 44,
-                    "height": 96,
-                    "x": 652,
+                    "width": 45,
+                    "height": 91,
+                    "x": 499,
                     "y": 99
                 },
                 "hitboxes": [
@@ -803,7 +803,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": -5,
                 "offsetV": 0
             }
         ]
@@ -997,7 +997,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 11,
                 "offsetV": 0
             },
             {
@@ -1112,7 +1112,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 74,
-                    "height": 85,
+                    "height": 90,
                     "x": 274,
                     "y": 215
                 },
@@ -1139,7 +1139,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 21,
                 "offsetV": 0
             },
             {
@@ -1288,7 +1288,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 74,
-                    "height": 86,
+                    "height": 96,
                     "x": 274,
                     "y": 215
                 },
@@ -1315,7 +1315,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 22,
                 "offsetV": 0
             },
             {
@@ -1782,7 +1782,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 63,
-                    "height": 88,
+                    "height": 94,
                     "x": 1060,
                     "y": 215
                 },
@@ -1809,7 +1809,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 12,
                 "offsetV": 0
             },
             {
@@ -1850,7 +1850,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 64,
-                    "height": 88,
+                    "height": 92,
                     "x": 1187,
                     "y": 215
                 },
@@ -1877,7 +1877,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 10,
                 "offsetV": 0
             },
             {
@@ -1958,7 +1958,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 72,
-                    "height": 87,
+                    "height": 97,
                     "x": 62,
                     "y": 346
                 },
@@ -1985,7 +1985,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": -32,
+                "offsetH": -23,
                 "offsetV": 2
             },
             {
@@ -2093,7 +2093,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": -32,
+                "offsetH": -23,
                 "offsetV": 0
             },
             {
@@ -2174,7 +2174,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 59,
-                    "height": 85,
+                    "height": 88,
                     "x": 246,
                     "y": 346
                 },
@@ -2201,7 +2201,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 8,
                 "offsetV": 0
             },
             {
@@ -2235,7 +2235,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 23,
                 "offsetV": 0
             },
             {
@@ -2269,7 +2269,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 14,
                 "offsetV": 0
             },
             {
@@ -2377,7 +2377,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 20,
                 "offsetV": 0
             },
             {
@@ -2661,7 +2661,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 27,
                 "offsetV": 0
             },
             {
@@ -2729,7 +2729,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 27,
                 "offsetV": 0
             },
             {
@@ -2837,7 +2837,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 12,
                 "offsetV": 0
             },
             {
@@ -2945,7 +2945,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 14,
                 "offsetV": 0
             },
             {
@@ -3236,7 +3236,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 72,
-                    "height": 61,
+                    "height": 76,
                     "x": 714,
                     "y": 474
                 },
@@ -3263,7 +3263,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 16,
                 "offsetV": 0
             },
             {
@@ -3452,7 +3452,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 72,
-                    "height": 55,
+                    "height": 68,
                     "x": 1104,
                     "y": 474
                 },
@@ -3479,7 +3479,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 19,
                 "offsetV": 0
             },
             {
@@ -3547,7 +3547,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 15,
                 "offsetV": 0
             },
             {
@@ -4127,7 +4127,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 16,
                 "offsetV": 0
             },
             {
@@ -4208,7 +4208,7 @@
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 66,
-                    "height": 82,
+                    "height": 86,
                     "x": 60,
                     "y": 718
                 },
@@ -4235,14 +4235,14 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 5,
                 "offsetV": 0
             },
             {
                 "sprite": {
                     "sheetPath": "SpriteSheets/RyuSS.png",
                     "width": 69,
-                    "height": 82,
+                    "height": 84,
                     "x": 131,
                     "y": 718
                 },
@@ -4269,7 +4269,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 4,
                 "offsetV": 0
             },
             {
@@ -4303,7 +4303,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 27,
                 "offsetV": 0
             },
             {
@@ -4337,7 +4337,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 3,
                 "offsetV": 0
             }
         ]
@@ -4411,7 +4411,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 4,
                 "offsetV": 0
             },
             {
@@ -4445,7 +4445,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 10,
                 "offsetV": 0
             },
             {
@@ -4479,7 +4479,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 18,
                 "offsetV": 0
             },
             {
@@ -4513,7 +4513,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": -3,
                 "offsetV": 0
             }
         ]
@@ -4587,7 +4587,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 5,
                 "offsetV": 0
             },
             {
@@ -4621,7 +4621,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 4,
                 "offsetV": 0
             },
             {
@@ -4655,7 +4655,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 27,
                 "offsetV": 0
             },
             {
@@ -4689,7 +4689,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 8,
                 "offsetV": 0
             }
         ]
@@ -6249,7 +6249,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": -8,
+                "offsetH": -2,
                 "offsetV": 0
             },
             {
@@ -6283,7 +6283,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": -20,
+                "offsetH": -11,
                 "offsetV": 0
             },
             {
@@ -7067,7 +7067,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 20,
                 "offsetV": 0
             },
             {
@@ -7101,7 +7101,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": 18,
                 "offsetV": 0
             }
         ]
@@ -7209,7 +7209,7 @@
                         "damage": 0
                     }
                 ],
-                "offsetH": 0,
+                "offsetH": -2,
                 "offsetV": 0
             }
         ]

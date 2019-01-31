@@ -31,7 +31,7 @@ bool Animation::SetFrame(unsigned frameNum, Sprite* sprite)
 	return false;
 }
 
-void Animation::Play(const float3 &pos, bool &loopEnded, bool loop)
+void Animation::Play(const float3 &pos, bool &loopEnded, bool flip, bool loop)
 {
 	lastTime = SDL_GetTicks();
 	loopEnded = false;
@@ -83,7 +83,7 @@ void Animation::Play(const float3 &pos, bool &loopEnded, bool loop)
 			}
 		}
 	}
-	game->render->RenderSprite(frames[currentFrame]->sprite, pos + float3(frames[currentFrame]->offsetH, frames[currentFrame]->offsetV, .0f));
+	game->render->RenderSprite(frames[currentFrame]->sprite, pos, frames[currentFrame]->offsetH, frames[currentFrame]->offsetV, flip);
 
 }
 

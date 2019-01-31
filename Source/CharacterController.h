@@ -42,6 +42,8 @@ public:
 	AnimationSheet* animationSheet = nullptr; //TODO:Clean
 	Animation* attackAnimation = nullptr;
 	PlayerController* controller = nullptr;
+	CharacterController* other = nullptr;
+
 	bool loopEnded = false;
 
 	float3 pos = float3::zero;
@@ -52,6 +54,7 @@ public:
 	float gravity = .4f;
 	float idleY = 0.f;
 	float landingY = 0.f;
+	bool flip = false;
 	
 private:
 

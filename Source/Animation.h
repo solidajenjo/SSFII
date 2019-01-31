@@ -28,7 +28,7 @@ public:
 	~Animation();
 
 	bool SetFrame(unsigned frameNum, Sprite* sprite);
-	void Play(const float3 &pos, bool &loopEnded, bool loop = true);
+	void Play(const float3 &pos, bool &loopEnded, bool flip, bool loop = true);
 	void Rewind();
 
 	void Reset(unsigned newNFrames, std::string sheetPath);
