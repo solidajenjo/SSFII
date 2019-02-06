@@ -29,6 +29,8 @@ public:
 
 	bool SetFrame(unsigned frameNum, Sprite* sprite);
 	void Play(const float3 &pos, bool &loopEnded, bool flip, bool loop = true);
+	void UpdateHBoxes(const float2 &pos, bool flip);
+	void DrawHBoxes() const;
 	void Rewind();
 
 	void Reset(unsigned newNFrames, std::string sheetPath);
@@ -38,6 +40,7 @@ public:
 
 	//members
 
+	HitBox hitBoxes[3]; // 0 - Face / 1 - Body / 3 - Attack
 	Frame** frames = nullptr;
 	unsigned nFrames = 0u, currentFrame = 0u;
 	unsigned frameDuration = 400u;

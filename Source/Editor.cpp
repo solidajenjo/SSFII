@@ -250,29 +250,31 @@ bool Editor::Update()
 						ImGui::Text(animPreview->name.c_str());
 						if (animPreview->nFrames > 0 && animPreview->frames[animPreview->currentFrame]->sprite != nullptr)
 						{
+							float2 offsettedPos = float2(previewPos) + float2(animPreview->frames[animPreview->currentFrame]->offsetH,
+								animPreview->frames[animPreview->currentFrame]->offsetV);
+							float2 offsettedPos2 = float2(previewPos2) - float2(animPreview->frames[animPreview->currentFrame]->offsetH,
+								-animPreview->frames[animPreview->currentFrame]->offsetV);
 							if (!play)
 							{
+								animPreview->UpdateHBoxes(offsettedPos, false);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
-									float3(previewPos, 0.f), animPreview->frames[animPreview->currentFrame]->offsetH,
-										animPreview->frames[animPreview->currentFrame]->offsetV, false);
+									float3(offsettedPos, 0.f), 0, 0, false);
+								animPreview->DrawHBoxes();
+								animPreview->UpdateHBoxes(offsettedPos2, true);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
-									float3(previewPos2, 0.f), animPreview->frames[animPreview->currentFrame]->offsetH,
-										animPreview->frames[animPreview->currentFrame]->offsetV, true);
+									float3(offsettedPos2, 0.f), 0, 0, true);
+								animPreview->DrawHBoxes();
 							}
 							else
 							{
 								bool loopEnded;
-								animPreview->Play(float3(previewPos, 0.f), loopEnded, false);
-								animPreview->Play(float3(previewPos2, 0.f), loopEnded, true);
+								animPreview->UpdateHBoxes(offsettedPos, false);
+								animPreview->Play(float3(offsettedPos, 0.f), loopEnded, false);
+								animPreview->DrawHBoxes();
+								animPreview->UpdateHBoxes(offsettedPos, true);
+								animPreview->Play(float3(offsettedPos2, 0.f), loopEnded, true);
+								animPreview->DrawHBoxes();
 							}
-							float2 offsettedPos = float2(previewPos) + float2(animPreview->frames[animPreview->currentFrame]->offsetH,
-								animPreview->frames[animPreview->currentFrame]->offsetV);
-							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.minPoint,
-								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[0].box.maxPoint);
-							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.minPoint,
-								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[1].box.maxPoint);
-							game->render->DrawBox(offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.minPoint,
-								offsettedPos + animPreview->frames[animPreview->currentFrame]->hitBoxes[2].box.maxPoint, false);
 							
 						}
 					}
