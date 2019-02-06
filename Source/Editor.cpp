@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "Sprite.h"
 #include "AnimationSheet.h"
+#include "Fx.h"
 #include "Animation.h"
 #include "FileSystem.h"
 #include "CharacterController.h"
@@ -288,6 +289,134 @@ bool Editor::Update()
 		
 	}
 	
+	if (ImGui::CollapsingHeader("Fx Editor"))
+	{
+		if (fx != nullptr)
+		{
+			char sheetName[256];
+			sprintf_s(sheetName, fx->sheetName.c_str());
+			if (ImGui::InputText("Sheet Name", sheetName, 256))
+				fx->sheetName = std::string(sheetName);
+		}
+		if (ImGui::Button("New", ImVec2(100, 20)))
+		{
+			RELEASE(fx);
+			fx = new Fx("default.fx");
+			files.resize(0);
+			dirs.resize(0);
+			game->fileSystem->GetContentList("SpriteSheets", files, dirs);
+			ImGui::OpenPopup("LoadFxSheetPopup");
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Save", ImVec2(100, 20)))
+		{
+			fx->Serialize();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Load", ImVec2(100, 20)))
+		{
+			files.resize(0);
+			dirs.resize(0);
+			game->fileSystem->GetContentList("Fx", files, dirs);
+			ImGui::OpenPopup("LoadFxPopup");
+		}
+		if (ImGui::BeginPopup("LoadFxPopup", ImGuiWindowFlags_Modal))
+		{
+			for (std::string s : files)
+			{
+				if (ImGui::Button(s.c_str()))
+				{
+					RELEASE(spriteSheet);
+					RELEASE(as);
+					RELEASE(animPreview);
+					fx = new Fx(s.c_str());
+					fx->LoadSheet();
+					fxSpriteSheet = new Sprite(fx->sheetPath);
+					ImGui::CloseCurrentPopup();					
+				}
+			}
+			ImGui::EndPopup();
+		}
+		if (ImGui::BeginPopup("LoadFxSheetPopup", ImGuiWindowFlags_Modal))
+		{
+			for (std::string s : files)
+			{
+				if (ImGui::Button(s.c_str()))
+				{
+					fxSpriteSheet = new Sprite(std::string(("SpriteSheets/" + s).c_str()));
+					fx->sheetPath = std::string("SpriteSheets/" + s);
+					ImGui::CloseCurrentPopup();
+				}
+			}
+			ImGui::EndPopup();
+		}
+		ImGui::PushItemWidth(100.f);
+		if (fxSpriteSheet != nullptr)
+		{
+			ImGui::BeginChildFrame(3, ImVec2(fxSpriteSheet->width, 250));
+			ImVec2 imagePos = ImVec2(ImGui::GetWindowPos().x + ImGui::GetCursorPos().x,
+				ImGui::GetWindowPos().y + ImGui::GetCursorPos().y);
+			ImGui::Image((void*)(intptr_t)fxSpriteSheet->texture, ImVec2(fxSpriteSheet->width, fxSpriteSheet->height), ImVec2(0, 1), ImVec2(1, 0));
+			if (ImGui::IsItemHovered())
+			{
+				int x = ImGui::GetMousePos().x - imagePos.x;
+				int y = ImGui::GetMousePos().y - imagePos.y + ImGui::GetScrollY();
+				ImGui::BeginTooltip();
+				ImGui::Text("x: %d y: %d", x, y);
+				ImGui::EndTooltip();
+			}
+			ImGui::EndChildFrame();
+		}
+		ImVec2 regAvail = ImGui::GetContentRegionAvail();
+		if (fx != nullptr)
+		{
+			int nFrames = fx->animation->nFrames;
+			if (ImGui::InputInt("# of frames", &nFrames))
+			{
+				if (nFrames > 0)
+				{
+					fx->animation->Reset(nFrames, fx->sheetPath);
+				}
+			}
+			int frameDuration = fx->animation->frameDuration;
+			ImGui::InputInt("Frame duration (ms)", &frameDuration);
+			fx->animation->frameDuration = frameDuration;
+			int currentFrame = fx->animation->currentFrame;
+			if (ImGui::InputInt("Current Frame", &currentFrame))
+			{
+				if (currentFrame >= 0 && currentFrame < nFrames)
+				{
+					fx->animation->currentFrame = currentFrame;
+				}
+			}
+			ImGui::Separator();
+			if (fx->animation->nFrames > 0u)
+			{
+				ImGui::BeginChildFrame(4, ImVec2(regAvail.x, regAvail.y));
+				ImGui::PushItemWidth(100.f);
+				if (ImGui::InputInt("X", &fx->animation->frames[fx->animation->currentFrame]->sprite->x) ||
+					ImGui::InputInt("Y", &fx->animation->frames[fx->animation->currentFrame]->sprite->y) ||
+					ImGui::InputInt("W", &fx->animation->frames[fx->animation->currentFrame]->sprite->width) ||
+					ImGui::InputInt("H", &fx->animation->frames[fx->animation->currentFrame]->sprite->height))
+				{
+					fx->animation->frames[fx->animation->currentFrame]->sprite->Flush();
+					fx->animation->frames[fx->animation->currentFrame]->sprite->CreateSprite();
+				}
+				ImGui::InputInt("Offset H", &fx->animation->frames[fx->animation->currentFrame]->offsetH);
+				ImGui::InputInt("Offset V", &fx->animation->frames[fx->animation->currentFrame]->offsetV);
+				ImGui::Separator();
+				ImGui::Text("Hit box");
+				ImGui::InputFloat("MinPoint X", &fx->animation->frames[fx->animation->currentFrame]->hitBoxes[0].box.minPoint[0], 2.f);
+				ImGui::InputFloat("MinPoint Y", &fx->animation->frames[fx->animation->currentFrame]->hitBoxes[0].box.minPoint[1], 2.f);
+
+				ImGui::InputFloat("MaxPoint X", &fx->animation->frames[fx->animation->currentFrame]->hitBoxes[0].box.maxPoint[0], 2.f);
+				ImGui::InputFloat("MaxPoint Y", &fx->animation->frames[fx->animation->currentFrame]->hitBoxes[0].box.maxPoint[1], 2.f);
+				ImGui::PopItemWidth();
+				ImGui::EndChildFrame();
+			}
+		}
+		ImGui::PopItemWidth();
+	}
 
 	return true;
 }

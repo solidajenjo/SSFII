@@ -128,6 +128,7 @@
     <ClCompile Include="Source\FileSystem.cpp" />
     <ClCompile Include="Source\CharacterController.cpp" />
     <ClCompile Include="Source\PlayerController.cpp" />
+    <ClCompile Include="Source\Fx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Render.h" />
@@ -602,6 +603,7 @@
     </ClInclude>
     <ClInclude Include="Source\CharacterController.h" />
     <ClInclude Include="Source\PlayerController.h" />
+    <ClInclude Include="Source\Fx.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">

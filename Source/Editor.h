@@ -10,6 +10,7 @@ struct ImGuiIO;
 class Sprite;
 class AnimationSheet;
 class Animation;
+class Fx;
 
 class Editor
 {
@@ -22,7 +23,9 @@ public:
 
 	ImGuiIO* io;
 	Sprite* spriteSheet = nullptr;
+	Sprite* fxSpriteSheet = nullptr;
 	AnimationSheet* as = nullptr;
+	Fx* fx = nullptr;
 	Animation* animPreview = nullptr;
 
 	std::vector<std::string> files;

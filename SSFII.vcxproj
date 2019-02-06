@@ -175,6 +175,7 @@
     <ClCompile Include="Source\ExternalLibraries\MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="Source\ExternalLibraries\MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Source\FileSystem.cpp" />
+    <ClCompile Include="Source\Fx.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\log.cpp" />
@@ -343,6 +344,7 @@
     <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_video.h" />
     <ClInclude Include="Source\ExternalLibraries\SDL\include\SDL_vulkan.h" />
     <ClInclude Include="Source\FileSystem.h" />
+    <ClInclude Include="Source\Fx.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\Input.h" />
