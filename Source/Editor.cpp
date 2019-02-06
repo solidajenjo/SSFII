@@ -256,11 +256,11 @@ bool Editor::Update()
 								-animPreview->frames[animPreview->currentFrame]->offsetV);
 							if (!play)
 							{
-								animPreview->UpdateHBoxes(offsettedPos, false);
+								animPreview->UpdateHBoxes(previewPos, false);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
 									float3(offsettedPos, 0.f), 0, 0, false);
 								animPreview->DrawHBoxes();
-								animPreview->UpdateHBoxes(offsettedPos2, true);
+								animPreview->UpdateHBoxes(previewPos2, true);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
 									float3(offsettedPos2, 0.f), 0, 0, true);
 								animPreview->DrawHBoxes();
@@ -268,11 +268,11 @@ bool Editor::Update()
 							else
 							{
 								bool loopEnded;
-								animPreview->UpdateHBoxes(offsettedPos, false);
-								animPreview->Play(float3(offsettedPos, 0.f), loopEnded, false);
+								animPreview->UpdateHBoxes(previewPos, false);
+								animPreview->Play(float3(previewPos, 0.f), loopEnded, false);
 								animPreview->DrawHBoxes();
-								animPreview->UpdateHBoxes(offsettedPos, true);
-								animPreview->Play(float3(offsettedPos2, 0.f), loopEnded, true);
+								animPreview->UpdateHBoxes(previewPos2, true);
+								animPreview->Play(float3(previewPos2, 0.f), loopEnded, true);
 								animPreview->DrawHBoxes();
 							}
 							

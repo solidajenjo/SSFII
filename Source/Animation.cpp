@@ -91,25 +91,37 @@ void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 {
 	if (!flip)
 	{
-		hitBoxes[0].box.minPoint = float2(pos.x + frames[currentFrame]->hitBoxes[0].box.minPoint.x, pos.y + frames[currentFrame]->hitBoxes[0].box.minPoint.y);
-		hitBoxes[0].box.maxPoint = float2(pos.x + frames[currentFrame]->hitBoxes[0].box.maxPoint.x, pos.y + frames[currentFrame]->hitBoxes[0].box.maxPoint.y);
+		hitBoxes[0].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[0].box.minPoint.x, 
+			pos.y + frames[currentFrame]->hitBoxes[0].box.minPoint.y);
+		hitBoxes[0].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[0].box.maxPoint.x, 
+			pos.y + frames[currentFrame]->hitBoxes[0].box.maxPoint.y);
 
-		hitBoxes[1].box.minPoint = float2(pos.x + frames[currentFrame]->hitBoxes[1].box.minPoint.x, pos.y + frames[currentFrame]->hitBoxes[1].box.minPoint.y);
-		hitBoxes[1].box.maxPoint = float2(pos.x + frames[currentFrame]->hitBoxes[1].box.maxPoint.x, pos.y + frames[currentFrame]->hitBoxes[1].box.maxPoint.y);
+		hitBoxes[1].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[1].box.minPoint.x, 
+			pos.y + frames[currentFrame]->hitBoxes[1].box.minPoint.y);
+		hitBoxes[1].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[1].box.maxPoint.x, 
+			pos.y + frames[currentFrame]->hitBoxes[1].box.maxPoint.y);
 
-		hitBoxes[2].box.minPoint = float2(pos.x + frames[currentFrame]->hitBoxes[2].box.minPoint.x, pos.y + frames[currentFrame]->hitBoxes[2].box.minPoint.y);
-		hitBoxes[2].box.maxPoint = float2(pos.x + frames[currentFrame]->hitBoxes[2].box.maxPoint.x, pos.y + frames[currentFrame]->hitBoxes[2].box.maxPoint.y);
+		hitBoxes[2].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[2].box.minPoint.x, 
+			pos.y + frames[currentFrame]->hitBoxes[2].box.minPoint.y);
+		hitBoxes[2].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[2].box.maxPoint.x, 
+			pos.y + frames[currentFrame]->hitBoxes[2].box.maxPoint.y);
 	}
 	else																							 
 	{																								 
-		hitBoxes[0].box.minPoint = float2(pos.x - frames[currentFrame]->hitBoxes[0].box.maxPoint.x, pos.y + frames[currentFrame]->hitBoxes[0].box.minPoint.y);
-		hitBoxes[0].box.maxPoint = float2(pos.x - frames[currentFrame]->hitBoxes[0].box.minPoint.x, pos.y + frames[currentFrame]->hitBoxes[0].box.maxPoint.y);
+		hitBoxes[0].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[0].box.maxPoint.x, 
+			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.minPoint.y);
+		hitBoxes[0].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[0].box.minPoint.x, 
+			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.maxPoint.y);
+
+		hitBoxes[1].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[1].box.maxPoint.x, 
+			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.minPoint.y);
+		hitBoxes[1].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[1].box.minPoint.x, 
+			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.maxPoint.y);
 																									
-		hitBoxes[1].box.minPoint = float2(pos.x - frames[currentFrame]->hitBoxes[1].box.maxPoint.x, pos.y + frames[currentFrame]->hitBoxes[1].box.minPoint.y);
-		hitBoxes[1].box.maxPoint = float2(pos.x - frames[currentFrame]->hitBoxes[1].box.minPoint.x, pos.y + frames[currentFrame]->hitBoxes[1].box.maxPoint.y);
-																									
-		hitBoxes[2].box.minPoint = float2(pos.x - frames[currentFrame]->hitBoxes[2].box.maxPoint.x, pos.y + frames[currentFrame]->hitBoxes[2].box.minPoint.y);
-		hitBoxes[2].box.maxPoint = float2(pos.x - frames[currentFrame]->hitBoxes[2].box.minPoint.x, pos.y + frames[currentFrame]->hitBoxes[2].box.maxPoint.y);
+		hitBoxes[2].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[2].box.maxPoint.x, 
+			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.minPoint.y);
+		hitBoxes[2].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[2].box.minPoint.x, 
+			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.maxPoint.y);
 	}
 }
 
