@@ -3,10 +3,12 @@
 
 #include "Globals.h"
 #include "ExternalLibraries/MathGeoLib/include/Math/float3.h"
+#include <queue>
 
 class AnimationSheet;
 class Animation;
 class PlayerController;
+class Fx;
 
 class CharacterController
 {
@@ -32,7 +34,7 @@ public:
 		KO		
 	};
 
-	CharacterController(AnimationSheet *animationSheet, float3 pos) : animationSheet(animationSheet), pos(pos), idleY(pos.y), landingY(pos.y + 80.f) {};
+	CharacterController(AnimationSheet *animationSheet, float3 pos);
 
 	void Update();
 
@@ -50,12 +52,15 @@ public:
 	int direction = 1;
 	float speed = 2.5f; //TODO:Add deltatime
 	float verticalSpeed = 0.f;
-	float jumpSpeed = 12.f;
-	float gravity = .4f;
+	float jumpSpeed = 18.f;
+	float gravity = .9f;
 	float idleY = 0.f;
 	float landingY = 0.f;
 	bool flip = false;
-	
+
+	//FXs
+	std::queue<Fx*> fxQueue;
+	Fx* landingFx = nullptr;
 private:
 
 	void CheckCrouch();

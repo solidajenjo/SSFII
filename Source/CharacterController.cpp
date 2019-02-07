@@ -6,11 +6,31 @@
 #include "Animation.h"
 #include "AnimationSheet.h"
 #include "Input.h"
+#include "Fx.h"
+
+CharacterController::CharacterController(AnimationSheet * animationSheet, float3 pos) : animationSheet(animationSheet), pos(pos), idleY(pos.y), landingY(pos.y + 80.f) 
+{
+	landingFx = new Fx("landing.fx");
+	landingFx->LoadSheet();
+}
 
 void CharacterController::Update()
 {
 	assert(animationSheet != nullptr); //null animation sheet on character controller
 	assert(other != nullptr); // no enemy set
+
+	unsigned fxAmount = fxQueue.size();
+
+	while (fxAmount > 0)
+	{
+		Fx* fx = fxQueue.front();
+		fxQueue.pop();
+		bool loopEnded;
+		fx->animation->Play(float3(fx->position, 0.f), loopEnded, flip, false);
+		if (!loopEnded)
+			fxQueue.push(fx);
+		--fxAmount;
+	}
 
 	flip = false;
 
@@ -74,6 +94,9 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			pos.y = idleY;
+			landingFx->position = pos.xy();
+			fxQueue.push(landingFx);
+			landingFx->animation->Rewind();		
 		}
 		CheckAirAttack();
 		break;
@@ -87,6 +110,9 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			pos.y = idleY;
+			landingFx->position = pos.xy();
+			fxQueue.push(landingFx);
+			landingFx->animation->Rewind();
 		}
 		CheckAirAttack();
 		break;
@@ -100,6 +126,9 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			pos.y = idleY;
+			landingFx->position = pos.xy();
+			fxQueue.push(landingFx);
+			landingFx->animation->Rewind();
 		}
 		CheckAirAttack();
 		break;
@@ -143,6 +172,9 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			pos.y = idleY;
+			landingFx->position = pos.xy();
+			fxQueue.push(landingFx);
+			landingFx->animation->Rewind();
 		}
 		break;
 
@@ -161,6 +193,9 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			pos.y = idleY;
+			landingFx->position = pos.xy();
+			fxQueue.push(landingFx);
+			landingFx->animation->Rewind();
 		}
 		break;
 
@@ -178,6 +213,9 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			pos.y = idleY;
+			landingFx->position = pos.xy();
+			fxQueue.push(landingFx);
+			landingFx->animation->Rewind();
 		}
 		break;
 

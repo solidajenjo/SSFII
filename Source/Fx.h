@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include <string>
 #include "ExternalLibraries/rapidjson-1.1.0/include/rapidjson/prettywriter.h"
+#include "ExternalLibraries/MathGeoLib/include/Math/float2.h"
 
 
 class Animation;
@@ -22,7 +23,7 @@ public:
 	
 	std::string sheetName = "";
 	std::string sheetPath = "";
-	
+	float2 position = float2::zero;
 	Animation* animation = nullptr;
 
 };
