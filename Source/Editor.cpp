@@ -168,6 +168,7 @@ bool Editor::Update()
 							as->animations[i]->Reset(nFrames, as->sheetPath); 
 						}
 					}
+					ImGui::InputFloat("Scale", &as->animations[i]->scale);
 					int frameDuration = as->animations[i]->frameDuration;
 					ImGui::InputInt("Frame duration (ms)", &frameDuration);
 					as->animations[i]->frameDuration = frameDuration;
@@ -259,11 +260,11 @@ bool Editor::Update()
 							{
 								animPreview->UpdateHBoxes(previewPos, false);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
-									float3(offsettedPos, 0.f), 0, 0, false);
+									float3(offsettedPos, 0.f), animPreview->scale, 0.f, 0.f, false);
 								animPreview->DrawHBoxes();
 								animPreview->UpdateHBoxes(previewPos2, true);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
-									float3(offsettedPos2, 0.f), 0, 0, true);
+									float3(offsettedPos2, 0.f), animPreview->scale, 0.f, 0.f, true);
 								animPreview->DrawHBoxes();
 							}
 							else
@@ -370,6 +371,16 @@ bool Editor::Update()
 		ImVec2 regAvail = ImGui::GetContentRegionAvail();
 		if (fx != nullptr)
 		{
+			static bool playFx = false;
+			if (ImGui::Button("Play"))
+			{
+				playFx = true;
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Stop"))
+			{
+				playFx = false;
+			}
 			int nFrames = fx->animation->nFrames;
 			if (ImGui::InputInt("# of frames", &nFrames))
 			{
@@ -389,6 +400,7 @@ bool Editor::Update()
 					fx->animation->currentFrame = currentFrame;
 				}
 			}
+			ImGui::InputFloat("Scale", &fx->animation->scale);
 			ImGui::Separator();
 			if (fx->animation->nFrames > 0u)
 			{
@@ -413,6 +425,24 @@ bool Editor::Update()
 				ImGui::InputFloat("MaxPoint Y", &fx->animation->frames[fx->animation->currentFrame]->hitBoxes[0].box.maxPoint[1], 2.f);
 				ImGui::PopItemWidth();
 				ImGui::EndChildFrame();
+				float2 offsettedPos = float2(previewPos) + float2(fx->animation->frames[fx->animation->currentFrame]->offsetH,
+					fx->animation->frames[fx->animation->currentFrame]->offsetV);
+				float2 offsettedPos2 = float2(previewPos2) - float2(fx->animation->frames[fx->animation->currentFrame]->offsetH,
+					-fx->animation->frames[fx->animation->currentFrame]->offsetV);
+				if (!playFx)
+				{
+					fx->animation->UpdateHBoxes(previewPos, false);
+					game->render->RenderSprite(fx->animation->frames[fx->animation->currentFrame]->sprite,
+						float3(offsettedPos, 0.f), fx->animation->scale, 0.f, 0.f, false);
+					fx->animation->DrawHBoxes();					
+				}
+				else
+				{
+					bool loopEnded;
+					fx->animation->UpdateHBoxes(previewPos, false);
+					fx->animation->Play(float3(previewPos, 0.f), loopEnded, false);
+					fx->animation->DrawHBoxes();					
+				}
 			}
 		}
 		ImGui::PopItemWidth();

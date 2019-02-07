@@ -48,6 +48,7 @@ public:
 	unsigned nextFrameChange = frameDuration;
 	bool reverse = false;
 	std::string name = "";
+	float scale = 1.f;
 };
 
 

@@ -18,13 +18,12 @@ void Fx::Serialize() const
 {
 	rapidjson::StringBuffer sb;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(sb);
-	writer.StartArray();
 	writer.StartObject();
 	writer.String("spriteSheetPath"); writer.String(sheetPath.c_str());
 	writer.String("animation");
 	animation->Serialize(writer);
 	writer.EndObject();
-	if (game->fileSystem->Write("AnimSheets/" + sheetName, sb.GetString(), strlen(sb.GetString())))
+	if (game->fileSystem->Write("Fx/" + sheetName, sb.GetString(), strlen(sb.GetString())))
 	{
 		LOG("Fx saved.");
 	}
@@ -32,9 +31,9 @@ void Fx::Serialize() const
 
 bool Fx::LoadSheet()
 {
-	unsigned fileSize = game->fileSystem->Size("AnimSheets/" + sheetName);
+	unsigned fileSize = game->fileSystem->Size("Fx/" + sheetName);
 	char* buffer = new char[fileSize];
-	if (game->fileSystem->Read("AnimSheets/" + sheetName, buffer, fileSize))
+	if (game->fileSystem->Read("Fx/" + sheetName, buffer, fileSize))
 	{
 		rapidjson::Document document;
 		if (document.Parse<rapidjson::kParseStopWhenDoneFlag>(buffer).HasParseError())
@@ -45,10 +44,10 @@ bool Fx::LoadSheet()
 		}
 		else
 		{
-			rapidjson::Value sheetJSON = document.GetArray();
-			sheetPath = sheetJSON[0]["spriteSheetPath"].GetString();
+			rapidjson::Value sheetJSON = document.GetObjectA();
+			sheetPath = sheetJSON["spriteSheetPath"].GetString();
 			animation = new Animation(0);
-			animation->UnSerialize(sheetJSON[0]["animation"]);						
+			animation->UnSerialize(sheetJSON["animation"]);						
 		}
 	}
 	else

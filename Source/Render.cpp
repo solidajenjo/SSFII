@@ -133,7 +133,7 @@ bool Render::Update()
 	return true;
 }
 
-void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float offsetH, float offsetV, bool flip) const
+void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, float offsetH, float offsetV, bool flip) const
 {
 	glUseProgram(program);
 	float4x4 model;
@@ -148,9 +148,10 @@ void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float offsetH
 	{
 		spritePos = float3((((pos.x + offsetH) / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, .0f);		
 	}
+	float3 scl = (float3((dir * sprite->width) / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT, 1.f) * 2.f) * scale;
 	model = model.FromTRS(spritePos,
 		float4x4::identity, 
-		float3((dir * sprite->width) / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT , 1.f) * 2.f);
+		scl);
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, model.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, float4x4::identity.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, float4x4::identity.ptr());
