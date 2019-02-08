@@ -52,8 +52,8 @@ public:
 	int direction = 1;
 	float speed = 2.5f; //TODO:Add deltatime
 	float verticalSpeed = 0.f;
-	float jumpSpeed = 18.f;
-	float gravity = .9f;
+	float jumpSpeed = 28.f;
+	float gravity = 1.4f;
 	float idleY = 0.f;
 	float landingY = 0.f;
 	bool flip = false;
