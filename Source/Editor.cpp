@@ -32,8 +32,8 @@ bool Editor::Update()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(game->render->window);
 	ImGui::NewFrame();
-	float2 previewPos = float2(100.f, 300.f);
-	float2 previewPos2 = float2(200.f, 300.f);
+	float2 previewPos = float2(100.f, 10.f);
+	float2 previewPos2 = float2(200.f, 10.f);
 	if (ImGui::Button("Test") && game->characterController1 != nullptr)
 	{
 		testing = true;

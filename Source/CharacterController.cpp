@@ -407,7 +407,7 @@ void CharacterController::CheckAirAttack()
 {
 	switch (state)
 	{
-	case CharacterStates::JUMP_FORWARD:
+	case CharacterStates::JUMP_FORWARD: //TODO: When flipped this must be reversed
 		if (controller->H_Punch())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
