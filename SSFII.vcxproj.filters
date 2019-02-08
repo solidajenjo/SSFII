@@ -129,6 +129,72 @@
     <ClCompile Include="Source\CharacterController.cpp" />
     <ClCompile Include="Source\PlayerController.cpp" />
     <ClCompile Include="Source\Fx.cpp" />
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_7z.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_dir.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_grp.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_hog.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_iso9660.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_mvl.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_qpak.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_slb.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_unpacked.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_vdf.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_wad.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_archiver_zip.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_byteorder.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platform_haiku.cpp">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platform_os2.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platform_posix.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platform_qnx.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platform_unix.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platform_windows.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platform_winrt.cpp">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_unicode.c">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Render.h" />
@@ -604,6 +670,24 @@
     <ClInclude Include="Source\CharacterController.h" />
     <ClInclude Include="Source\PlayerController.h" />
     <ClInclude Include="Source\Fx.h" />
+    <ClInclude Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs.h">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_casefolding.h">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_internal.h">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_lzmasdk.h">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_miniz.h">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platforms.h">
+      <Filter>ExternalLibraries\PhysFS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">
@@ -620,6 +704,9 @@
     </Filter>
     <Filter Include="ExternalLibraries\Rapidjson">
       <UniqueIdentifier>{0f2abd94-f762-47a5-9e58-53e5ac525a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalLibraries\PhysFS">
+      <UniqueIdentifier>{0bb5c121-93d7-4d07-b6d5-60556486a962}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
