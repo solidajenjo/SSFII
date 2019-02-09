@@ -12,37 +12,19 @@ CharacterController::CharacterController(AnimationSheet * animationSheet, float3
 {
 	landingFx = new Fx("landing.fx");
 	landingFx->LoadSheet();
+	currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 }
 
 void CharacterController::Update()
 {
 	assert(animationSheet != nullptr); //null animation sheet on character controller
 	assert(other != nullptr); // no enemy set
-
-	unsigned fxAmount = fxQueue.size();
-
-	while (fxAmount > 0)
-	{
-		Fx* fx = fxQueue.front();
-		fxQueue.pop();
-		bool loopEnded;
-		fx->animation->Play(float3(fx->position, 0.f), loopEnded, flip, false);
-		if (!loopEnded)
-			fxQueue.push(fx);
-		--fxAmount;
-	}
-
-	flip = false;
-
-	if (other->pos.x < pos.x)
-	{
-		flip = true;
-	}
-
+	
 	switch (state)
 	{
 	case CharacterStates::IDLE:
 		animationSheet->animations[AnimationSheet::Anims::IDLE]->Play(pos, loopEnded, flip);
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		CheckCrouch();
 		CheckWalk();
 		CheckJump();
@@ -70,7 +52,7 @@ void CharacterController::Update()
 		}
 		CheckCrouch();
 		CheckJump();
-		CheckGroundAttack();
+		CheckGroundAttack();		
 		break;
 
 	case CharacterStates::WALK_BACKWARDS:
@@ -90,70 +72,55 @@ void CharacterController::Update()
 		animationSheet->animations[AnimationSheet::Anims::JUMP]->Play(pos, loopEnded, flip, false);
 		pos.y += verticalSpeed;
 		verticalSpeed -= gravity;
-		if (pos.y < idleY)
-		{
-			state = CharacterStates::IDLE;
-			pos.y = idleY;
-			landingFx->position = pos.xy();
-			fxQueue.push(landingFx);
-			landingFx->animation->Rewind();		
-		}
+		CheckLanding();
 		CheckAirAttack();
 		break;
 
 	case CharacterStates::JUMP_FORWARD:
 		animationSheet->animations[AnimationSheet::Anims::FORWARD_JUMP]->Play(pos, loopEnded, flip, false);
 		pos.y += verticalSpeed;
-		pos.x += speed;
+		pos.x += speed * jumpMovementMultiplier;
 		verticalSpeed -= gravity;
-		if (pos.y < idleY)
-		{
-			state = CharacterStates::IDLE;
-			pos.y = idleY;
-			landingFx->position = pos.xy();
-			fxQueue.push(landingFx);
-			landingFx->animation->Rewind();
-		}
+		CheckLanding();
 		CheckAirAttack();
 		break;
 	
 	case CharacterStates::JUMP_BACKWARDS:
 		animationSheet->animations[AnimationSheet::Anims::JUMP]->Play(pos, loopEnded, flip);
 		pos.y += verticalSpeed;
-		pos.x -= speed;
+		pos.x -= speed * jumpMovementMultiplier;
 		verticalSpeed -= gravity;
-		if (pos.y < idleY)
-		{
-			state = CharacterStates::IDLE;
-			pos.y = idleY;
-			landingFx->position = pos.xy();
-			fxQueue.push(landingFx);
-			landingFx->animation->Rewind();
-		}
+		CheckLanding();
 		CheckAirAttack();
 		break;
 
 	case CharacterStates::ATTACK:
 		attackAnimation->Play(pos, loopEnded, flip);
+		currentAnimation = attackAnimation;
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
+			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
 		}
 		break;
 
 	case CharacterStates::FORWARD_ATTACK:
 		attackAnimation->Play(pos, loopEnded, flip);
+		currentAnimation = attackAnimation;
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
+			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
 		}
 		break;
 
 	case CharacterStates::CROUCH_ATTACK:
 		attackAnimation->Play(pos, loopEnded, flip);
+		currentAnimation = attackAnimation;
 		if (loopEnded)
 		{
 			state = CharacterStates::CROUCH;
+			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
 		}
 		break;
 
@@ -161,66 +128,81 @@ void CharacterController::Update()
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
 			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip);
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::LANDING];
 		}
 		else
+		{
 			attackAnimation->Play(pos, loopEnded, flip, false);
+			currentAnimation = attackAnimation;
+		}
 		pos.y += verticalSpeed;
-		pos.x += speed;
+		pos.x += speed * jumpMovementMultiplier;
 		verticalSpeed -= gravity;
 		
-		if (pos.y < idleY)
-		{
-			state = CharacterStates::IDLE;
-			pos.y = idleY;
-			landingFx->position = pos.xy();
-			fxQueue.push(landingFx);
-			landingFx->animation->Rewind();
-		}
+		CheckLanding();
+
 		break;
 
 	case CharacterStates::JUMP_BACKWARDS_ATTACK:
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
 			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip);
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::LANDING];
 		}
 		else
+		{
 			attackAnimation->Play(pos, loopEnded, flip, false);
+			currentAnimation = attackAnimation;
+		}
 		pos.y += verticalSpeed;
-		pos.x -= speed;
+		pos.x -= speed * jumpMovementMultiplier;
 		verticalSpeed -= gravity;
 
-		if (pos.y < idleY)
-		{
-			state = CharacterStates::IDLE;
-			pos.y = idleY;
-			landingFx->position = pos.xy();
-			fxQueue.push(landingFx);
-			landingFx->animation->Rewind();
-		}
+		CheckLanding();
+
 		break;
 
 	case CharacterStates::JUMP_ATTACK:
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
 			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip);
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::LANDING];
 		}
 		else
+		{
 			attackAnimation->Play(pos, loopEnded, flip, false);
+			currentAnimation = attackAnimation;
+		}
 		pos.y += verticalSpeed;
 		verticalSpeed -= gravity;
 		
-		if (pos.y < idleY)
-		{
-			state = CharacterStates::IDLE;
-			pos.y = idleY;
-			landingFx->position = pos.xy();
-			fxQueue.push(landingFx);
-			landingFx->animation->Rewind();
-		}
+		CheckLanding();
+
 		break;
 
 	}
 
+	CheckCollision();
+
+	unsigned fxAmount = fxQueue.size();
+
+	while (fxAmount > 0)
+	{
+		Fx* fx = fxQueue.front();
+		fxQueue.pop();
+		bool loopEnded;
+		fx->animation->Play(float3(fx->position, 0.f), loopEnded, flip, false);
+		if (!loopEnded)
+			fxQueue.push(fx);
+		--fxAmount;
+	}
+
+	flip = false;
+
+	if (other->pos.x < pos.x && isGrounded)
+	{
+		flip = true;
+	}
 
 }
 
@@ -230,6 +212,7 @@ void CharacterController::CheckCrouch()
 	{
 		state = CharacterStates::CROUCH;		
 		animationSheet->animations[AnimationSheet::Anims::CROUCH]->Rewind();
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::CROUCH];
 	}
 }
 
@@ -240,12 +223,14 @@ void CharacterController::CheckWalk()
 		state = CharacterStates::WALK_BACKWARDS;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->reverse = true;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Rewind();
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::WALK];
 	}
 	if (controller->Right())
 	{
 		state = CharacterStates::WALK_FORWARD;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->reverse = false;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Rewind();
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::WALK];
 	}
 }
 
@@ -259,14 +244,20 @@ void CharacterController::CheckJump()
 		case CharacterStates::IDLE:
 			state = CharacterStates::JUMP;
 			animationSheet->animations[AnimationSheet::Anims::JUMP]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::JUMP];
+			isGrounded = false;
 			break;
 		case CharacterStates::WALK_FORWARD:
 			state = CharacterStates::JUMP_FORWARD;
 			animationSheet->animations[AnimationSheet::Anims::FORWARD_JUMP]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::FORWARD_JUMP];
+			isGrounded = false;
 			break;
 		case CharacterStates::WALK_BACKWARDS:
 			state = CharacterStates::JUMP_BACKWARDS;
 			animationSheet->animations[AnimationSheet::Anims::JUMP]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::JUMP];
+			isGrounded = false;
 			break;
 		}
 	}
@@ -289,7 +280,7 @@ void CharacterController::CheckGroundAttack()
 		{
 			state = CharacterStates::ATTACK;
 			attackAnimation = animationSheet->animations[AnimationSheet::Anims::H_PUNCH];
-			animationSheet->animations[AnimationSheet::Anims::H_PUNCH]->Rewind();
+			animationSheet->animations[AnimationSheet::Anims::H_PUNCH]->Rewind();			
 		}
 		if (controller->M_Punch())
 		{
@@ -526,4 +517,33 @@ void CharacterController::CheckAirAttack()
 	}
 }
 
+void CharacterController::CheckLanding()
+{
+	if (pos.y < idleY)
+	{
+		state = CharacterStates::IDLE;
+		animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+		pos.y = idleY;
+		landingFx->position = pos.xy();
+		fxQueue.push(landingFx);
+		landingFx->animation->Rewind();
+		isGrounded = true;
+	}
+}
 
+void CharacterController::CheckCollision()
+{
+	currentAnimation->DrawHBoxes();	
+	if (currentAnimation->hitBoxes[1].box.Intersects(other->currentAnimation->hitBoxes[1].box))
+	{
+		if (!flip)
+		{
+			pos.x -= speed;
+		}
+		else
+		{
+			pos.x += speed;
+		}
+	}
+	
+}

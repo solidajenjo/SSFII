@@ -25,8 +25,10 @@ public:
 	Sprite* spriteSheet = nullptr;
 	Sprite* fxSpriteSheet = nullptr;
 	AnimationSheet* as = nullptr;
+	AnimationSheet* as2 = nullptr; //TODO: CLean
 	Fx* fx = nullptr;
 	Animation* animPreview = nullptr;
+	Sprite* bg = nullptr;
 
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;

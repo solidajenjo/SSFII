@@ -569,7 +569,7 @@
     },
     {
         "nFrames": 7,
-        "frameDuration": 150.0,
+        "frameDuration": 60.0,
         "scale": 2.0,
         "frames": [
             {
@@ -7044,7 +7044,7 @@
     },
     {
         "nFrames": 3,
-        "frameDuration": 200.0,
+        "frameDuration": 100.0,
         "scale": 2.0,
         "frames": [
             {
@@ -7153,7 +7153,7 @@
     },
     {
         "nFrames": 3,
-        "frameDuration": 250.0,
+        "frameDuration": 125.0,
         "scale": 2.0,
         "frames": [
             {

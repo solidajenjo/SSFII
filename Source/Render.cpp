@@ -111,9 +111,9 @@ bool Render::Init()
 	}
 	
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glClearDepth(1.0f);
 	glClearColor(.5f, 0.5f, .5f, 1.f);
@@ -133,7 +133,7 @@ bool Render::Update()
 	return true;
 }
 
-void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, float offsetH, float offsetV, bool flip) const
+void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, float offsetH, float offsetV, bool flip, float alpha) const
 {
 	glUseProgram(program);
 	float4x4 model;
@@ -141,12 +141,12 @@ void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, 
 	float dir = 1.f;
 	if (flip)
 	{
-		spritePos = float3((((pos.x - offsetH) / SCREEN_WIDTH) * 2.f) - 1.f, (((pos.y + offsetV) / SCREEN_HEIGHT) * 2.f) - 1.f, .0f);
+		spritePos = float3((((pos.x - offsetH) / SCREEN_WIDTH) * 2.f) - 1.f, (((pos.y + offsetV) / SCREEN_HEIGHT) * 2.f) - 1.f, pos.z);
 		dir = -1.f;
 	}
 	else
 	{
-		spritePos = float3((((pos.x + offsetH) / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, .0f);		
+		spritePos = float3((((pos.x + offsetH) / SCREEN_WIDTH) * 2.f) - 1.f, ((pos.y / SCREEN_HEIGHT) * 2.f) - 1.f, pos.z);		
 	}
 	float3 scl = (float3((dir * sprite->width) / (float)SCREEN_WIDTH, sprite->height / (float)SCREEN_HEIGHT, 1.f) * 2.f) * scale;
 	model = model.FromTRS(spritePos,
@@ -155,6 +155,7 @@ void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, 
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, model.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, float4x4::identity.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, float4x4::identity.ptr());
+	glUniform1f(glGetUniformLocation(program, "alpha"), alpha);
 	glActiveTexture(GL_TEXTURE0);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->vbo);
 

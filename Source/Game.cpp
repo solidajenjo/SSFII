@@ -20,11 +20,11 @@ bool Game::Init()
 	fileSystem = new FileSystem();
 	joystickController = new PlayerController(PlayerControllerType::JOYSTICK);
 	keyboardController = new PlayerController(PlayerControllerType::KEYBOARD); //TODO: Clean
+	fileSystem->Init();
 	render->Init();
 	editor->Init();
 	input->Init();
 	textures->Init();
-	fileSystem->Init();
 
 	return true;
 }

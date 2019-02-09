@@ -24,11 +24,13 @@ bool Editor::Init()
 
 	ImGui::StyleColorsDark();
 
+	bg = new Sprite("BackGrounds/testBG.gif");
 	return true;
 }
 
 bool Editor::Update()
 {
+	game->render->RenderSprite(bg, float3(SCREEN_WIDTH * 0.5f, 0.f, 0.f), 1.6f, 0.f, 0.f, false);
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(game->render->window);
 	ImGui::NewFrame();
@@ -84,12 +86,14 @@ bool Editor::Update()
 					RELEASE(animPreview);
 					as = new AnimationSheet(s.c_str());
 					as->LoadSheet();
+					as2 = new AnimationSheet(s.c_str());
+					as2->LoadSheet();
 					spriteSheet = new Sprite(as->sheetPath);
 					ImGui::CloseCurrentPopup();
 					//TODO:Release old character controller
 					game->characterController1 = new CharacterController(as, float3(previewPos, 0.f));
 					game->characterController1->controller = game->keyboardController;
-					game->characterController2 = new CharacterController(as, float3(previewPos2, 0.f));
+					game->characterController2 = new CharacterController(as2, float3(previewPos2, 0.f));
 					game->characterController2->controller = game->joystickController;
 					game->characterController2->other = game->characterController1;
 					game->characterController1->other = game->characterController2;

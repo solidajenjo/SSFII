@@ -43,6 +43,7 @@ public:
 	CharacterStates state = CharacterStates::IDLE;
 	AnimationSheet* animationSheet = nullptr; //TODO:Clean
 	Animation* attackAnimation = nullptr;
+	Animation* currentAnimation = nullptr;
 	PlayerController* controller = nullptr;
 	CharacterController* other = nullptr;
 
@@ -50,11 +51,13 @@ public:
 
 	float3 pos = float3::zero;
 	int direction = 1;
-	float speed = 2.5f; //TODO:Add deltatime
+	float speed = 3.5f; //TODO:Add deltatime
 	float verticalSpeed = 0.f;
 	float jumpSpeed = 28.f;
+	float jumpMovementMultiplier = 1.5f;
 	float gravity = 1.4f;
 	float idleY = 0.f;
+	bool isGrounded = true;
 	float landingY = 0.f;
 	bool flip = false;
 
@@ -68,6 +71,8 @@ private:
 	void CheckJump();
 	void CheckGroundAttack();
 	void CheckAirAttack();
+	void CheckLanding();
+	void CheckCollision();
 };
 
 

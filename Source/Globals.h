@@ -36,7 +36,7 @@ enum LoopStates
 };
 // Configuration -----------
 
-#define SCREEN_WIDTH 1500
+#define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800
 #define ANIM_NUM 50
 #endif
