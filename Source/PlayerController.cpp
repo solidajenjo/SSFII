@@ -2,30 +2,60 @@
 #include "Game.h"
 #include "Input.h"
 
-bool PlayerController::Left() const
+bool PlayerController::Forward(bool flipped) const
 {
-	switch (type)
+	if (!flipped)
 	{
-	case KEYBOARD:
-		return game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT;
-		break;
-	case JOYSTICK:
-		return game->input->GetJoy(JOY_LEFT) == KEY_REPEAT;
-		break;
+		switch (type)
+		{
+		case KEYBOARD:
+			return game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT;
+			break;
+		case JOYSTICK:
+			return game->input->GetJoy(JOY_RIGHT) == KEY_REPEAT;
+			break;
+		}
+	}
+	else
+	{
+		switch (type)
+		{
+		case KEYBOARD:
+			return game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT;
+			break;
+		case JOYSTICK:
+			return game->input->GetJoy(JOY_LEFT) == KEY_REPEAT;
+			break;
+		}
 	}
 	return false;
 }
 
-bool PlayerController::Right() const
+bool PlayerController::Backward(bool flipped) const
 {
-	switch (type)
+	if (!flipped)
 	{
-	case KEYBOARD:
-		return game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT;
-		break;
-	case JOYSTICK:
-		return game->input->GetJoy(JOY_RIGHT) == KEY_REPEAT;
-		break;
+		switch (type)
+		{
+		case KEYBOARD:
+			return game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT;
+			break;
+		case JOYSTICK:
+			return game->input->GetJoy(JOY_LEFT) == KEY_REPEAT;
+			break;
+		}
+	}
+	else
+	{
+		switch (type)
+		{
+		case KEYBOARD:
+			return game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || game->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT;
+			break;
+		case JOYSTICK:
+			return game->input->GetJoy(JOY_RIGHT) == KEY_REPEAT;
+			break;
+		}
 	}
 	return false;
 }

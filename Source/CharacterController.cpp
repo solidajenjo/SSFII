@@ -44,8 +44,8 @@ void CharacterController::Update()
 
 	case CharacterStates::WALK_FORWARD:
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded, flip);
-		pos.x += speed;
-		if (!controller->Right())
+		pos.x += speed * direction;
+		if (!controller->Forward(flip))
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
@@ -57,8 +57,8 @@ void CharacterController::Update()
 
 	case CharacterStates::WALK_BACKWARDS:
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded, flip);
-		pos.x -= speed;
-		if (!controller->Left())
+		pos.x -= speed * direction;
+		if (!controller->Backward(flip))
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
@@ -79,7 +79,7 @@ void CharacterController::Update()
 	case CharacterStates::JUMP_FORWARD:
 		animationSheet->animations[AnimationSheet::Anims::FORWARD_JUMP]->Play(pos, loopEnded, flip, false);
 		pos.y += verticalSpeed;
-		pos.x += speed * jumpMovementMultiplier;
+		pos.x += speed * jumpMovementMultiplier * direction;
 		verticalSpeed -= gravity;
 		CheckLanding();
 		CheckAirAttack();
@@ -88,7 +88,7 @@ void CharacterController::Update()
 	case CharacterStates::JUMP_BACKWARDS:
 		animationSheet->animations[AnimationSheet::Anims::JUMP]->Play(pos, loopEnded, flip);
 		pos.y += verticalSpeed;
-		pos.x -= speed * jumpMovementMultiplier;
+		pos.x -= speed * jumpMovementMultiplier * direction;
 		verticalSpeed -= gravity;
 		CheckLanding();
 		CheckAirAttack();
@@ -136,7 +136,7 @@ void CharacterController::Update()
 			currentAnimation = attackAnimation;
 		}
 		pos.y += verticalSpeed;
-		pos.x += speed * jumpMovementMultiplier;
+		pos.x += speed * jumpMovementMultiplier * direction;
 		verticalSpeed -= gravity;
 		
 		CheckLanding();
@@ -155,7 +155,7 @@ void CharacterController::Update()
 			currentAnimation = attackAnimation;
 		}
 		pos.y += verticalSpeed;
-		pos.x -= speed * jumpMovementMultiplier;
+		pos.x -= speed * jumpMovementMultiplier * direction;
 		verticalSpeed -= gravity;
 
 		CheckLanding();
@@ -180,7 +180,50 @@ void CharacterController::Update()
 
 		break;
 
+	case CharacterStates::FACE_HIT:
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::FACE_HIT];
+		animationSheet->animations[AnimationSheet::Anims::FACE_HIT]->Play(pos, loopEnded, flip);
+		if (loopEnded)
+		{
+			state = CharacterStates::IDLE;
+		}
+		pos.x -= speed * hitMultiplier * direction;
+		break;
+
+	case CharacterStates::BODY_HIT:
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::HIT];
+		animationSheet->animations[AnimationSheet::Anims::HIT]->Play(pos, loopEnded, flip);
+		if (loopEnded)
+		{
+			state = CharacterStates::IDLE;
+		}
+		pos.x -= speed * hitMultiplier * direction;
+		break;
+
+	case CharacterStates::KNOCK_DOWN:
+		if (!isGrounded)
+			pos.x -= speed * direction * 2;		
+
+		if (pos.y > idleY)
+		{
+			isGrounded = false;
+			verticalSpeed -= gravity;
+			pos.y += verticalSpeed;			
+			animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Rewind();
+		}
+		else
+		{
+			isGrounded = true;
+			pos.y = idleY;
+		}
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN];
+		animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Play(pos, loopEnded, flip);
+		if (loopEnded)
+		{
+			state = CharacterStates::IDLE;
+		}
 	}
+
 
 	CheckCollision();
 
@@ -197,11 +240,15 @@ void CharacterController::Update()
 		--fxAmount;
 	}
 
-	flip = false;
-
 	if (other->pos.x < pos.x && isGrounded)
 	{
 		flip = true;
+		direction = -1.f;
+	}
+	else if (isGrounded)
+	{
+		flip = false;
+		direction = 1.f;
 	}
 
 }
@@ -218,14 +265,14 @@ void CharacterController::CheckCrouch()
 
 void CharacterController::CheckWalk()
 {
-	if (controller->Left())
+	if (controller->Backward(flip))
 	{
 		state = CharacterStates::WALK_BACKWARDS;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->reverse = true;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->Rewind();
 		currentAnimation = animationSheet->animations[AnimationSheet::Anims::WALK];
 	}
-	if (controller->Right())
+	if (controller->Forward(flip))
 	{
 		state = CharacterStates::WALK_FORWARD;
 		animationSheet->animations[AnimationSheet::Anims::WALK]->reverse = false;
@@ -533,6 +580,8 @@ void CharacterController::CheckLanding()
 
 void CharacterController::CheckCollision()
 {
+	currentAnimation->UpdateHBoxes(pos.xy(), flip);
+	other->currentAnimation->UpdateHBoxes(other->pos.xy(), other->flip);
 	currentAnimation->DrawHBoxes();	
 	if (currentAnimation->hitBoxes[1].box.Intersects(other->currentAnimation->hitBoxes[1].box))
 	{
@@ -544,6 +593,36 @@ void CharacterController::CheckCollision()
 		{
 			pos.x += speed;
 		}
+	}
+
+	if (currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[0].box))
+	{
+		if (other->isGrounded)
+		{
+			other->state = CharacterStates::FACE_HIT;
+			other->animationSheet->animations[AnimationSheet::Anims::FACE_HIT]->Rewind();
+		}
+		else
+		{
+			other->state = CharacterStates::KNOCK_DOWN;
+			other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Rewind();
+		}		
+		return;
+	}
+
+	if (currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[1].box))
+	{
+		if (other->isGrounded)
+		{
+			other->state = CharacterStates::BODY_HIT;
+			other->animationSheet->animations[AnimationSheet::Anims::HIT]->Rewind();
+		}
+		else
+		{
+			other->state = CharacterStates::KNOCK_DOWN;
+			other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Rewind();
+		}
+		return;
 	}
 	
 }

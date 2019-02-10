@@ -15,8 +15,8 @@ public:
 
 	PlayerController(PlayerControllerType type) : type(type) {}
 
-	bool Left() const;
-	bool Right() const;
+	bool Forward(bool flipped) const;
+	bool Backward(bool flipped) const;
 	bool Down() const;
 	bool Up() const;
 	bool L_Punch() const;

@@ -84,44 +84,81 @@ void Animation::Play(const float3 &pos, bool &loopEnded, bool flip, bool loop)
 		}
 	}
 	game->render->RenderSprite(frames[currentFrame]->sprite, pos, scale, frames[currentFrame]->offsetH, frames[currentFrame]->offsetV, flip);
-	UpdateHBoxes(pos.xy(), flip);
 }
 
 void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 {
 	if (!flip)
 	{
-		hitBoxes[0].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[0].box.minPoint.x * scale, 
-			pos.y + frames[currentFrame]->hitBoxes[0].box.minPoint.y * scale);
-		hitBoxes[0].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[0].box.maxPoint.x * scale, 
-			pos.y + frames[currentFrame]->hitBoxes[0].box.maxPoint.y * scale);
-
-		hitBoxes[1].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[1].box.minPoint.x * scale, 
-			pos.y + frames[currentFrame]->hitBoxes[1].box.minPoint.y * scale);
-		hitBoxes[1].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[1].box.maxPoint.x * scale, 
-			pos.y + frames[currentFrame]->hitBoxes[1].box.maxPoint.y * scale);
-
-		hitBoxes[2].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[2].box.minPoint.x * scale, 
-			pos.y + frames[currentFrame]->hitBoxes[2].box.minPoint.y * scale);
-		hitBoxes[2].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[2].box.maxPoint.x * scale, 
-			pos.y + frames[currentFrame]->hitBoxes[2].box.maxPoint.y * scale);
+		if (hitBoxes[0].box.minPoint.Equals(hitBoxes[0].box.maxPoint))
+		{
+			hitBoxes[0].box.SetNegativeInfinity();
+		}
+		else
+		{
+			hitBoxes[0].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[0].box.minPoint.x * scale,
+				pos.y + frames[currentFrame]->hitBoxes[0].box.minPoint.y * scale);
+			hitBoxes[0].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[0].box.maxPoint.x * scale,
+				pos.y + frames[currentFrame]->hitBoxes[0].box.maxPoint.y * scale);
+		}
+		if (hitBoxes[1].box.minPoint.Equals(hitBoxes[1].box.maxPoint))
+		{
+			hitBoxes[1].box.SetNegativeInfinity();
+		}
+		else
+		{
+			hitBoxes[1].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[1].box.minPoint.x * scale,
+				pos.y + frames[currentFrame]->hitBoxes[1].box.minPoint.y * scale);
+			hitBoxes[1].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[1].box.maxPoint.x * scale,
+				pos.y + frames[currentFrame]->hitBoxes[1].box.maxPoint.y * scale);
+		}
+		if (hitBoxes[2].box.minPoint.Equals(hitBoxes[2].box.maxPoint))
+		{
+			hitBoxes[2].box.SetNegativeInfinity();
+		}
+		else
+		{
+			hitBoxes[2].box.minPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[2].box.minPoint.x * scale,
+				pos.y + frames[currentFrame]->hitBoxes[2].box.minPoint.y * scale);
+			hitBoxes[2].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[2].box.maxPoint.x * scale,
+				pos.y + frames[currentFrame]->hitBoxes[2].box.maxPoint.y * scale);
+		}
 	}
 	else																							 
-	{																								 
-		hitBoxes[0].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[0].box.maxPoint.x * scale,
-			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.minPoint.y * scale);
-		hitBoxes[0].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[0].box.minPoint.x * scale,
-			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.maxPoint.y * scale);
-
-		hitBoxes[1].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[1].box.maxPoint.x * scale,
-			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.minPoint.y * scale);
-		hitBoxes[1].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[1].box.minPoint.x * scale,
-			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.maxPoint.y * scale);
-																									
-		hitBoxes[2].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[2].box.maxPoint.x * scale,
-			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.minPoint.y * scale);
-		hitBoxes[2].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[2].box.minPoint.x * scale,
-			pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.maxPoint.y * scale);
+	{			
+		if (hitBoxes[0].box.minPoint.Equals(hitBoxes[0].box.maxPoint))
+		{
+			hitBoxes[0].box.SetNegativeInfinity();
+		}
+		else
+		{
+			hitBoxes[0].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[0].box.maxPoint.x * scale,
+				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.minPoint.y * scale);
+			hitBoxes[0].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[0].box.minPoint.x * scale,
+				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.maxPoint.y * scale);
+		}
+		if (hitBoxes[1].box.minPoint.Equals(hitBoxes[1].box.maxPoint))
+		{
+			hitBoxes[1].box.SetNegativeInfinity();
+		}
+		else
+		{
+			hitBoxes[1].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[1].box.maxPoint.x * scale,
+				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.minPoint.y * scale);
+			hitBoxes[1].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[1].box.minPoint.x * scale,
+				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.maxPoint.y * scale);
+		}
+		if (hitBoxes[2].box.minPoint.Equals(hitBoxes[2].box.maxPoint))
+		{
+			hitBoxes[2].box.SetNegativeInfinity();
+		}
+		else
+		{
+			hitBoxes[2].box.minPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[2].box.maxPoint.x * scale,
+				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.minPoint.y * scale);
+			hitBoxes[2].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[2].box.minPoint.x * scale,
+				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.maxPoint.y * scale);
+		}
 	}
 }
 
@@ -135,7 +172,7 @@ void Animation::DrawHBoxes() const
 void Animation::Rewind()
 {
 	currentFrame = 0u;
-	nextFrameChange = SDL_GetTicks() + frameDuration;
+	nextFrameChange = SDL_GetTicks() + frameDuration;	
 }
 
 

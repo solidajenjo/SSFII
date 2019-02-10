@@ -30,6 +30,8 @@ public:
 		JUMP_FORWARD_ATTACK,
 		JUMP_BACKWARDS,
 		JUMP_BACKWARDS_ATTACK,
+		FACE_HIT,
+		BODY_HIT,
 		KNOCK_DOWN,
 		KO		
 	};
@@ -50,13 +52,14 @@ public:
 	bool loopEnded = false;
 
 	float3 pos = float3::zero;
-	int direction = 1;
 	float speed = 3.5f; //TODO:Add deltatime
 	float verticalSpeed = 0.f;
 	float jumpSpeed = 28.f;
 	float jumpMovementMultiplier = 1.5f;
+	float hitMultiplier = .5f;
 	float gravity = 1.4f;
 	float idleY = 0.f;
+	float direction = 1.f;
 	bool isGrounded = true;
 	float landingY = 0.f;
 	bool flip = false;
