@@ -35,10 +35,20 @@ bool Editor::Update()
 	ImGui_ImplSDL2_NewFrame(game->render->window);
 	ImGui::NewFrame();
 	float2 previewPos = float2(100.f, 10.f);
-	float2 previewPos2 = float2(1000.f, 10.f);
+	float2 previewPos2 = float2(1100.f, 10.f);
+	if (testing)
+	{
+		ImGui::Text("Life A = %d - Life B = %d", game->characterController1->life, game->characterController2->life);
+	}
 	if (ImGui::Button("Test") && game->characterController1 != nullptr)
 	{
 		testing = true;
+		game->characterController1->life = game->characterController1->lifeAmount;
+		game->characterController1->pos = float3(previewPos, 1.f);
+		game->characterController1->state = CharacterController::CharacterStates::IDLE;
+		game->characterController2->life = game->characterController2->lifeAmount;
+		game->characterController2->pos = float3(previewPos2, 1.f);
+		game->characterController2->state = CharacterController::CharacterStates::IDLE;
 		animPreview = nullptr;
 	}
 	if (ImGui::CollapsingHeader("Animation Editor"))
@@ -240,8 +250,7 @@ bool Editor::Update()
 
 						ImGui::Text("Attack");
 						ImGui::PushID("Attack");
-
-						ImGui::InputInt("Damage amount", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].damageAmount);
+						
 						ImGui::InputFloat("MinPoint X", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.minPoint[0], 2.f);
 						ImGui::InputFloat("MinPoint Y", &as->animations[i]->frames[as->animations[i]->currentFrame]->hitBoxes[2].box.minPoint[1], 2.f);
 																															  

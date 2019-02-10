@@ -33,7 +33,8 @@ public:
 		FACE_HIT,
 		BODY_HIT,
 		KNOCK_DOWN,
-		KO		
+		KO,
+		WIN
 	};
 
 	CharacterController(AnimationSheet *animationSheet, float3 pos);
@@ -63,10 +64,16 @@ public:
 	bool isGrounded = true;
 	float landingY = 0.f;
 	bool flip = false;
+	int lifeAmount = 1000;
+	int life = lifeAmount;
+	unsigned damage = 30u;
+	unsigned damageMultiplier = 1u;
 
 	//FXs
 	std::queue<Fx*> fxQueue;
 	Fx* landingFx = nullptr;
+
+	
 private:
 
 	void CheckCrouch();
