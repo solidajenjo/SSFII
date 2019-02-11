@@ -29,6 +29,7 @@ void CharacterController::Update()
 		CheckWalk();
 		CheckJump();
 		CheckGroundAttack();
+		CheckBlocking();
 		break;
 
 	case CharacterStates::CROUCH:
@@ -40,6 +41,7 @@ void CharacterController::Update()
 		}
 		CheckJump();
 		CheckGroundAttack();
+		CheckBlocking();
 		break;
 
 	case CharacterStates::WALK_FORWARD:
@@ -66,6 +68,7 @@ void CharacterController::Update()
 		CheckCrouch();
 		CheckJump();
 		CheckGroundAttack();
+		CheckBlocking();
 		break;
 
 	case CharacterStates::JUMP: //TODO: Weird artifacts on Ryu's jump animation
@@ -91,7 +94,7 @@ void CharacterController::Update()
 		pos.x -= speed * jumpMovementMultiplier * direction;
 		verticalSpeed -= gravity;
 		CheckLanding();
-		CheckAirAttack();
+		CheckAirAttack();		
 		break;
 
 	case CharacterStates::ATTACK:
@@ -222,6 +225,7 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 		}
+		break;
 	case CharacterStates::WIN:
 		animationSheet->animations[AnimationSheet::Anims::VICTORY]->Play(pos, loopEnded, flip);
 		break;
@@ -235,8 +239,15 @@ void CharacterController::Update()
 			animationSheet->animations[AnimationSheet::Anims::KO]->Rewind();
 		}
 		break;
+	case CharacterStates::BLOCK:
+		animationSheet->animations[AnimationSheet::Anims::BLOCKING]->Play(pos, loopEnded, flip, false);
+		CheckBlocking();
+		break;
+	case CharacterStates::CROUCH_BLOCK:
+		animationSheet->animations[AnimationSheet::Anims::BLOCKING]->Play(pos, loopEnded, flip, false);
+		CheckBlocking();
+		break;
 	}
-
 
 	CheckCollision();
 
@@ -253,17 +264,19 @@ void CharacterController::Update()
 		--fxAmount;
 	}
 
-	if (other->pos.x < pos.x && isGrounded)
+	if (pos.x > other->pos.x && isGrounded)
 	{
 		flip = true;
 		direction = -1.f;
 	}
-	else if (isGrounded)
+	else if (pos.x < other->pos.x  && isGrounded)
 	{
 		flip = false;
 		direction = 1.f;
 	}
 
+	CheckInsideScreen();
+	PrepareNeuralNetworkInput();
 }
 
 void CharacterController::CheckCrouch()
@@ -634,7 +647,10 @@ void CharacterController::CheckCollision()
 
 	if (currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[0].box))
 	{
-		other->life -= damage * damageMultiplier;
+		unsigned damageApplied = damage * damageMultiplier;
+		other->life -= damageApplied;
+		other->lastDamage = damageApplied;
+		other->damageTaken += damageApplied;
 		if (other->isGrounded)
 		{
 			other->state = CharacterStates::FACE_HIT;
@@ -650,7 +666,10 @@ void CharacterController::CheckCollision()
 
 	if (currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[1].box))
 	{
-		other->life -= damage * damageMultiplier;
+		unsigned damageApplied = damage * damageMultiplier;
+		other->life -= damageApplied;
+		other->lastDamage += damageApplied;
+		other->damageTaken += damageApplied;
 		if (other->isGrounded)
 		{
 			other->state = CharacterStates::BODY_HIT;
@@ -670,4 +689,46 @@ void CharacterController::CheckCollision()
 		other->state = CharacterStates::KO;
 	}
 	
+}
+
+void CharacterController::CheckInsideScreen()
+{
+	if (pos.x < 0)
+		pos.x = 0;
+	if (pos.x > SCREEN_WIDTH)
+		pos.x = SCREEN_WIDTH;
+}
+
+void CharacterController::CheckBlocking()
+{
+	/*
+	if (controller->Backward(flip))
+	{
+		switch (other->state)
+		{
+		case CharacterStates::ATTACK:
+		case CharacterStates::BACKWARDS_ATTACK:
+		case CharacterStates::CROUCH_ATTACK:
+		case CharacterStates::FORWARD_ATTACK:
+			if (state == CharacterStates::CROUCH || state == CharacterStates::CROUCH_BLOCK)
+			{
+				state = CharacterStates::CROUCH_BLOCK;
+				animationSheet->animations[AnimationSheet::Anims::BLOCKING_CROUCH]->Rewind();
+			}
+			else
+			{
+				state = CharacterStates::BLOCK;
+				animationSheet->animations[AnimationSheet::Anims::BLOCKING]->Rewind();
+			}
+			break;
+		default:
+			state = CharacterStates::IDLE;
+		}		
+	}
+	*/
+}
+
+void CharacterController::PrepareNeuralNetworkInput()
+{
+	neuralNetworkInput = std::bitset<8>((int)state * 10).to_string();
 }

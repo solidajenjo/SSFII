@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AI.cpp" />
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\AnimationSheet.cpp" />
     <ClCompile Include="Source\CharacterController.cpp" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Source\Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\AI.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimationSheet.h" />
     <ClInclude Include="Source\CharacterController.h" />

@@ -10,6 +10,7 @@
 #include "CharacterController.h"
 #include "PlayerController.h"
 #include "FileSystem.h"
+#include "AI.h"
 
 bool Game::Init()
 {
@@ -20,6 +21,11 @@ bool Game::Init()
 	fileSystem = new FileSystem();
 	joystickController = new PlayerController(PlayerControllerType::JOYSTICK);
 	keyboardController = new PlayerController(PlayerControllerType::KEYBOARD); //TODO: Clean
+	for (unsigned i = 0u; i < AI_AMOUNT; ++i)
+	{
+		aiS.push_back(new AI());
+		aiS[i]->name = "G0_" + std::to_string(i);
+	}
 	fileSystem->Init();
 	render->Init();
 	editor->Init();

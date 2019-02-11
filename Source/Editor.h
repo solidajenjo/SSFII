@@ -11,6 +11,7 @@ class Sprite;
 class AnimationSheet;
 class Animation;
 class Fx;
+class AI;
 
 class Editor
 {
@@ -30,10 +31,23 @@ public:
 	Animation* animPreview = nullptr;
 	Sprite* bg = nullptr;
 
+	unsigned endRound = 0u;
+	unsigned roundDuration = 5000u;
+	unsigned nextUpdate = 0u;
+	unsigned updateWait = 300u;
+	std::vector<float> fitness;
+
+	AI* ai1 = nullptr;
+	AI* ai2 = nullptr;
+
+	unsigned ai1Num = 0u;
+	unsigned ai2Num = 1u;
+
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;
 
 	bool testing = false;
+	
 };
 
 #endif

@@ -195,6 +195,7 @@
     <ClCompile Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_unicode.c">
       <Filter>ExternalLibraries\PhysFS</Filter>
     </ClCompile>
+    <ClCompile Include="Source\AI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Render.h" />
@@ -688,6 +689,7 @@
     <ClInclude Include="Source\ExternalLibraries\physfs-3.0.1\src\physfs_platforms.h">
       <Filter>ExternalLibraries\PhysFS</Filter>
     </ClInclude>
+    <ClInclude Include="Source\AI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">

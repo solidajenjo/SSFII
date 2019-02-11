@@ -14,17 +14,18 @@ class PlayerController
 public:
 
 	PlayerController(PlayerControllerType type) : type(type) {}
+	PlayerController() {};
 
-	bool Forward(bool flipped) const;
-	bool Backward(bool flipped) const;
-	bool Down() const;
-	bool Up() const;
-	bool L_Punch() const;
-	bool M_Punch() const;
-	bool H_Punch() const;
-	bool L_Kick() const; 
-	bool M_Kick() const;
-	bool H_Kick() const;
+	virtual bool Forward(bool flipped) const;
+	virtual bool Backward(bool flipped) const;
+	virtual bool Down() const;
+	virtual bool Up() const;
+	virtual bool L_Punch();
+	virtual bool M_Punch();
+	virtual bool H_Punch();
+	virtual bool L_Kick();  
+	virtual bool M_Kick(); 
+	virtual bool H_Kick(); 
 
 private:
 

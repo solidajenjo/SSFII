@@ -88,7 +88,7 @@ bool PlayerController::Up() const
 	return false;
 }
 
-bool PlayerController::L_Punch() const
+bool PlayerController::L_Punch() 
 {
 	switch (type)
 	{
@@ -102,7 +102,7 @@ bool PlayerController::L_Punch() const
 	return false;
 }
 
-bool PlayerController::M_Punch() const
+bool PlayerController::M_Punch() 
 {
 	switch (type)
 	{
@@ -116,7 +116,7 @@ bool PlayerController::M_Punch() const
 	return false;
 }
 
-bool PlayerController::H_Punch() const
+bool PlayerController::H_Punch() 
 {
 	switch (type)
 	{
@@ -130,7 +130,7 @@ bool PlayerController::H_Punch() const
 	return false;
 }
 
-bool PlayerController::L_Kick() const
+bool PlayerController::L_Kick() 
 {
 	switch (type)
 	{
@@ -144,7 +144,7 @@ bool PlayerController::L_Kick() const
 	return false;
 }
 
-bool PlayerController::M_Kick() const
+bool PlayerController::M_Kick() 
 {
 	switch (type)
 	{
@@ -158,7 +158,7 @@ bool PlayerController::M_Kick() const
 	return false;
 }
 
-bool PlayerController::H_Kick() const
+bool PlayerController::H_Kick() 
 {
 	switch (type)
 	{

@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "ExternalLibraries/MathGeoLib/include/Math/float3.h"
 #include <queue>
+#include <bitset>
 
 class AnimationSheet;
 class Animation;
@@ -20,8 +21,10 @@ public:
 		WALK_FORWARD,
 		WALK_BACKWARDS,
 		ATTACK,
+		BLOCK,
 		CROUCH,
 		CROUCH_ATTACK,
+		CROUCH_BLOCK,
 		FORWARD_ATTACK,
 		BACKWARDS_ATTACK,
 		JUMP,
@@ -56,9 +59,9 @@ public:
 	float speed = 3.5f; //TODO:Add deltatime
 	float verticalSpeed = 0.f;
 	float jumpSpeed = 28.f;
-	float jumpMovementMultiplier = 1.5f;
+	float jumpMovementMultiplier = 1.9f;
 	float hitMultiplier = .5f;
-	float gravity = 1.4f;
+	float gravity = 1.2f;
 	float idleY = 0.f;
 	float direction = 1.f;
 	bool isGrounded = true;
@@ -66,14 +69,21 @@ public:
 	bool flip = false;
 	int lifeAmount = 1000;
 	int life = lifeAmount;
-	unsigned damage = 30u;
+	unsigned damage = 10u;
 	unsigned damageMultiplier = 1u;
+
+	unsigned lastDamage = 0u; //Tells the neural network the damage taken to sum fitness to the rival
+	unsigned damageTaken = 0u; //Tells the neural network the damage taken to decrease fitness
+	unsigned blocks = 0u;
 
 	//FXs
 	std::queue<Fx*> fxQueue;
 	Fx* landingFx = nullptr;
 
-	
+	//Neural Network inputs
+
+	std::string neuralNetworkInput;
+
 private:
 
 	void CheckCrouch();
@@ -83,6 +93,9 @@ private:
 	void CheckAirAttack();
 	void CheckLanding();
 	void CheckCollision();
+	void CheckInsideScreen();
+	void CheckBlocking();
+	void PrepareNeuralNetworkInput();
 };
 
 

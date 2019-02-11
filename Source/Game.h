@@ -1,6 +1,8 @@
 #ifndef __GAME_H_
 #define __GAME_H_
 
+#include <vector>
+
 class Editor;
 class Render;
 class Input;
@@ -8,6 +10,7 @@ class Textures;
 class FileSystem;
 class CharacterController;
 class PlayerController;
+class AI;
 
 class Game
 {
@@ -29,6 +32,7 @@ public:
 	CharacterController* characterController2 = nullptr;
 	PlayerController* joystickController = nullptr;
 	PlayerController* keyboardController = nullptr;
+	std::vector<AI*> aiS;
 };
 
 extern Game* game;
