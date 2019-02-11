@@ -292,12 +292,12 @@ void AI::Update()
 		
 	if (other->lastDamage > 0u)
 	{
-		fitness += other->lastDamage * 10u;
+		fitness += other->lastDamage;
 		other->lastDamage = 0u;
 	}
 	if (own->damageTaken > 0u)
 	{
-		fitness -= own->damageTaken * 10u;
+		fitness -= own->damageTaken;
 		own->damageTaken = 0u;
 	}
 }
