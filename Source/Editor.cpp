@@ -137,19 +137,15 @@ bool Editor::Update()
 					ai1Num = 0u;
 					ai2Num = 1u;
 
-					own = ai1->own;
-					other = ai1->other;
 					ai1 = game->aiS[ai1Num];
-					ai1->own = own;
-					own->controller = ai1;
-					ai1->other = other;
-
-					own = ai2->own;
-					other = ai2->other;					
+					ai1->own = game->characterController1;
+					game->characterController1->controller = (AI*)ai1;
+					ai1->other = game->characterController2;
+				
 					ai2 = game->aiS[ai2Num];
-					ai2->own = own;
-					own->controller = ai2;
-					ai2->other = other;
+					ai2->own = game->characterController2;
+					game->characterController2->controller = (AI*)ai2;
+					ai2->other = game->characterController1;
 				}
 			}
 			game->characterController1->life = game->characterController1->lifeAmount;
