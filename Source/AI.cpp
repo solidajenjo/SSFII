@@ -134,6 +134,7 @@ void AI::Update()
 	{
 	case 0:
 		forward = true;
+		fitness += 1.f * abs(own->pos.x - other->pos.x);
 		break;
 	case 1:
 		backward = true;
