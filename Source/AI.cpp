@@ -2,7 +2,13 @@
 #include "CharacterController.h"
 #include <time.h>
 #include "ExternalLibraries/imgui/imgui.h"
-#include "ExternalLibraries/SDL/include/SDL_timer.h"
+#include "ExternalLibraries/SDL/include/SDL_timer.h";
+#include "Animation.h"
+#include "Sprite.h"
+
+float AI::blockPrize = 1000.f;
+float AI::walkPrize = 5.f;
+float AI::attackDistancePenalization = .00005f;
 
 void InputLayer::FeedInput(const std::string & ownCharacter, const std::string & otherCharacter, const int distance)
 {
@@ -14,7 +20,7 @@ void InputLayer::FeedInput(const std::string & ownCharacter, const std::string &
 	{
 		otherCharacter.c_str()[i] == '0' ? input[i + (INPUT_AMOUNT - 1) / 2] = 0.f : input[i + (INPUT_AMOUNT - 1) / 2] = 1.f;
 	}
-	input[INPUT_AMOUNT - 1] = abs(distance) / SCREEN_WIDTH;
+	input[INPUT_AMOUNT - 1] = abs(distance) / (float)SCREEN_WIDTH;
 }
 
 Neuron::Neuron()
@@ -32,9 +38,7 @@ void Neuron::Calculate(const float* input)
 	{
 		x += input[i] * weights[i];
 	}
-	value = 1.f /(1.f + exp(-x));
-	if (value < 0.9f)
-		value = 0.f;
+	value = 1.f /(1.f + exp(-x));	//Sigmoid function
 }
 
 void Neuron::Calculate()
@@ -44,8 +48,7 @@ void Neuron::Calculate()
 	{
 		x += inputs[i] * weights[i];
 	}
-	value = 1.f / (1.f + exp(-x));
-	value = x;
+	value = x; //linear activation
 }
 
 Layer::Layer(int size) : size(size)
@@ -130,176 +133,195 @@ void AI::Update()
 	m_Kick = false;
 	h_Kick = false;
 
-	switch (op)
+	if (own->landingWaitTimer <= 0) // This avoids jump abusers
 	{
-	case 0:
-		forward = true;
-		fitness += 1.f * abs(own->pos.x - other->pos.x);
-		break;
-	case 1:
-		backward = true;
-		break;
-	case 2:
-		up = true;
-		break;
-	case 3:
-		down = true;
-		break;
-	case 4:
-		backward = true;
-		up = true;
-		break;
-	case 5:
-		forward = true;
-		up = true;
-		break;
-	case 6:
-		backward = true;
-		down = true;
-		break;
-	case 7:
-		forward = true;
-		down = true;
-		break;
-	case 8:
-		h_Punch = true;
-		break;
-	case 9:
-		m_Punch = true;
-		break;
-	case 10:
-		h_Punch = true;
-		break;
-	case 11:
-		h_Kick = true;
-		break;
-	case 12:
-		m_Kick = true;
-		break;
-	case 13:
-		l_Kick = true;
-		break;
-	case 14:
-		down = true;
-		h_Kick = true;
-		break;
-	case 15:
-		down = true;
-		m_Kick = true;
-		break;
-	case 16:
-		down = true;
-		l_Kick = true;
-		break;
-	case 17:
-		down = true;
-		h_Punch = true;
-		break;
-	case 18:
-		down = true;
-		m_Punch = true;
-		break;
-	case 19:
-		down = true;
-		l_Punch = true;
-		break;
-	case 20:
-		up = true;
-		h_Kick = true;
-		break;
-	case 21:
-		up = true;
-		m_Kick = true;
-		break;
-	case 22:
-		up = true;
-		l_Kick = true;
-		break;
-	case 23:
-		up = true;
-		h_Punch = true;
-		break;
-	case 24:
-		up = true;
-		m_Punch = true;
-		break;
-	case 25:
-		up = true;
-		l_Punch = true;
-		break;
-	case 26:
-		backward = true;
-		up = true;
-		h_Kick = true;
-		break;
-	case 27:
-		backward = true;
-		up = true;
-		m_Kick = true;
-		break;
-	case 28:
-		backward = true;
-		up = true;
-		l_Kick = true;
-		break;
-	case 29:
-		backward = true;
-		up = true;
-		h_Punch = true;
-		break;
-	case 30:
-		backward = true;
-		up = true;
-		m_Punch = true;
-		break;
-	case 31:
-		backward = true;
-		up = true;
-		l_Punch = true;
-		break;
-	case 32:
-		forward = true;
-		up = true;
-		h_Kick = true;
-		break;
-	case 33:
-		forward = true;
-		up = true;
-		m_Kick = true;
-		break;
-	case 34:
-		forward = true;
-		up = true;
-		l_Kick = true;
-		break;
-	case 35:
-		forward = true;
-		up = true;
-		h_Punch = true;
-		break;
-	case 36:
-		forward = true;
-		up = true;
-		m_Punch = true;
-		break;
-	case 37:
-		forward = true;
-		up = true;
-		l_Punch = true;
-		break;
+		switch (op)
+		{
+		case 0:
+			forward = true;
+			fitness += walkPrize * abs(own->pos.x - other->pos.x)
+				- own->currentAnimation->frames[own->currentAnimation->currentFrame]->hitBoxes[1].box.Width() * 1.5f; //Walk forward when the other fighter is away is good stuff
+			break;
+		case 1:
+			backward = true;	
+			if (!other->isAttacking)
+			{
+				fitness -= walkPrize * abs(own->pos.x - other->pos.x); //Penalize fleeing fighters
+			}
+			break;
+		case 2:
+			up = true;
+			break;
+		case 3:
+			down = true;
+			break;
+		case 4:
+			backward = true;
+			up = true;
+			break;
+		case 5:
+			forward = true;
+			up = true;
+			break;
+		case 6:
+			backward = true;
+			down = true;
+			break;
+		case 7:
+			forward = true;
+			down = true;
+			break;
+		case 8:
+			h_Punch = true;
+			break;
+		case 9:
+			m_Punch = true;
+			break;
+		case 10:
+			h_Punch = true;
+			break;
+		case 11:
+			h_Kick = true;
+			break;
+		case 12:
+			m_Kick = true;
+			break;
+		case 13:
+			l_Kick = true;
+			break;
+		case 14:
+			down = true;
+			h_Kick = true;
+			break;
+		case 15:
+			down = true;
+			m_Kick = true;
+			break;
+		case 16:
+			down = true;
+			l_Kick = true;
+			break;
+		case 17:
+			down = true;
+			h_Punch = true;
+			break;
+		case 18:
+			down = true;
+			m_Punch = true;
+			break;
+		case 19:
+			down = true;
+			l_Punch = true;
+			break;
+		case 20:
+			up = true;
+			h_Kick = true;
+			break;
+		case 21:
+			up = true;
+			m_Kick = true;
+			break;
+		case 22:
+			up = true;
+			l_Kick = true;
+			break;
+		case 23:
+			up = true;
+			h_Punch = true;
+			break;
+		case 24:
+			up = true;
+			m_Punch = true;
+			break;
+		case 25:
+			up = true;
+			l_Punch = true;
+			break;
+		case 26:
+			backward = true;
+			up = true;
+			h_Kick = true;
+			break;
+		case 27:
+			backward = true;
+			up = true;
+			m_Kick = true;
+			break;
+		case 28:
+			backward = true;
+			up = true;
+			l_Kick = true;
+			break;
+		case 29:
+			backward = true;
+			up = true;
+			h_Punch = true;
+			break;
+		case 30:
+			backward = true;
+			up = true;
+			m_Punch = true;
+			break;
+		case 31:
+			backward = true;
+			up = true;
+			l_Punch = true;
+			break;
+		case 32:
+			forward = true;
+			up = true;
+			h_Kick = true;
+			break;
+		case 33:
+			forward = true;
+			up = true;
+			m_Kick = true;
+			break;
+		case 34:
+			forward = true;
+			up = true;
+			l_Kick = true;
+			break;
+		case 35:
+			forward = true;
+			up = true;
+			h_Punch = true;
+			break;
+		case 36:
+			forward = true;
+			up = true;
+			m_Punch = true;
+			break;
+		case 37:
+			forward = true;
+			up = true;
+			l_Punch = true;
+			break;
+		}
 	}
 	
 	//fitness
 		
-	if (other->lastDamage > 0u)
+	if (other->lastDamage > 0u) //hit is good
 	{
 		fitness += other->lastDamage;
 		other->lastDamage = 0u;
 	}
-	if (own->damageTaken > 0u)
+	if (own->damageTaken > 0u) //get hit is bad :(
 	{
 		fitness -= own->damageTaken;
 		own->damageTaken = 0u;
+	}
+	if (own->blocks > 0u) //block is sexy!
+	{
+		LOG("%s blocked %d attacks", name.c_str(), own->blocks);
+		fitness += own->blocks * blockPrize;
+		own->blocks = 0u;
+	}
+
+	if (own->isAttacking) //attack from far is for pussies
+	{
+		fitness -= abs(own->pos.x - other->pos.x) * attackDistancePenalization;
 	}
 }
 
@@ -385,11 +407,17 @@ bool AI::H_Kick()
 
 void AI::Text()
 {
+	ImGui::PushID(this);
 	ImGui::Text("Fitness %.3f", fitness);
-	for (unsigned i = 0u; i < outputLayer->size; ++i)
+	if (ImGui::TreeNodeEx("Decisions"))
 	{
-		if (i % 5 != 0)
-			ImGui::SameLine();
-		ImGui::Text("%.5f", outputLayer->neurons[i]->value);
+		for (unsigned i = 0u; i < outputLayer->size; ++i)
+		{
+			if (i % 5 != 0)
+				ImGui::SameLine();
+			ImGui::Text("%.5f", outputLayer->neurons[i]->value);
+		}
+		ImGui::TreePop();
 	}
+	ImGui::PopID();
 }

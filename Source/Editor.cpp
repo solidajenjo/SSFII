@@ -41,10 +41,10 @@ bool Editor::Update()
 	float2 previewPos2 = float2(800.f, 10.f);
 	if (testing)
 	{
-		if (rand() % 100 < 10)
+		if (rand() % 100 < 10 || game->characterController1->landingWaitTimer > 0 || game->characterController2->landingWaitTimer > 0)
 		{
-			game->characterController1->controller = ai1;
-			game->characterController2->controller = ai2;
+			//game->characterController1->controller = ai1;
+			//game->characterController2->controller = ai2;
 			ai1->Update();
 			ai2->Update();
 			nextUpdate = SDL_GetTicks() + updateWait;
@@ -54,6 +54,9 @@ bool Editor::Update()
 		ImGui::Text("NN Input A = %s - NN Input B = %s", game->characterController1->neuralNetworkInput.c_str(), 
 			game->characterController2->neuralNetworkInput.c_str());		
 		ImGui::PlotLines("Fitness evo", &fitness[0], fitness.size(), 0, "Fitness evo", -10000.f, 10000.f, ImVec2(ImGui::GetWindowContentRegionMax().x, 60));
+		ImGui::InputFloat("Block Prize", &AI::blockPrize, 0.1f, 1.f);
+		ImGui::InputFloat("Walk Prize", &AI::walkPrize, 0.1f, 1.f);
+		ImGui::InputFloat("Distance attack penalization", &AI::attackDistancePenalization, 0.1f, 1.f, "%.6f");
 		ai1->Text();
 		ai2->Text();
 		unsigned timeRemaining = (endRound - SDL_GetTicks()) / 1000;
@@ -63,7 +66,7 @@ bool Editor::Update()
 		if (SDL_GetTicks() >= endRound)
 		{
 			endRound = SDL_GetTicks() + roundDuration;
-			if (ai2Num < (AI_AMOUNT - 1))  //TODO: This is kinda buggy. Check it. Move it to other place
+			if (ai2Num < (AI_AMOUNT - 1)) //Move this to other place
 			{
 				++ai2Num;
 				CharacterController* own = ai2->own;

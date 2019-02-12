@@ -37,7 +37,9 @@ public:
 		BODY_HIT,
 		KNOCK_DOWN,
 		KO,
-		WIN
+		WIN,
+		SPECIAL_1,
+		SPECIAL_2
 	};
 
 	CharacterController(AnimationSheet *animationSheet, float3 pos);
@@ -65,6 +67,7 @@ public:
 	float idleY = 0.f;
 	float direction = 1.f;
 	bool isGrounded = true;
+	bool isAttacking = false;
 	float landingY = 0.f;
 	bool flip = false;
 	int lifeAmount = 1000;
@@ -75,6 +78,9 @@ public:
 	unsigned lastDamage = 0u; //Tells the neural network the damage taken to sum fitness to the rival
 	unsigned damageTaken = 0u; //Tells the neural network the damage taken to decrease fitness
 	unsigned blocks = 0u;
+	int landingWaitTimer = 0u;
+	int lastTicks = 0u; //TODO: Do a global delta time
+	int landingWaitAmount = 1000u;
 
 	//FXs
 	std::queue<Fx*> fxQueue;
@@ -93,8 +99,7 @@ private:
 	void CheckAirAttack();
 	void CheckLanding();
 	void CheckCollision();
-	void CheckInsideScreen();
-	void CheckBlocking();
+	void CheckInsideScreen();	
 	void PrepareNeuralNetworkInput();
 };
 

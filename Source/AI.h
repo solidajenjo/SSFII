@@ -6,7 +6,7 @@
 #include "ExternalLibraries/MathGeoLib/include/Math/float2.h"
 #include "PlayerController.h"
 
-#define INPUT_AMOUNT 17
+#define INPUT_AMOUNT 51
 #define OUTPUT_AMOUNT 38
 
 class CharacterController;
@@ -87,6 +87,10 @@ public:
 	InputLayer il;
 	Layer* hiddenLayer = nullptr;
 	Layer* outputLayer = nullptr;
+
+	static float blockPrize;
+	static float walkPrize;
+	static float attackDistancePenalization;
 
 	std::string name = "";
 };
