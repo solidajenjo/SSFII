@@ -32,7 +32,7 @@ public:
 	Sprite* bg = nullptr;
 
 	unsigned endRound = 0u;
-	unsigned roundDuration = 5000u;
+	int roundDuration = 3000u;
 	unsigned nextUpdate = 0u;
 	unsigned updateWait = 300u;
 	std::vector<float> fitness;

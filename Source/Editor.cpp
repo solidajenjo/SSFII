@@ -60,6 +60,7 @@ bool Editor::Update()
 		ai1->Text();
 		ai2->Text();
 		unsigned timeRemaining = (endRound - SDL_GetTicks()) / 1000;
+		ImGui::InputInt("Round time", &roundDuration);
 		ImGui::Text("Time remaining %d", timeRemaining);
 		ImGui::Text("%d - %s (%s)(%s) vs %d - %s (%s)(%s)", ai1Num, ai1->name.c_str(), ((AI*)game->characterController1->controller)->name.c_str(), ((AI*)ai1->other->controller)->name.c_str(),
 			ai2Num, ai2->name.c_str(), ((AI*)game->characterController2->controller)->name.c_str(), ((AI*)ai2->other->controller)->name.c_str());
