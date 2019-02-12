@@ -41,7 +41,7 @@ bool Editor::Update()
 	float2 previewPos2 = float2(800.f, 10.f);
 	if (testing)
 	{
-		if (rand() % 100 < 10 || game->characterController1->landingWaitTimer > 0 || game->characterController2->landingWaitTimer > 0)
+		if (rand() % 100 < 50 || game->characterController1->landingWaitTimer > 0 || game->characterController2->landingWaitTimer > 0)
 		{
 			//game->characterController1->controller = ai1;
 			//game->characterController2->controller = ai2;

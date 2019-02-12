@@ -6,7 +6,7 @@
 #include "Animation.h"
 #include "Sprite.h"
 
-float AI::blockPrize = 1000.f;
+float AI::blockPrize = 1.f;
 float AI::walkPrize = 5.f;
 float AI::attackDistancePenalization = .00005f;
 
@@ -144,10 +144,6 @@ void AI::Update()
 			break;
 		case 1:
 			backward = true;	
-			if (!other->isAttacking)
-			{
-				fitness -= walkPrize * abs(own->pos.x - other->pos.x); //Penalize fleeing fighters
-			}
 			break;
 		case 2:
 			up = true;
@@ -302,9 +298,21 @@ void AI::Update()
 	
 	//fitness
 		
+	if (own->state == CharacterController::CharacterStates::WALK_BACKWARDS && !other->isAttacking)
+	{
+		fitness -= walkPrize * abs(own->pos.x - other->pos.x); //Penalize fleeing fighters
+	}
+	if ((own->state == CharacterController::CharacterStates::BLOCK ||
+		own->state == CharacterController::CharacterStates::CROUCH_BLOCK) && other->isAttacking)
+	{
+		float k = (1 - ((abs(own->pos.x - other->pos.x) / (float)SCREEN_WIDTH))) * blockPrize;
+		fitness += k;
+		LOG("BLOCK REWARD %.5f", k);
+	}
+
 	if (other->lastDamage > 0u) //hit is good
 	{
-		fitness += other->lastDamage;
+		fitness += other->lastDamage * 3.f;
 		other->lastDamage = 0u;
 	}
 	if (own->damageTaken > 0u) //get hit is bad :(
