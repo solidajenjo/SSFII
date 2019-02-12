@@ -35,6 +35,7 @@ public:
 	int roundDuration = 3000u;
 	unsigned nextUpdate = 0u;
 	unsigned updateWait = 300u;
+	int mutationPosibiliy = 20;
 	std::vector<float> fitness;
 
 	AI* ai1 = nullptr;

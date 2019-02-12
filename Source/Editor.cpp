@@ -50,6 +50,7 @@ bool Editor::Update()
 			nextUpdate = SDL_GetTicks() + updateWait;
 		}
 		ImGui::Text("Generation %d", generation);
+		ImGui::InputInt("Mutation posibility %", &mutationPosibiliy);
 		ImGui::Text("Life A = %d - Life B = %d", game->characterController1->life, game->characterController2->life);
 		ImGui::Text("NN Input A = %s - NN Input B = %s", game->characterController1->neuralNetworkInput.c_str(), 
 			game->characterController2->neuralNetworkInput.c_str());		
@@ -120,7 +121,7 @@ bool Editor::Update()
 						{
 							for (unsigned j = 0u; j < INPUT_AMOUNT; ++j)
 							{
-								if (rand() % 100 < 5)
+								if (rand() % 100 < mutationPosibiliy)
 									game->aiS[i]->hiddenLayer->neurons[k]->weights[j] = (rand() % 101) / 100.f;
 								else
 									game->aiS[i]->hiddenLayer->neurons[k]->weights[j] = game->aiS[0]->hiddenLayer->neurons[k]->weights[j];
@@ -130,7 +131,7 @@ bool Editor::Update()
 						{
 							for (unsigned j = 0u; j < INPUT_AMOUNT; ++j)
 							{
-								if (rand() % 100 < 5)
+								if (rand() % 100 < mutationPosibiliy)
 									game->aiS[i]->outputLayer->neurons[k]->weights[j] = (rand() % 101) / 100.f;
 								else
 									game->aiS[i]->outputLayer->neurons[k]->weights[j] = game->aiS[0]->outputLayer->neurons[k]->weights[j];
