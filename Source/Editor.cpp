@@ -55,9 +55,9 @@ bool Editor::Update()
 		ImGui::Text("NN Input A = %s - NN Input B = %s", game->characterController1->neuralNetworkInput.c_str(), 
 			game->characterController2->neuralNetworkInput.c_str());		
 		ImGui::PlotLines("Fitness evo", &fitness[0], fitness.size(), 0, "Fitness evo", -1000000.f, 1000000.f, ImVec2(ImGui::GetWindowContentRegionMax().x, 60));
-		ImGui::InputFloat("Block Prize", &AI::blockPrize, 0.1f, 1.f);
+		/*ImGui::InputFloat("Block Prize", &AI::blockPrize, 0.1f, 1.f);
 		ImGui::InputFloat("Walk Prize", &AI::walkPrize, 0.1f, 1.f);
-		ImGui::InputFloat("Distance attack penalization", &AI::attackDistancePenalization, 0.1f, 1.f, "%.6f");
+		ImGui::InputFloat("Distance attack penalization", &AI::attackDistancePenalization, 0.1f, 1.f, "%.6f");*/
 		ai1->Text();
 		ai2->Text();
 		unsigned timeRemaining = (endRound - SDL_GetTicks()) / 1000;
@@ -173,7 +173,7 @@ bool Editor::Update()
 	}
 	if (ImGui::BeginPopup("LoadAIPopup", ImGuiWindowFlags_Modal))
 	{
-		unsigned i = 0u;
+		unsigned i = 1u;
 		for (std::string s : files)
 		{
 			if (ImGui::Button(s.c_str()))
@@ -202,6 +202,7 @@ bool Editor::Update()
 			}
 			if (i % 10 != 0)
 				ImGui::SameLine();
+			++i;
 		}
 		ImGui::EndPopup();
 	}

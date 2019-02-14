@@ -14,7 +14,7 @@ class PlayerController
 public:
 
 	PlayerController(PlayerControllerType type) : type(type) {}
-	PlayerController() {};
+	PlayerController() {}; //TODO: Virtual destructor 
 
 	virtual bool Forward(bool flipped) const;
 	virtual bool Backward(bool flipped) const;

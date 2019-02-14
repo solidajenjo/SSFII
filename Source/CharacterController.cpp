@@ -748,6 +748,11 @@ void CharacterController::CheckCollision()
 		{
 			++other->blocks;
 			other->pos.x -= (other->speed * other->direction) * 5;
+			if (!isGrounded)
+			{
+				state = CharacterStates::JUMP;
+				currentAnimation = animationSheet->animations[AnimationSheet::Anims::JUMP];
+			}
 		}
 		return;
 	}
