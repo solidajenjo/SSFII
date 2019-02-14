@@ -5,101 +5,20 @@
 #include "ExternalLibraries/SDL/include/SDL_timer.h";
 #include "Animation.h"
 #include "Sprite.h"
+#include "Game.h"
+#include "FileSystem.h"
 
-float AI::blockPrize = 1.f;
-float AI::walkPrize = 5.f;
-float AI::attackDistancePenalization = .00005f;
-
-void InputLayer::FeedInput(const std::string & ownCharacter, const std::string & otherCharacter, const int distance)
-{
-	for (unsigned i = 0u; i < (INPUT_AMOUNT - 1) / 2; ++i)
-	{
-		ownCharacter.c_str()[i] == '0' ? input[i] = 0.f : input[i] = 1.f;
-	}
-	for (unsigned i = 0u; i < (INPUT_AMOUNT - 1) / 2; ++i)
-	{
-		otherCharacter.c_str()[i] == '0' ? input[i + (INPUT_AMOUNT - 1) / 2] = 0.f : input[i + (INPUT_AMOUNT - 1) / 2] = 1.f;
-	}
-	input[INPUT_AMOUNT - 1] = abs(distance) / (float)SCREEN_WIDTH;
-}
-
-Neuron::Neuron()
-{		
-	for (unsigned i = 0u; i < INPUT_AMOUNT; ++i)
-	{		
-		weights[i] = rand() % 101 / 100.f;
-	}
-}
-
-void Neuron::Calculate(const float* input)
-{
-	float x = 0.f;
-	for (unsigned i = 0u; i < INPUT_AMOUNT; ++i)
-	{
-		x += input[i] * weights[i];
-	}
-	value = 1.f /(1.f + exp(-x));	//Sigmoid function
-}
-
-void Neuron::Calculate()
-{
-	float x = 0.f;
-	for (unsigned i = 0u; i < INPUT_AMOUNT; ++i)
-	{
-		x += inputs[i] * weights[i];
-	}
-	value = x; //linear activation
-}
-
-Layer::Layer(int size) : size(size)
-{
-	neurons = new Neuron*[size];
-	for (unsigned i = 0u; i < size; ++i)
-	{
-		neurons[i] = new Neuron();
-	}
-}
-
-Layer::~Layer()
-{
-	for (unsigned i = 0u; i < size; ++i)
-	{
-		RELEASE(neurons[i]);
-	}
-	RELEASE_ARRAY(neurons);
-}
-
-void Layer::FeedLayer(const InputLayer &il)
-{
-	for (unsigned i = 0u; i < size; ++i)
-	{
-		neurons[i]->Calculate(il.input);
-	}
-}
-
-void Layer::FeedLayer(const Layer* sourceLayer)
-{
-	for (unsigned i = 0u; i < sourceLayer->size; ++i)
-		for (unsigned j = 0u; j < size; ++j)
-		{
-			neurons[j]->inputs[i] = sourceLayer->neurons[i]->value;
-		}
-	for (unsigned j = 0u; j < size; ++j)
-	{
-		neurons[j]->Calculate();
-	}
-}
+float AI::blockPrize = 20.f;
+float AI::walkPrize = 1.f;
+float AI::attackDistancePenalization = .005f;
 
 AI::AI()
 {
-	hiddenLayer = new Layer(INPUT_AMOUNT);
-	outputLayer = new Layer(OUTPUT_AMOUNT);
+	Mutate(brain, 100u);
 }
 
 AI::~AI()
 {
-	RELEASE(hiddenLayer);
-	RELEASE(outputLayer);
 }
 
 void AI::Reset()
@@ -107,21 +26,81 @@ void AI::Reset()
 	fitness = 0.f;
 }
 
+void AI::Mutate(Brain ancestor, unsigned mutationChance)
+{
+	for (unsigned j = 0u; j < OUTPUT_AMOUNT; ++j)
+	{
+		brain.neurons[j].value = 0.f;
+		for (unsigned i = 0u; i < INPUT_AMOUNT; ++i)
+		{
+			if (rand() % 100 <= mutationChance)
+			{
+				brain.neurons[j].weights[i] = (rand() % 101) / 100.f;
+			}
+			else
+			{
+				brain.neurons[j].weights[i] = ancestor.neurons[j].weights[i];
+			}
+		}
+	}
+
+}
+
+void AI::Save(std::string name, Brain b2, Brain b3, Brain b4, Brain b5)
+{
+	Brain brains[5] = { brain, b2, b3, b4, b5 };
+	game->fileSystem->Write(name, &brains, sizeof(brains));
+}
+
+void AI::Load(std::string name)
+{
+	Brain brains[5];
+	game->fileSystem->Read("Brains/" + name, &brains, sizeof(brains));
+	brain = brains[0];
+	game->aiS[1]->brain = brains[1];
+	game->aiS[2]->brain = brains[2];
+	game->aiS[3]->brain = brains[3];
+	game->aiS[4]->brain = brains[4];
+}
+
 void AI::Update()
 {
-	il.FeedInput(own->neuralNetworkInput, other->neuralNetworkInput, own->pos.x - other->pos.x);	
-	hiddenLayer->FeedLayer(il);
-	outputLayer->FeedLayer(hiddenLayer);
-	int op = 0;
-	float max = outputLayer->neurons[0]->value;
-	for (unsigned i = 1u; i < outputLayer->size; ++i)
+	float input[INPUT_AMOUNT];
+	float distance = abs(own->pos.x - other->pos.x);
+
+	for (unsigned i = 0u; i < (INPUT_AMOUNT - 1) / 2; ++i)
 	{
-		if (outputLayer->neurons[i]->value > max)
+		own->neuralNetworkInput.c_str()[i] == '0' ? input[i] = 0.f : input[i] = 1.f;
+	}
+	for (unsigned i = 0u; i < (INPUT_AMOUNT - 1) / 2; ++i)
+	{
+		other->neuralNetworkInput.c_str()[i] == '0' ? input[i + (INPUT_AMOUNT - 1) / 2] = 0.f : input[i + (INPUT_AMOUNT - 1) / 2] = 1.f;
+	}
+	input[INPUT_AMOUNT - 1] = distance / (float)SCREEN_WIDTH;
+
+	for (unsigned j = 0u; j < OUTPUT_AMOUNT; ++j)	
+	{
+		brain.neurons[j].value = 0.f;
+		for (unsigned i = 0u; i < INPUT_AMOUNT; ++i)
 		{
-			max = outputLayer->neurons[i]->value;
+			brain.neurons[j].value  += input[i] * brain.neurons[j].weights[i];
+		}
+		brain.neurons[j].value = 1.f / (1 + exp(-brain.neurons[j].value));
+	}
+
+	int op = 0;
+	float max = brain.neurons[0].value;
+	for (unsigned i = 1u; i < OUTPUT_AMOUNT; ++i)
+	{
+		if (brain.neurons[i].value > max)
+		{
+			max = brain.neurons[i].value;
 			op = i;
 		}
 	}
+
+
+
 	forward = false;
 	backward = false;
 	down = false;
@@ -133,17 +112,15 @@ void AI::Update()
 	m_Kick = false;
 	h_Kick = false;
 
-	if (own->landingWaitTimer <= 0) // This avoids jump abusers
+	if (own->landingWaitTimer <= 0)
 	{
 		switch (op)
 		{
 		case 0:
 			forward = true;
-			fitness += walkPrize * abs(own->pos.x - other->pos.x)
-				- own->currentAnimation->frames[own->currentAnimation->currentFrame]->hitBoxes[1].box.Width() * 1.5f; //Walk forward when the other fighter is away is good stuff
 			break;
 		case 1:
-			backward = true;	
+			backward = true;
 			break;
 		case 2:
 			up = true;
@@ -297,7 +274,12 @@ void AI::Update()
 	}
 	
 	//fitness
-		
+	/*
+	if (own->state == CharacterController::CharacterStates::WALK_FORWARD)
+	{
+		fitness += walkPrize * abs(own->pos.x - other->pos.x)
+			- own->currentAnimation->frames[own->currentAnimation->currentFrame]->hitBoxes[1].box.Width() * 1.5f; //Walk forward when the other fighter is away is good stuff
+	}
 	if (own->state == CharacterController::CharacterStates::WALK_BACKWARDS && !other->isAttacking)
 	{
 		fitness -= walkPrize * abs(own->pos.x - other->pos.x); //Penalize fleeing fighters
@@ -331,6 +313,7 @@ void AI::Update()
 	{
 		fitness -= abs(own->pos.x - other->pos.x) * attackDistancePenalization;
 	}
+	*/
 }
 
 bool AI::Forward(bool flipped) const
@@ -419,11 +402,11 @@ void AI::Text()
 	ImGui::Text("Fitness %.3f", fitness);
 	if (ImGui::TreeNodeEx("Decisions"))
 	{
-		for (unsigned i = 0u; i < outputLayer->size; ++i)
+		for (unsigned i = 0u; i < OUTPUT_AMOUNT; ++i)
 		{
 			if (i % 5 != 0)
 				ImGui::SameLine();
-			ImGui::Text("%.5f", outputLayer->neurons[i]->value);
+			ImGui::Text("%.5f", brain.neurons[i].value);
 		}
 		ImGui::TreePop();
 	}

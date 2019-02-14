@@ -84,14 +84,17 @@ void Animation::Play(const float3 &pos, bool &loopEnded, bool flip, bool loop)
 		}
 	}
 	game->render->RenderSprite(frames[currentFrame]->sprite, pos, scale, frames[currentFrame]->offsetH, frames[currentFrame]->offsetV, flip);
+	UpdateHBoxes(pos.xy(), flip);
+	DrawHBoxes();
 }
 
 void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 {
 	if (!flip)
 	{
-		if (hitBoxes[0].box.minPoint.Equals(hitBoxes[0].box.maxPoint))
+		if (frames[currentFrame]->hitBoxes[0].box.minPoint.Equals(frames[currentFrame]->hitBoxes[0].box.maxPoint))
 		{
+			hitBoxes[0].enabled = false;
 			hitBoxes[0].box.SetNegativeInfinity();
 		}
 		else
@@ -100,9 +103,11 @@ void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 				pos.y + frames[currentFrame]->hitBoxes[0].box.minPoint.y * scale);
 			hitBoxes[0].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[0].box.maxPoint.x * scale,
 				pos.y + frames[currentFrame]->hitBoxes[0].box.maxPoint.y * scale);
+			hitBoxes[0].enabled = true;
 		}
-		if (hitBoxes[1].box.minPoint.Equals(hitBoxes[1].box.maxPoint))
+		if (frames[currentFrame]->hitBoxes[1].box.minPoint.Equals(frames[currentFrame]->hitBoxes[1].box.maxPoint))
 		{
+			hitBoxes[1].enabled = false;
 			hitBoxes[1].box.SetNegativeInfinity();
 		}
 		else
@@ -111,9 +116,11 @@ void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 				pos.y + frames[currentFrame]->hitBoxes[1].box.minPoint.y * scale);
 			hitBoxes[1].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[1].box.maxPoint.x * scale,
 				pos.y + frames[currentFrame]->hitBoxes[1].box.maxPoint.y * scale);
+			hitBoxes[1].enabled = true;
 		}
-		if (hitBoxes[2].box.minPoint.Equals(hitBoxes[2].box.maxPoint))
+		if (frames[currentFrame]->hitBoxes[2].box.minPoint.Equals(frames[currentFrame]->hitBoxes[2].box.maxPoint))
 		{
+			hitBoxes[2].enabled = false;
 			hitBoxes[2].box.SetNegativeInfinity();
 		}
 		else
@@ -122,12 +129,14 @@ void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 				pos.y + frames[currentFrame]->hitBoxes[2].box.minPoint.y * scale);
 			hitBoxes[2].box.maxPoint = float2(pos.x + frames[currentFrame]->offsetH + frames[currentFrame]->hitBoxes[2].box.maxPoint.x * scale,
 				pos.y + frames[currentFrame]->hitBoxes[2].box.maxPoint.y * scale);
+			hitBoxes[2].enabled = true;
 		}
 	}
 	else																							 
 	{			
-		if (hitBoxes[0].box.minPoint.Equals(hitBoxes[0].box.maxPoint))
+		if (frames[currentFrame]->hitBoxes[0].box.minPoint.Equals(frames[currentFrame]->hitBoxes[0].box.maxPoint))
 		{
+			hitBoxes[0].enabled = false;
 			hitBoxes[0].box.SetNegativeInfinity();
 		}
 		else
@@ -136,9 +145,11 @@ void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.minPoint.y * scale);
 			hitBoxes[0].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[0].box.minPoint.x * scale,
 				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[0].box.maxPoint.y * scale);
+			hitBoxes[0].enabled = true;
 		}
-		if (hitBoxes[1].box.minPoint.Equals(hitBoxes[1].box.maxPoint))
+		if (frames[currentFrame]->hitBoxes[1].box.minPoint.Equals(frames[currentFrame]->hitBoxes[1].box.maxPoint))
 		{
+			hitBoxes[1].enabled = false;
 			hitBoxes[1].box.SetNegativeInfinity();
 		}
 		else
@@ -147,9 +158,11 @@ void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.minPoint.y * scale);
 			hitBoxes[1].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[1].box.minPoint.x * scale,
 				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[1].box.maxPoint.y * scale);
+			hitBoxes[1].enabled = true;
 		}
-		if (hitBoxes[2].box.minPoint.Equals(hitBoxes[2].box.maxPoint))
+		if (frames[currentFrame]->hitBoxes[2].box.minPoint.Equals(frames[currentFrame]->hitBoxes[2].box.maxPoint))
 		{
+			hitBoxes[2].enabled = false;
 			hitBoxes[2].box.SetNegativeInfinity();
 		}
 		else
@@ -158,6 +171,7 @@ void Animation::UpdateHBoxes(const float2 & pos, bool flip)
 				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.minPoint.y * scale);
 			hitBoxes[2].box.maxPoint = float2(pos.x - frames[currentFrame]->offsetH - frames[currentFrame]->hitBoxes[2].box.minPoint.x * scale,
 				pos.y + frames[currentFrame]->offsetV + frames[currentFrame]->hitBoxes[2].box.maxPoint.y * scale);
+			hitBoxes[2].enabled = true;
 		}
 	}
 }

@@ -41,20 +41,20 @@ bool Editor::Update()
 	float2 previewPos2 = float2(800.f, 10.f);
 	if (testing)
 	{
-		if (rand() % 100 < 50 || game->characterController1->landingWaitTimer > 0 || game->characterController2->landingWaitTimer > 0)
+		if (rand() % 100 < 20 || game->characterController1->landingWaitTimer > 0)
 		{
-			//game->characterController1->controller = ai1;
-			//game->characterController2->controller = ai2;
 			ai1->Update();
+		}
+		if (rand() % 100 < 20 || game->characterController2->landingWaitTimer > 0)
+		{
 			ai2->Update();
-			nextUpdate = SDL_GetTicks() + updateWait;
 		}
 		ImGui::Text("Generation %d", generation);
 		ImGui::InputInt("Mutation posibility %", &mutationPosibiliy);
 		ImGui::Text("Life A = %d - Life B = %d", game->characterController1->life, game->characterController2->life);
 		ImGui::Text("NN Input A = %s - NN Input B = %s", game->characterController1->neuralNetworkInput.c_str(), 
 			game->characterController2->neuralNetworkInput.c_str());		
-		ImGui::PlotLines("Fitness evo", &fitness[0], fitness.size(), 0, "Fitness evo", -10000.f, 10000.f, ImVec2(ImGui::GetWindowContentRegionMax().x, 60));
+		ImGui::PlotLines("Fitness evo", &fitness[0], fitness.size(), 0, "Fitness evo", -1000000.f, 1000000.f, ImVec2(ImGui::GetWindowContentRegionMax().x, 60));
 		ImGui::InputFloat("Block Prize", &AI::blockPrize, 0.1f, 1.f);
 		ImGui::InputFloat("Walk Prize", &AI::walkPrize, 0.1f, 1.f);
 		ImGui::InputFloat("Distance attack penalization", &AI::attackDistancePenalization, 0.1f, 1.f, "%.6f");
@@ -65,9 +65,14 @@ bool Editor::Update()
 		ImGui::Text("Time remaining %d", timeRemaining);
 		ImGui::Text("%d - %s (%s)(%s) vs %d - %s (%s)(%s)", ai1Num, ai1->name.c_str(), ((AI*)game->characterController1->controller)->name.c_str(), ((AI*)ai1->other->controller)->name.c_str(),
 			ai2Num, ai2->name.c_str(), ((AI*)game->characterController2->controller)->name.c_str(), ((AI*)ai2->other->controller)->name.c_str());
-		if (SDL_GetTicks() >= endRound)
+		if (SDL_GetTicks() >= endRound || game->characterController1->state == CharacterController::CharacterStates::KO 
+			|| game->characterController2->state == CharacterController::CharacterStates::KO)
 		{
+			ai1->fitness += game->characterController1->life - game->characterController2->life;
+			ai2->fitness += game->characterController2->life - game->characterController1->life;
 			endRound = SDL_GetTicks() + roundDuration;
+			game->characterController1->flip = false;
+			game->characterController2->flip = true;
 			if (ai2Num < (AI_AMOUNT - 1)) //Move this to other place
 			{
 				++ai2Num;
@@ -101,44 +106,28 @@ bool Editor::Update()
 					ai2->other = other;
 				}
 				else
-				{
-					++generation;					
+				{										
+					++generation;	
+					roundDuration += 10;
 					std::sort(game->aiS.begin(), game->aiS.end(),
 							[](const AI* a, const AI* b)
 					{
 						return a->fitness > b->fitness;
 					});
+					game->aiS[0]->brain.generation = generation - 1;
+					game->aiS[0]->Save("Brains/G" + std::to_string(generation) + ".ai", game->aiS[1]->brain, game->aiS[2]->brain,
+						game->aiS[3]->brain, game->aiS[4]->brain);
 
 					fitness.push_back(game->aiS[0]->fitness);
-
-					for (unsigned i = 0u; i < AI_AMOUNT;  ++i)
-						game->aiS[i]->fitness = 0u;
+					
+					for (unsigned i = 0u; i < AI_AMOUNT; ++i)
+						game->aiS[i]->Reset();
 					
 					for (unsigned i = (AI_AMOUNT / 2); i < AI_AMOUNT; ++i)
 					{
-						game->aiS[i]->name = "G" + std::to_string(generation) + "_" + std::to_string(i);
-						for (unsigned k = 0u; k < game->aiS[i]->hiddenLayer->size; ++k)
-						{
-							for (unsigned j = 0u; j < INPUT_AMOUNT; ++j)
-							{
-								if (rand() % 100 < mutationPosibiliy)
-									game->aiS[i]->hiddenLayer->neurons[k]->weights[j] = (rand() % 101) / 100.f;
-								else
-									game->aiS[i]->hiddenLayer->neurons[k]->weights[j] = game->aiS[0]->hiddenLayer->neurons[k]->weights[j];
-							}
-						}
-						for (unsigned k = 0u; k < game->aiS[i]->outputLayer->size; ++k)
-						{
-							for (unsigned j = 0u; j < INPUT_AMOUNT; ++j)
-							{
-								if (rand() % 100 < mutationPosibiliy)
-									game->aiS[i]->outputLayer->neurons[k]->weights[j] = (rand() % 101) / 100.f;
-								else
-									game->aiS[i]->outputLayer->neurons[k]->weights[j] = game->aiS[0]->outputLayer->neurons[k]->weights[j];
-							}
-						}
-					}
-
+						game->aiS[i]->name = "G" + std::to_string(generation) + "_" + std::to_string(i);						
+						game->aiS[i]->Mutate(game->aiS[0]->brain, mutationPosibiliy);
+					}					
 					ai1Num = 0u;
 					ai2Num = 1u;
 
@@ -173,6 +162,48 @@ bool Editor::Update()
 		game->characterController2->pos = float3(previewPos2, 1.f);
 		game->characterController2->state = CharacterController::CharacterStates::IDLE;
 		animPreview = nullptr;
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Load AI", ImVec2(100, 20)))
+	{
+		files.resize(0);
+		dirs.resize(0);
+		game->fileSystem->GetContentList("Brains", files, dirs);
+		ImGui::OpenPopup("LoadAIPopup");
+	}
+	if (ImGui::BeginPopup("LoadAIPopup", ImGuiWindowFlags_Modal))
+	{
+		unsigned i = 0u;
+		for (std::string s : files)
+		{
+			if (ImGui::Button(s.c_str()))
+			{
+				ImGui::CloseCurrentPopup();
+				game->aiS[0]->Load(s);
+				for (unsigned i = (AI_AMOUNT / 2); i < AI_AMOUNT; ++i)
+				{
+					game->aiS[i]->name = "G" + std::to_string(generation) + "_" + std::to_string(i);
+					game->aiS[i]->Mutate(game->aiS[0]->brain, mutationPosibiliy);
+				}
+				generation = game->aiS[0]->brain.generation;
+				ai1Num = 0u;
+				ai2Num = 1u;
+				endRound = SDL_GetTicks() + roundDuration;
+
+				ai1 = game->aiS[ai1Num];
+				ai1->own = game->characterController1;
+				game->characterController1->controller = (AI*)ai1;
+				ai1->other = game->characterController2;
+
+				ai2 = game->aiS[ai2Num];
+				ai2->own = game->characterController2;
+				game->characterController2->controller = (AI*)ai2;
+				ai2->other = game->characterController1;
+			}
+			if (i % 10 != 0)
+				ImGui::SameLine();
+		}
+		ImGui::EndPopup();
 	}
 	if (ImGui::CollapsingHeader("Animation Editor"))
 	{

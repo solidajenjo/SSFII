@@ -14,6 +14,7 @@ public:
 	{
 		AABB2D box;		
 		int damageAmount = 0;
+		bool enabled = false;
 	};
 
 	struct Frame

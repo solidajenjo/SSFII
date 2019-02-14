@@ -7,42 +7,21 @@
 #include "PlayerController.h"
 
 #define INPUT_AMOUNT 51
-#define OUTPUT_AMOUNT 38
+#define OUTPUT_AMOUNT 40
 
 class CharacterController;
 
-class InputLayer
+
+struct Neuron
 {
-public:
-	void FeedInput(const std::string &ownCharacter, const std::string &otherCharacter, const int distance);
-
-	float input[INPUT_AMOUNT];
-};
-
-class Neuron
-{
-public:
-	Neuron();
-	void Calculate(const float* input);
-	void Calculate();
-
 	float value = 0.f;
 	float weights[INPUT_AMOUNT];
-	float inputs[INPUT_AMOUNT];
 };
-class Layer
-{
-public:
 
-	Layer(int size);
-	~Layer();
-		
-	void FeedLayer(const InputLayer &il);	
-	void FeedLayer(const Layer* sourceLayer);	
-
-
-	Neuron** neurons = nullptr;
-	int size = 0;
+struct Brain
+{	
+	Neuron neurons[OUTPUT_AMOUNT];
+	unsigned generation = 1u;
 };
 
 
@@ -54,6 +33,9 @@ public:
 	~AI();
 
 	void Reset();
+	void Mutate(Brain ancestor, unsigned mutationChance);
+	void Save(std::string name, Brain b2, Brain b3, Brain b4, Brain b5);
+	void Load(std::string name);
 	void Update();
 
 	bool Forward(bool flipped) const override;
@@ -84,9 +66,8 @@ public:
 	float dist = 0.f;
 	CharacterController* own = nullptr;
 	CharacterController* other = nullptr;
-	InputLayer il;
-	Layer* hiddenLayer = nullptr;
-	Layer* outputLayer = nullptr;
+
+	Brain brain;
 
 	static float blockPrize;
 	static float walkPrize;

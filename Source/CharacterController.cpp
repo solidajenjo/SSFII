@@ -33,7 +33,6 @@ void CharacterController::Update()
 	case CharacterStates::IDLE:
 		isAttacking = false;
 		animationSheet->animations[AnimationSheet::Anims::IDLE]->Play(pos, loopEnded, flip);
-		currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		CheckCrouch();
 		CheckWalk();
 		CheckJump();
@@ -47,12 +46,14 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		CheckJump();
 		CheckGroundAttack();
 		if (other->isAttacking && controller->Backward(flip))
 		{
 			state = CharacterStates::CROUCH_BLOCK;
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::BLOCKING_CROUCH];
 		}
 		break;
 
@@ -64,6 +65,7 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		CheckCrouch();
 		CheckJump();
@@ -78,6 +80,7 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		CheckCrouch();
 		CheckJump();
@@ -121,6 +124,7 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		break;
 
@@ -132,6 +136,7 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		break;
 
@@ -143,6 +148,7 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::CROUCH;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		break;
 
@@ -212,6 +218,7 @@ void CharacterController::Update()
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		pos.x -= speed * hitMultiplier * direction;
 		break;
@@ -223,6 +230,7 @@ void CharacterController::Update()
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		pos.x -= speed * hitMultiplier * direction;
 		break;
@@ -238,6 +246,7 @@ void CharacterController::Update()
 			verticalSpeed -= gravity;
 			pos.y += verticalSpeed;			
 			animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN];
 		}
 		else
 		{
@@ -249,11 +258,13 @@ void CharacterController::Update()
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		break;
 	case CharacterStates::WIN:
 		isAttacking = false;
 		animationSheet->animations[AnimationSheet::Anims::VICTORY]->Play(pos, loopEnded, flip);
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::VICTORY];
 		break;
 	case CharacterStates::KO:
 		isAttacking = false;
@@ -264,6 +275,7 @@ void CharacterController::Update()
 			verticalSpeed -= gravity;
 			pos.y += verticalSpeed;
 			animationSheet->animations[AnimationSheet::Anims::KO]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::KO];
 		}
 		break;
 	case CharacterStates::BLOCK:
@@ -278,6 +290,7 @@ void CharacterController::Update()
 		{
 			state = CharacterStates::IDLE;
 			animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		}
 		break;
 	case CharacterStates::CROUCH_BLOCK:
@@ -285,7 +298,8 @@ void CharacterController::Update()
 		animationSheet->animations[AnimationSheet::Anims::BLOCKING_CROUCH]->Play(pos, loopEnded, flip, false);
 		if (!controller->Backward(flip) || !other->isAttacking)
 		{
-			state = CharacterStates::CROUCH;			
+			state = CharacterStates::CROUCH;
+			currentAnimation = animationSheet->animations[AnimationSheet::Anims::CROUCH];
 		}
 		break;
 	}
@@ -401,42 +415,42 @@ void CharacterController::CheckGroundAttack()
 		if (controller->H_Punch())
 		{
 			state = CharacterStates::ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::H_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::H_PUNCH]->Rewind();	
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Punch())
 		{
 			state = CharacterStates::ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::M_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::M_PUNCH]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Punch())
 		{
 			state = CharacterStates::ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::L_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::L_PUNCH]->Rewind();
 			damageMultiplier = 1u;
 		}
 		if (controller->H_Kick())
 		{
 			state = CharacterStates::ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::H_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::H_KICK]->Rewind();
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Kick())
 		{
 			state = CharacterStates::ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::M_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::M_KICK]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Kick())
 		{
 			state = CharacterStates::ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::L_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::L_KICK];
 			animationSheet->animations[AnimationSheet::Anims::L_KICK]->Rewind();
 			damageMultiplier = 1u;
 		}
@@ -446,38 +460,44 @@ void CharacterController::CheckGroundAttack()
 		if (controller->H_Punch())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_H_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::F_H_PUNCH]->Rewind();
+			damageMultiplier = 3u;
 		}
 		if (controller->M_Punch())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_M_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::F_M_PUNCH]->Rewind();
+			damageMultiplier = 2u;
 		}
 		if (controller->L_Punch())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_L_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::F_L_PUNCH]->Rewind();
+			damageMultiplier = 1u;
 		}
 		if (controller->H_Kick())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_H_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::F_H_KICK]->Rewind();
+			damageMultiplier = 3u;
 		}
 		if (controller->M_Kick())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_M_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::F_M_KICK]->Rewind();
+			damageMultiplier = 2u;
 		}
 		if (controller->L_Kick())
 		{
 			state = CharacterStates::FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_L_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::F_L_KICK];
 			animationSheet->animations[AnimationSheet::Anims::F_L_KICK]->Rewind();
+			damageMultiplier = 1u;
 		}
 		break;
 
@@ -485,38 +505,44 @@ void CharacterController::CheckGroundAttack()
 		if (controller->H_Punch())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::C_H_PUNCH]->Rewind();
+			damageMultiplier = 3u;
 		}
 		if (controller->M_Punch())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::C_M_PUNCH]->Rewind();
+			damageMultiplier = 2u;
 		}
 		if (controller->L_Punch())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::C_L_PUNCH]->Rewind();
+			damageMultiplier = 1u;
 		}
 		if (controller->H_Kick())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::C_H_KICK]->Rewind();
+			damageMultiplier = 3u;
 		}
 		if (controller->M_Kick())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::C_M_KICK]->Rewind();
+			damageMultiplier = 2u;
 		}
 		if (controller->L_Kick())
 		{
 			state = CharacterStates::CROUCH_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::C_L_KICK];
 			animationSheet->animations[AnimationSheet::Anims::C_L_KICK]->Rewind();
+			damageMultiplier = 1u;
 		}
 		break;
 	}
@@ -530,42 +556,42 @@ void CharacterController::CheckAirAttack()
 		if (controller->H_Punch())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_H_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_F_H_PUNCH]->Rewind();
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Punch())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_M_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_F_M_PUNCH]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Punch())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_L_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_F_L_PUNCH]->Rewind();
 			damageMultiplier = 1u;
 		}
 		if (controller->H_Kick())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_H_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_F_H_KICK]->Rewind();
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Kick())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_M_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_F_M_KICK]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Kick())
 		{
 			state = CharacterStates::JUMP_FORWARD_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_L_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_F_L_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_F_L_KICK]->Rewind();
 			damageMultiplier = 1u;
 		}
@@ -575,42 +601,42 @@ void CharacterController::CheckAirAttack()
 		if (controller->H_Punch())
 		{
 			state = CharacterStates::JUMP_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH]->Rewind();
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Punch())
 		{
 			state = CharacterStates::JUMP_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Punch())
 		{
 			state = CharacterStates::JUMP_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH]->Rewind();
 			damageMultiplier = 1u;
 		}
 		if (controller->H_Kick())
 		{
 			state = CharacterStates::JUMP_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_H_KICK]->Rewind();
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Kick())
 		{
 			state = CharacterStates::JUMP_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_M_KICK]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Kick())
 		{
 			state = CharacterStates::JUMP_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_L_KICK]->Rewind();
 			damageMultiplier = 1u;
 		}
@@ -620,42 +646,42 @@ void CharacterController::CheckAirAttack()
 		if (controller->H_Punch())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_H_PUNCH]->Rewind();
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Punch())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_M_PUNCH]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Punch())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH];
 			animationSheet->animations[AnimationSheet::Anims::J_L_PUNCH]->Rewind();
 			damageMultiplier = 1u;
 		}
 		if (controller->H_Kick())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_H_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_H_KICK]->Rewind();
 			damageMultiplier = 3u;
 		}
 		if (controller->M_Kick())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_M_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_M_KICK]->Rewind();
 			damageMultiplier = 2u;
 		}
 		if (controller->L_Kick())
 		{
 			state = CharacterStates::JUMP_BACKWARDS_ATTACK;
-			attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_KICK];
+			currentAnimation = attackAnimation = animationSheet->animations[AnimationSheet::Anims::J_L_KICK];
 			animationSheet->animations[AnimationSheet::Anims::J_L_KICK]->Rewind();
 			damageMultiplier = 1u;
 		}
@@ -669,6 +695,7 @@ void CharacterController::CheckLanding()
 	{
 		state = CharacterStates::IDLE;
 		animationSheet->animations[AnimationSheet::Anims::IDLE]->Rewind();
+		currentAnimation = animationSheet->animations[AnimationSheet::Anims::IDLE];
 		pos.y = idleY;
 		landingFx->position = pos.xy();
 		fxQueue.push(landingFx);
@@ -679,11 +706,11 @@ void CharacterController::CheckLanding()
 }
 
 void CharacterController::CheckCollision()
-{
+{	
 	currentAnimation->UpdateHBoxes(pos.xy(), flip);
 	other->currentAnimation->UpdateHBoxes(other->pos.xy(), other->flip);
-	currentAnimation->DrawHBoxes();	
-	if (currentAnimation->hitBoxes[1].box.Intersects(other->currentAnimation->hitBoxes[1].box))
+	if (currentAnimation->hitBoxes[1].enabled && other->currentAnimation->hitBoxes[1].enabled 
+		&& currentAnimation->hitBoxes[1].box.Intersects(other->currentAnimation->hitBoxes[1].box))
 	{
 		if (!flip)
 		{
@@ -695,8 +722,9 @@ void CharacterController::CheckCollision()
 		}
 	}
 
-	if (currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[0].box))
-	{
+	if (currentAnimation->hitBoxes[2].enabled && other->currentAnimation->hitBoxes[0].enabled  
+		&& currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[0].box))
+	{		
 		if (other->state != CharacterStates::BLOCK)
 		{
 			unsigned damageApplied = damage * damageMultiplier;
@@ -707,11 +735,13 @@ void CharacterController::CheckCollision()
 			{
 				other->state = CharacterStates::FACE_HIT;
 				other->animationSheet->animations[AnimationSheet::Anims::FACE_HIT]->Rewind();
+				other->currentAnimation = other->animationSheet->animations[AnimationSheet::Anims::FACE_HIT];
 			}
 			else
 			{
 				other->state = CharacterStates::KNOCK_DOWN;
 				other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Rewind();
+				other->currentAnimation = other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN];
 			}
 		}
 		else
@@ -722,7 +752,8 @@ void CharacterController::CheckCollision()
 		return;
 	}
 
-	if (currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[1].box))
+	if (currentAnimation->hitBoxes[2].enabled && other->currentAnimation->hitBoxes[1].enabled  
+		&& currentAnimation->hitBoxes[2].box.Intersects(other->currentAnimation->hitBoxes[1].box))
 	{		
 		if (isGrounded)
 		{
@@ -734,6 +765,7 @@ void CharacterController::CheckCollision()
 				other->damageTaken += damageApplied;
 				other->state = CharacterStates::BODY_HIT;
 				other->animationSheet->animations[AnimationSheet::Anims::HIT]->Rewind();
+				other->currentAnimation = other->animationSheet->animations[AnimationSheet::Anims::HIT];
 			}
 			else if (!other->isGrounded)
 			{
@@ -743,6 +775,7 @@ void CharacterController::CheckCollision()
 				other->damageTaken += damageApplied;
 				other->state = CharacterStates::KNOCK_DOWN;
 				other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Rewind();
+				other->currentAnimation = other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN];
 			}
 			else
 			{
@@ -758,6 +791,7 @@ void CharacterController::CheckCollision()
 			other->damageTaken += damageApplied;
 			other->state = CharacterStates::KNOCK_DOWN;
 			other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Rewind();
+			other->currentAnimation = other->animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN];
 		}
 		return;
 	}
