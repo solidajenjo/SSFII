@@ -26,7 +26,7 @@ void AI::Reset()
 	fitness = 0.f;
 }
 
-void AI::Mutate(Brain ancestor, unsigned mutationChance)
+void AI::Mutate(const Brain & ancestor, unsigned mutationChance)
 {
 	for (unsigned j = 0u; j < OUTPUT_AMOUNT; ++j)
 	{
@@ -43,25 +43,28 @@ void AI::Mutate(Brain ancestor, unsigned mutationChance)
 			}
 		}
 	}
-
 }
 
-void AI::Save(std::string name, Brain b2, Brain b3, Brain b4, Brain b5)
+void AI::Cross(const Brain & b1, const Brain & b2)
 {
-	Brain brains[5] = { brain, b2, b3, b4, b5 };
-	game->fileSystem->Write(name, &brains, sizeof(brains));
+	for (unsigned j = 0u; j < OUTPUT_AMOUNT; ++j)
+	{
+		brain.neurons[j].value = 0.f;
+		for (unsigned i = 0u; i < INPUT_AMOUNT; ++i)
+		{
+			if (rand() % 100 <= 50)
+			{
+				brain.neurons[j].weights[i] = b1.neurons[j].weights[i];
+			}
+			else
+			{
+				brain.neurons[j].weights[i] = b2.neurons[j].weights[i];
+			}
+		}
+	}
 }
 
-void AI::Load(std::string name)
-{
-	Brain brains[5];
-	game->fileSystem->Read("Brains/" + name, &brains, sizeof(brains));
-	brain = brains[0];
-	game->aiS[1]->brain = brains[1];
-	game->aiS[2]->brain = brains[2];
-	game->aiS[3]->brain = brains[3];
-	game->aiS[4]->brain = brains[4];
-}
+
 
 void AI::Update()
 {

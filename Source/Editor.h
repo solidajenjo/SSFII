@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "ExternalLibraries/MathGeoLib/include/Math/float2.h"
 
 struct SDL_Window;
 struct ImGuiIO;
@@ -36,13 +37,14 @@ public:
 	unsigned nextUpdate = 0u;
 	unsigned updateWait = 300u;
 	int mutationPosibiliy = 5;
+	int generation = 0;
 	std::vector<float> fitness;
 
-	AI* ai1 = nullptr;
-	AI* ai2 = nullptr;
 
 	unsigned ai1Num = 0u;
 	unsigned ai2Num = 1u;
+	float2 previewPos = float2(400.f, 10.f);
+	float2 previewPos2 = float2(800.f, 10.f);
 
 	std::vector<std::string> files;
 	std::vector<std::string> dirs;

@@ -11,6 +11,7 @@ class FileSystem;
 class CharacterController;
 class PlayerController;
 class AI;
+class AIManager;
 
 class Game
 {
@@ -32,7 +33,7 @@ public:
 	CharacterController* characterController2 = nullptr;
 	PlayerController* joystickController = nullptr;
 	PlayerController* keyboardController = nullptr;
-	std::vector<AI*> aiS;
+	AIManager* aiManager = nullptr;
 };
 
 extern Game* game;

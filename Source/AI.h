@@ -21,7 +21,6 @@ struct Neuron
 struct Brain
 {	
 	Neuron neurons[OUTPUT_AMOUNT];
-	unsigned generation = 1u;
 };
 
 
@@ -33,9 +32,8 @@ public:
 	~AI();
 
 	void Reset();
-	void Mutate(Brain ancestor, unsigned mutationChance);
-	void Save(std::string name, Brain b2, Brain b3, Brain b4, Brain b5);
-	void Load(std::string name);
+	void Mutate(const Brain &ancestor, unsigned mutationChance); //mutate from ancestor
+	void Cross(const Brain &b1, const Brain &b2); //cross two brains
 	void Update();
 
 	bool Forward(bool flipped) const override;
@@ -73,7 +71,7 @@ public:
 	static float walkPrize;
 	static float attackDistancePenalization;
 
-	std::string name = "";
+	char name[10] = "G0";
 };
 
 
