@@ -80,7 +80,7 @@ public:
 	unsigned blocks = 0u;
 	int landingWaitTimer = 0u;
 	int lastTicks = 0u; //TODO: Do a global delta time
-	int landingWaitAmount = 1500u;
+	int landingWaitAmount = 2500u;
 
 	//FXs
 	std::queue<Fx*> fxQueue;
