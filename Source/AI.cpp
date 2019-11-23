@@ -8,7 +8,7 @@
 #include "Game.h"
 #include "FileSystem.h"
 
-float AI::blockPrize = 20.f;
+float AI::blockPrize = 7000.f;
 float AI::walkPrize = 1.f;
 float AI::attackDistancePenalization = .005f;
 
@@ -24,6 +24,7 @@ AI::~AI()
 void AI::Reset()
 {
 	fitness = 0.f;
+	lastX = own->pos.x;
 }
 
 void AI::Mutate(const Brain & ancestor, unsigned mutationChance)
@@ -102,11 +103,6 @@ void AI::Update()
 		}
 	}
 
-
-
-	forward = false;
-	backward = false;
-	down = false;
 	up = false;
 	l_Punch = false;
 	m_Punch = false;
@@ -115,8 +111,14 @@ void AI::Update()
 	m_Kick = false;
 	h_Kick = false;
 
-	if (own->landingWaitTimer <= 0)
+	if ((own->landingWaitTimer <= 0 && (rand() % 100) < (other->isAttacking ? 80 : 50)) 
+		&& !((own->state == CharacterController::CharacterStates::BLOCK && other->isAttacking && other->isGrounded))
+		&& !((own->state == CharacterController::CharacterStates::CROUCH_BLOCK && other->isAttacking && !other->isGrounded)))
 	{
+		forward = false;
+		backward = false;
+		down = false;
+
 		switch (op)
 		{
 		case 0:
@@ -277,22 +279,24 @@ void AI::Update()
 	}
 	
 	//fitness
-	/*
+	float deltaX = abs(own->pos.x - lastX);
+	lastX = own->pos.x;
+
 	if (own->state == CharacterController::CharacterStates::WALK_FORWARD)
 	{
-		fitness += walkPrize * abs(own->pos.x - other->pos.x)
-			- own->currentAnimation->frames[own->currentAnimation->currentFrame]->hitBoxes[1].box.Width() * 1.5f; //Walk forward when the other fighter is away is good stuff
+		fitness += walkPrize * deltaX * 0.000001f * (distance * distance);
 	}
 	if (own->state == CharacterController::CharacterStates::WALK_BACKWARDS && !other->isAttacking)
 	{
-		fitness -= walkPrize * abs(own->pos.x - other->pos.x); //Penalize fleeing fighters
+		fitness -= walkPrize * deltaX * 0.000001f * (distance * distance); //Penalize fleeing fighters
 	}
 	if ((own->state == CharacterController::CharacterStates::BLOCK ||
 		own->state == CharacterController::CharacterStates::CROUCH_BLOCK) && other->isAttacking)
 	{
-		float k = (1 - ((abs(own->pos.x - other->pos.x) / (float)SCREEN_WIDTH))) * blockPrize;
+		float k = blockPrize / distance;
+		k = distance < 300.f ? k : 0.f;
 		fitness += k;
-		LOG("BLOCK REWARD %.5f", k);
+		LOG("BLOCK REWARD %.5f DIST %.5f", k, distance);
 	}
 
 	if (other->lastDamage > 0u) //hit is good
@@ -307,11 +311,10 @@ void AI::Update()
 	}
 	if (own->blocks > 0u) //block is sexy!
 	{
-		LOG("%s blocked %d attacks", name.c_str(), own->blocks);
 		fitness += own->blocks * blockPrize;
 		own->blocks = 0u;
 	}
-
+	/*
 	if (own->isAttacking) //attack from far is for pussies
 	{
 		fitness -= abs(own->pos.x - other->pos.x) * attackDistancePenalization;
@@ -413,5 +416,64 @@ void AI::Text()
 		}
 		ImGui::TreePop();
 	}
+	switch (own->state) {
+	case CharacterController::CharacterStates::IDLE:
+		ImGui::Text("STATE: IDLE");
+		break;
+	case CharacterController::CharacterStates::WALK_FORWARD:
+		ImGui::Text("STATE: WALK_FORWARD");
+		break;
+	case CharacterController::CharacterStates::WALK_BACKWARDS:
+		ImGui::Text("STATE: WALK_BACKWARDS");
+		break;
+	case CharacterController::CharacterStates::ATTACK:
+		ImGui::Text("STATE: ATTACK");
+		break;
+	case CharacterController::CharacterStates::BLOCK:
+		ImGui::Text("STATE: BLOCK");
+		break;
+	case CharacterController::CharacterStates::CROUCH:
+		ImGui::Text("STATE: CROUCH");
+		break;
+	case CharacterController::CharacterStates::CROUCH_ATTACK:
+		ImGui::Text("STATE: CROUCH_ATTACK");
+		break;
+	case CharacterController::CharacterStates::CROUCH_BLOCK:
+		ImGui::Text("STATE: CROUCH_BLOCK");
+		break;
+	case CharacterController::CharacterStates::FORWARD_ATTACK:
+		ImGui::Text("STATE: FORWARD_ATTACK");
+		break;
+	case CharacterController::CharacterStates::BACKWARDS_ATTACK:
+		ImGui::Text("STATE: BACKWARDS_ATTACK");
+		break;
+	case CharacterController::CharacterStates::JUMP:
+		ImGui::Text("STATE: JUMP");
+		break;
+	case CharacterController::CharacterStates::JUMP_ATTACK:
+		ImGui::Text("STATE: JUMP_ATTACK");
+		break;
+	case CharacterController::CharacterStates::JUMP_FORWARD:
+		ImGui::Text("STATE: JUMP_FORWARD");
+		break;
+	case CharacterController::CharacterStates::JUMP_FORWARD_ATTACK:
+		ImGui::Text("STATE: JUMP_FORWARD_ATTACK");
+		break;
+	case CharacterController::CharacterStates::JUMP_BACKWARDS:
+		ImGui::Text("STATE: JUMP_BACKWARDS");
+		break;
+	case CharacterController::CharacterStates::JUMP_BACKWARDS_ATTACK:
+		ImGui::Text("STATE: JUMP_BACKWARDS_ATTACK");
+		break;
+	case CharacterController::CharacterStates::FACE_HIT:
+		ImGui::Text("STATE: FACE_HIT");
+		break;
+	case CharacterController::CharacterStates::BODY_HIT:
+		ImGui::Text("STATE: BODY_HIT");
+		break;
+
+		
+	};
+
 	ImGui::PopID();
 }

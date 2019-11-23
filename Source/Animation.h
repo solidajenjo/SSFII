@@ -29,7 +29,7 @@ public:
 	~Animation();
 
 	bool SetFrame(unsigned frameNum, Sprite* sprite);
-	void Play(const float3 &pos, bool &loopEnded, bool flip, bool loop = true);
+	void Play(const float3 &pos, bool &loopEnded, bool flip, float3 color, bool loop = true);
 	void UpdateHBoxes(const float2 &pos, bool flip);
 	void DrawHBoxes() const;
 	void Rewind();
@@ -50,6 +50,7 @@ public:
 	bool reverse = false;
 	std::string name = "";
 	float scale = 1.f;
+	float3 color = float3::one;
 };
 
 

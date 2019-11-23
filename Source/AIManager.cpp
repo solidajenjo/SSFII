@@ -13,7 +13,13 @@ void AIManager::Save(std::string &name) const
 
 void AIManager::Load(std::string &name)
 {
-	game->fileSystem->Read("Brains/" + name, &dojo, sizeof(dojo));
+	AIDojo dojoAux;
+	game->fileSystem->Read("Brains/" + name, &dojoAux, sizeof(dojoAux));
+	for (int i = 0; i < AI_AMOUNT; ++i) {
+		memcpy(&dojo.fighters[i].brain, &dojoAux.fighters[i].brain, sizeof(Brain));
+		memcpy(&dojo.fighters[i].name[0], &dojoAux.fighters[i].name[0], sizeof(char) * 10);
+	}
+	dojo.generation = dojoAux.generation;
 	game->characterController1->life = game->characterController1->lifeAmount;
 	game->characterController1->pos = float3(game->editor->previewPos, 1.f);
 	game->characterController1->state = CharacterController::CharacterStates::IDLE;
@@ -72,35 +78,35 @@ void AIManager::StartTrainning()
 	game->editor->ai1Num = 0u;
 	game->editor->ai2Num = 1u;
 
-	ai1 = dojo.fighters[game->editor->ai1Num];
-	ai1.own = game->characterController1;
-	game->characterController1->controller = (AI*)&ai1;
-	ai1.other = game->characterController2;
+	ai1 = &dojo.fighters[game->editor->ai1Num];
+	ai1->own = game->characterController1;	
+	game->characterController1->controller = ai1;
+	ai1->other = game->characterController2;
 
-	ai2 = dojo.fighters[game->editor->ai2Num];
-	ai2.own = game->characterController2;
-	game->characterController2->controller = (AI*)&ai2;
-	ai2.other = game->characterController1;
+	ai2 = &dojo.fighters[game->editor->ai2Num];
+	ai2->own = game->characterController2;
+	game->characterController2->controller = ai2;
+	ai2->other = game->characterController1;
 }
 
 void AIManager::Train() 
 {
 	dojo.fighters[game->editor->ai1Num].fitness += game->characterController1->life - game->characterController2->life;
 	dojo.fighters[game->editor->ai2Num].fitness += game->characterController2->life - game->characterController1->life;
-	ai1.fitness = dojo.fighters[game->editor->ai1Num].fitness;
-	ai2.fitness = dojo.fighters[game->editor->ai2Num].fitness;
+	ai1->fitness = dojo.fighters[game->editor->ai1Num].fitness;
+	ai2->fitness = dojo.fighters[game->editor->ai2Num].fitness;	
 	game->editor->endRound = SDL_GetTicks() + game->editor->roundDuration;
 	game->characterController1->flip = false;
 	game->characterController2->flip = true;
 	if (game->editor->ai2Num < (AI_AMOUNT - 1)) 
 	{
 		++game->editor->ai2Num;
-		CharacterController* own = ai2.own;
-		CharacterController* other = ai2.other;
-		ai2 = dojo.fighters[game->editor->ai2Num];
-		ai2.own = own;
-		own->controller = &ai2;
-		ai2.other = other;
+		CharacterController* own = ai2->own;
+		CharacterController* other = ai2->other;
+		ai2 = &dojo.fighters[game->editor->ai2Num];
+		ai2->own = own;
+		own->controller = ai2;
+		ai2->other = other;
 	}
 	else
 	{
@@ -109,26 +115,27 @@ void AIManager::Train()
 		++game->editor->ai1Num;
 		if (game->editor->ai1Num < (AI_AMOUNT - 1))
 		{
-			own = ai1.own;
-			other = ai1.other;
-			ai1 = dojo.fighters[game->editor->ai1Num];
-			ai1.own = own;
-			own->controller = &ai1;
-			ai1.other = other;
+			own = ai1->own;
+			other = ai1->other;
+			ai1 = &dojo.fighters[game->editor->ai1Num];
+			ai1->own = own;
+			own->controller = ai1;
+			ai1->other = other;
 
-			own = ai2.own;
-			other = ai2.other;
+			own = ai2->own;
+			other = ai2->other;
 			game->editor->ai2Num = game->editor->ai1Num + 1;
-			ai2 = dojo.fighters[game->editor->ai2Num];
-			ai2.own = own;
-			own->controller = &ai2;
-			ai2.other = other;
+			ai2 = &dojo.fighters[game->editor->ai2Num];
+			ai2->own = own;
+			own->controller = ai2;
+			ai2->other = other;
 		}
 		else
 		{
 			dojo.generation = game->editor->generation;
 			++game->editor->generation;
-			game->editor->roundDuration += 10;
+			game->editor->roundDuration += 50;
+			game->editor->roundDuration = min(game->editor->roundDuration, 20000);
 			std::sort(std::begin(dojo.fighters), std::end(dojo.fighters),
 				[](const AI &a, const AI &b)
 			{
@@ -152,8 +159,10 @@ void AIManager::Train()
 	game->characterController1->pos = float3(game->editor->previewPos, 1.f);
 	game->characterController1->state = CharacterController::CharacterStates::IDLE;
 	game->characterController1->isGrounded = true;
+	game->characterController1->color = float3::one;
 	game->characterController2->life = game->characterController2->lifeAmount;
 	game->characterController2->pos = float3(game->editor->previewPos2, 1.f);
 	game->characterController2->state = CharacterController::CharacterStates::IDLE;
-	game->characterController2->isGrounded = true;
+	game->characterController2->isGrounded = true;	
+	game->characterController2->color = float3::unitX;
 }

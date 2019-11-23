@@ -33,7 +33,7 @@ bool Editor::Init()
 
 bool Editor::Update()
 {	
-	game->render->RenderSprite(bg, float3(SCREEN_WIDTH * 0.5f, 0.f, 0.f), 1.6f, 0.f, 0.f, false);
+	game->render->RenderSprite(bg, float3(SCREEN_WIDTH * 0.5f, 0.f, 0.f), 1.6f, 0.f, 0.f, false, float3::one);
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(game->render->window);
 	ImGui::NewFrame();
@@ -42,11 +42,11 @@ bool Editor::Update()
 	{
 		if (rand() % 100 < 50 || game->characterController1->landingWaitTimer > 0)
 		{
-			game->aiManager->ai1.Update();
+			game->aiManager->ai1->Update();			
 		}
 		if (rand() % 100 < 50 || game->characterController2->landingWaitTimer > 0)
 		{
-			game->aiManager->ai2.Update();
+			game->aiManager->ai2->Update();
 		}
 		ImGui::Text("Generation %d", generation);
 		ImGui::InputInt("Mutation chance %", &mutationPosibiliy);
@@ -57,13 +57,13 @@ bool Editor::Update()
 		/*ImGui::InputFloat("Block Prize", &AI::blockPrize, 0.1f, 1.f);
 		ImGui::InputFloat("Walk Prize", &AI::walkPrize, 0.1f, 1.f);
 		ImGui::InputFloat("Distance attack penalization", &AI::attackDistancePenalization, 0.1f, 1.f, "%.6f");*/
-		game->aiManager->ai1.Text();
-		game->aiManager->ai2.Text();		
+		game->aiManager->ai1->Text();
+		game->aiManager->ai2->Text();		
 		unsigned timeRemaining = (endRound - SDL_GetTicks()) / 1000;
 		ImGui::InputInt("Round time", &roundDuration);
 		ImGui::Text("Time remaining %d", timeRemaining);
-		ImGui::Text("%d - %s (%s)(%s) vs %d - %s (%s)(%s)", ai1Num, game->aiManager->ai1.name, ((AI*)game->characterController1->controller)->name, ((AI*)game->aiManager->ai1.other->controller)->name,
-			ai2Num, game->aiManager->ai2.name, ((AI*)game->characterController2->controller)->name, ((AI*)game->aiManager->ai2.other->controller)->name);
+		ImGui::Text("%d - %s (%s)(%s) vs %d - %s (%s)(%s)", ai1Num, game->aiManager->ai1->name, ((AI*)game->characterController1->controller)->name, ((AI*)game->aiManager->ai1->other->controller)->name,
+			ai2Num, game->aiManager->ai2->name, ((AI*)game->characterController2->controller)->name, ((AI*)game->aiManager->ai2->other->controller)->name);
 		if (SDL_GetTicks() >= endRound || game->characterController1->state == CharacterController::CharacterStates::KO 
 			|| game->characterController2->state == CharacterController::CharacterStates::KO)
 		{
@@ -328,21 +328,21 @@ bool Editor::Update()
 							{
 								animPreview->UpdateHBoxes(previewPos, false);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
-									float3(offsettedPos, 0.f), animPreview->scale, 0.f, 0.f, false);
+									float3(offsettedPos, 0.f), animPreview->scale, 0.f, 0.f, false, animPreview->color );
 								animPreview->DrawHBoxes();
 								animPreview->UpdateHBoxes(previewPos2, true);
 								game->render->RenderSprite(animPreview->frames[animPreview->currentFrame]->sprite,
-									float3(offsettedPos2, 0.f), animPreview->scale, 0.f, 0.f, true);
+									float3(offsettedPos2, 0.f), animPreview->scale, 0.f, 0.f, true, animPreview->color);
 								animPreview->DrawHBoxes();
 							}
 							else
 							{
 								bool loopEnded;
 								animPreview->UpdateHBoxes(previewPos, false);
-								animPreview->Play(float3(previewPos, 0.f), loopEnded, false);
+								animPreview->Play(float3(previewPos, 0.f), loopEnded, false, float3::one);
 								animPreview->DrawHBoxes();
 								animPreview->UpdateHBoxes(previewPos2, true);
-								animPreview->Play(float3(previewPos2, 0.f), loopEnded, true);
+								animPreview->Play(float3(previewPos2, 0.f), loopEnded, true, float3::one);
 								animPreview->DrawHBoxes();
 							}
 							
@@ -501,14 +501,14 @@ bool Editor::Update()
 				{
 					fx->animation->UpdateHBoxes(previewPos, false);
 					game->render->RenderSprite(fx->animation->frames[fx->animation->currentFrame]->sprite,
-						float3(offsettedPos, 0.f), fx->animation->scale, 0.f, 0.f, false);
+						float3(offsettedPos, 0.f), fx->animation->scale, 0.f, 0.f, false, float3::one);
 					fx->animation->DrawHBoxes();					
 				}
 				else
 				{
 					bool loopEnded;
 					fx->animation->UpdateHBoxes(previewPos, false);
-					fx->animation->Play(float3(previewPos, 0.f), loopEnded, false);
+					fx->animation->Play(float3(previewPos, 0.f), loopEnded, false, float3::one);
 					fx->animation->DrawHBoxes();					
 				}
 			}

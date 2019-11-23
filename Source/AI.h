@@ -62,6 +62,7 @@ public:
 
 	float fitness = 0.f;
 	float dist = 0.f;
+	float lastX = 0.f;
 	CharacterController* own = nullptr;
 	CharacterController* other = nullptr;
 

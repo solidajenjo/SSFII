@@ -133,7 +133,7 @@ bool Render::Update()
 	return true;
 }
 
-void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, float offsetH, float offsetV, bool flip, float alpha) const
+void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, float offsetH, float offsetV, bool flip, float3 color, float alpha) const
 {
 	glUseProgram(program);
 	float4x4 model;
@@ -156,6 +156,7 @@ void Render::RenderSprite(const Sprite* sprite, const float3 &pos, float scale, 
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, float4x4::identity.ptr());
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, float4x4::identity.ptr());
 	glUniform1f(glGetUniformLocation(program, "alpha"), alpha);
+	glUniform3f(glGetUniformLocation(program, "colorInput"), color.x, color.y, color.z);;
 	glActiveTexture(GL_TEXTURE0);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->vbo);
 

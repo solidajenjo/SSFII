@@ -32,7 +32,7 @@ void CharacterController::Update()
 	{
 	case CharacterStates::IDLE:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::IDLE]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::IDLE]->Play(pos, loopEnded, flip, color);
 		CheckCrouch();
 		CheckWalk();
 		CheckJump();
@@ -41,7 +41,7 @@ void CharacterController::Update()
 
 	case CharacterStates::CROUCH:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::CROUCH]->Play(pos, loopEnded, flip);		
+		animationSheet->animations[AnimationSheet::Anims::CROUCH]->Play(pos, loopEnded, flip, color);		
 		if (!controller->Down())
 		{
 			state = CharacterStates::IDLE;
@@ -59,7 +59,7 @@ void CharacterController::Update()
 
 	case CharacterStates::WALK_FORWARD:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded, flip, color);
 		pos.x += speed * direction;
 		if (!controller->Forward(flip))
 		{
@@ -74,7 +74,7 @@ void CharacterController::Update()
 
 	case CharacterStates::WALK_BACKWARDS:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::WALK]->Play(pos, loopEnded, flip, color);
 		pos.x -= speed * direction;
 		if (!controller->Backward(flip))
 		{
@@ -89,7 +89,7 @@ void CharacterController::Update()
 
 	case CharacterStates::JUMP: //TODO: Weird artifacts on Ryu's jump animation
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::JUMP]->Play(pos, loopEnded, flip, false);
+		animationSheet->animations[AnimationSheet::Anims::JUMP]->Play(pos, loopEnded, flip, color, false);
 		pos.y += verticalSpeed;
 		verticalSpeed -= gravity;
 		CheckLanding();
@@ -98,7 +98,7 @@ void CharacterController::Update()
 
 	case CharacterStates::JUMP_FORWARD:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::FORWARD_JUMP]->Play(pos, loopEnded, flip, false);
+		animationSheet->animations[AnimationSheet::Anims::FORWARD_JUMP]->Play(pos, loopEnded, flip, color, false);
 		pos.y += verticalSpeed;
 		pos.x += speed * jumpMovementMultiplier * direction;
 		verticalSpeed -= gravity;
@@ -108,7 +108,7 @@ void CharacterController::Update()
 	
 	case CharacterStates::JUMP_BACKWARDS:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::JUMP]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::JUMP]->Play(pos, loopEnded, flip, color);
 		pos.y += verticalSpeed;
 		pos.x -= speed * jumpMovementMultiplier * direction;
 		verticalSpeed -= gravity;
@@ -118,7 +118,7 @@ void CharacterController::Update()
 
 	case CharacterStates::ATTACK:
 		isAttacking = true;
-		attackAnimation->Play(pos, loopEnded, flip);
+		attackAnimation->Play(pos, loopEnded, flip, color);
 		currentAnimation = attackAnimation;
 		if (loopEnded)
 		{
@@ -130,7 +130,7 @@ void CharacterController::Update()
 
 	case CharacterStates::FORWARD_ATTACK:
 		isAttacking = true;
-		attackAnimation->Play(pos, loopEnded, flip);
+		attackAnimation->Play(pos, loopEnded, flip, color);
 		currentAnimation = attackAnimation;
 		if (loopEnded)
 		{
@@ -142,7 +142,7 @@ void CharacterController::Update()
 
 	case CharacterStates::CROUCH_ATTACK:
 		isAttacking = true;
-		attackAnimation->Play(pos, loopEnded, flip);
+		attackAnimation->Play(pos, loopEnded, flip, color);
 		currentAnimation = attackAnimation;
 		if (loopEnded)
 		{
@@ -156,12 +156,12 @@ void CharacterController::Update()
 		isAttacking = true;
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
-			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip);
+			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip, color);
 			currentAnimation = animationSheet->animations[AnimationSheet::Anims::LANDING];
 		}
 		else
 		{
-			attackAnimation->Play(pos, loopEnded, flip, false);
+			attackAnimation->Play(pos, loopEnded, flip, color, false);
 			currentAnimation = attackAnimation;
 		}
 		pos.y += verticalSpeed;
@@ -176,12 +176,12 @@ void CharacterController::Update()
 		isAttacking = true;
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
-			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip);
+			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip, color);
 			currentAnimation = animationSheet->animations[AnimationSheet::Anims::LANDING];
 		}
 		else
 		{
-			attackAnimation->Play(pos, loopEnded, flip, false);
+			attackAnimation->Play(pos, loopEnded, flip, color, false);
 			currentAnimation = attackAnimation;
 		}
 		pos.y += verticalSpeed;
@@ -196,12 +196,12 @@ void CharacterController::Update()
 		isAttacking = true;
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
-			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip);
+			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip, color);
 			currentAnimation = animationSheet->animations[AnimationSheet::Anims::LANDING];
 		}
 		else
 		{
-			attackAnimation->Play(pos, loopEnded, flip, false);
+			attackAnimation->Play(pos, loopEnded, flip, color, false);
 			currentAnimation = attackAnimation;
 		}
 		pos.y += verticalSpeed;
@@ -214,7 +214,7 @@ void CharacterController::Update()
 	case CharacterStates::FACE_HIT:
 		isAttacking = false;
 		currentAnimation = animationSheet->animations[AnimationSheet::Anims::FACE_HIT];
-		animationSheet->animations[AnimationSheet::Anims::FACE_HIT]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::FACE_HIT]->Play(pos, loopEnded, flip, color);
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
@@ -226,7 +226,7 @@ void CharacterController::Update()
 	case CharacterStates::BODY_HIT:
 		isAttacking = false;
 		currentAnimation = animationSheet->animations[AnimationSheet::Anims::HIT];
-		animationSheet->animations[AnimationSheet::Anims::HIT]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::HIT]->Play(pos, loopEnded, flip, color);
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
@@ -254,7 +254,7 @@ void CharacterController::Update()
 			pos.y = idleY;
 		}
 		currentAnimation = animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN];
-		animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::KNOCK_DOWN]->Play(pos, loopEnded, flip, color);
 		if (loopEnded)
 		{
 			state = CharacterStates::IDLE;
@@ -263,12 +263,12 @@ void CharacterController::Update()
 		break;
 	case CharacterStates::WIN:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::VICTORY]->Play(pos, loopEnded, flip);
+		animationSheet->animations[AnimationSheet::Anims::VICTORY]->Play(pos, loopEnded, flip, color);
 		currentAnimation = animationSheet->animations[AnimationSheet::Anims::VICTORY];
 		break;
 	case CharacterStates::KO:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::KO]->Play(pos, loopEnded, flip, false); //TODO: Improve death
+		animationSheet->animations[AnimationSheet::Anims::KO]->Play(pos, loopEnded, flip, color, false); //TODO: Improve death
 		if (pos.y > idleY)
 		{
 			isGrounded = false;
@@ -280,7 +280,7 @@ void CharacterController::Update()
 		break;
 	case CharacterStates::BLOCK:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::BLOCKING]->Play(pos, loopEnded, flip, false);
+		animationSheet->animations[AnimationSheet::Anims::BLOCKING]->Play(pos, loopEnded, flip, color, false);
 		CheckWalk();
 		CheckCrouch();
 		CheckWalk();
@@ -295,7 +295,7 @@ void CharacterController::Update()
 		break;
 	case CharacterStates::CROUCH_BLOCK:
 		isAttacking = false;
-		animationSheet->animations[AnimationSheet::Anims::BLOCKING_CROUCH]->Play(pos, loopEnded, flip, false);
+		animationSheet->animations[AnimationSheet::Anims::BLOCKING_CROUCH]->Play(pos, loopEnded, flip, color, false);
 		if (!controller->Backward(flip) || !other->isAttacking)
 		{
 			state = CharacterStates::CROUCH;
@@ -313,7 +313,7 @@ void CharacterController::Update()
 		Fx* fx = fxQueue.front();
 		fxQueue.pop();
 		bool loopEnded;
-		fx->animation->Play(float3(fx->position, 0.f), loopEnded, flip, false);
+		fx->animation->Play(float3(fx->position, 0.f), loopEnded, flip, color, false);
 		if (!loopEnded)
 			fxQueue.push(fx);
 		--fxAmount;

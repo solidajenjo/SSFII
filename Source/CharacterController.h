@@ -89,6 +89,7 @@ public:
 	//Neural Network inputs
 
 	std::string neuralNetworkInput;
+	float3 color = float3::one;
 
 private:
 
