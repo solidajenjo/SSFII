@@ -8,7 +8,7 @@
 #include "Game.h"
 #include "FileSystem.h"
 
-float AI::blockPrize = 7000.f;
+float AI::blockPrize = 500.f;
 float AI::walkPrize = 1.f;
 float AI::attackDistancePenalization = .005f;
 
@@ -111,9 +111,9 @@ void AI::Update()
 	m_Kick = false;
 	h_Kick = false;
 
-	if ((own->landingWaitTimer <= 0 && (rand() % 100) < (other->isAttacking ? 80 : 50)) 
-		&& !((own->state == CharacterController::CharacterStates::BLOCK && other->isAttacking && other->isGrounded))
-		&& !((own->state == CharacterController::CharacterStates::CROUCH_BLOCK && other->isAttacking && !other->isGrounded)))
+	bool cond1 = own->landingWaitTimer <= 0 && !((own->state == CharacterController::CharacterStates::BLOCK && other->isAttacking && !other->isGrounded)) && !((own->state == CharacterController::CharacterStates::CROUCH_BLOCK && other->isAttacking && other->isGrounded));
+	bool cond2 = (own->state == CharacterController::CharacterStates::CROUCH_BLOCK && other->isAttacking && !other->isGrounded);
+	if (cond1 || cond2)
 	{
 		forward = false;
 		backward = false;
@@ -288,7 +288,7 @@ void AI::Update()
 	}
 	if (own->state == CharacterController::CharacterStates::WALK_BACKWARDS && !other->isAttacking)
 	{
-		fitness -= walkPrize * deltaX * 0.000001f * (distance * distance); //Penalize fleeing fighters
+		fitness -= walkPrize * 0.000001f * (distance * distance); //Penalize fleeing fighters
 	}
 	if ((own->state == CharacterController::CharacterStates::BLOCK ||
 		own->state == CharacterController::CharacterStates::CROUCH_BLOCK) && other->isAttacking)
@@ -301,7 +301,7 @@ void AI::Update()
 
 	if (other->lastDamage > 0u) //hit is good
 	{
-		fitness += other->lastDamage * 3.f;
+		fitness += other->lastDamage * 10.f;
 		other->lastDamage = 0u;
 	}
 	if (own->damageTaken > 0u) //get hit is bad :(
@@ -309,11 +309,7 @@ void AI::Update()
 		fitness -= own->damageTaken;
 		own->damageTaken = 0u;
 	}
-	if (own->blocks > 0u) //block is sexy!
-	{
-		fitness += own->blocks * blockPrize;
-		own->blocks = 0u;
-	}
+
 	/*
 	if (own->isAttacking) //attack from far is for pussies
 	{

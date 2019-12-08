@@ -33,7 +33,7 @@ public:
 	Sprite* bg = nullptr;
 
 	unsigned endRound = 0u;
-	int roundDuration = 3000u;
+	int roundDuration = 10000u;
 	unsigned nextUpdate = 0u;
 	unsigned updateWait = 300u;
 	int mutationPosibiliy = 5;

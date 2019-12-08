@@ -117,7 +117,7 @@ void CharacterController::Update()
 		break;
 
 	case CharacterStates::ATTACK:
-		isAttacking = true;
+		isAttacking = true; landingWaitTimer = 500u;
 		attackAnimation->Play(pos, loopEnded, flip, color);
 		currentAnimation = attackAnimation;
 		if (loopEnded)
@@ -129,7 +129,7 @@ void CharacterController::Update()
 		break;
 
 	case CharacterStates::FORWARD_ATTACK:
-		isAttacking = true;
+		isAttacking = true; landingWaitTimer = 500u;
 		attackAnimation->Play(pos, loopEnded, flip, color);
 		currentAnimation = attackAnimation;
 		if (loopEnded)
@@ -141,7 +141,7 @@ void CharacterController::Update()
 		break;
 
 	case CharacterStates::CROUCH_ATTACK:
-		isAttacking = true;
+		isAttacking = true; landingWaitTimer = 500u;
 		attackAnimation->Play(pos, loopEnded, flip, color);
 		currentAnimation = attackAnimation;
 		if (loopEnded)
@@ -153,7 +153,7 @@ void CharacterController::Update()
 		break;
 
 	case CharacterStates::JUMP_FORWARD_ATTACK:
-		isAttacking = true;
+		isAttacking = true; landingWaitTimer = 500u;
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
 			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip, color);
@@ -173,7 +173,7 @@ void CharacterController::Update()
 		break;
 
 	case CharacterStates::JUMP_BACKWARDS_ATTACK:
-		isAttacking = true;
+		isAttacking = true; landingWaitTimer = 500u;
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
 			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip, color);
@@ -193,7 +193,7 @@ void CharacterController::Update()
 		break;
 
 	case CharacterStates::JUMP_ATTACK:
-		isAttacking = true;
+		isAttacking = true; landingWaitTimer = 500u;
 		if (verticalSpeed < .0f && pos.y < landingY)
 		{
 			animationSheet->animations[AnimationSheet::Anims::LANDING]->Play(pos, loopEnded, flip, color);
